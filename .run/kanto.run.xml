@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="kanto" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="buildFlavor" value="kanto" />
+    <option name="filePath" value="$PROJECT_DIR$/lib/main_kanto.dart" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="jhoto" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="buildFlavor" value="jhoto" />
+    <option name="filePath" value="$PROJECT_DIR$/lib/main_jhoto.dart" />
+    <method v="2" />
+  </configuration>
+</component>

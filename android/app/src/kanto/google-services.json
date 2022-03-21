@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "436938993963",
+    "project_id": "pokemon-kento",
+    "storage_bucket": "pokemon-kento.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436938993963:android:e56b36ab0a16e79ff0d56e",
+        "android_client_info": {
+          "package_name": "com.mayando.pokemon_quiz.kanto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436938993963-ur1tl6r0m9atubfm9mpahp7ca9nnd23e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD66tNa7-276YUkCA8Vw9t7ko7gQv98f60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436938993963-ur1tl6r0m9atubfm9mpahp7ca9nnd23e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
