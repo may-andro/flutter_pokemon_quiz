@@ -1,0 +1,42 @@
+name: build android
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        type: string
+        required: true
+      target:
+        type: string
+        required: true
+jobs:
+  flutter_test:
+    name: apk and aab
+    runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: "12.x"
+      FLUTTER_VERSION: "2.8.0"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java environment
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{env.JAVA_VERSION}}
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+      - name: Get flutter dependencies
+        run: flutter pub get
+      - name: Generate icons
+        run: flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons/${{ inputs.flavor }}.yaml
+      - name: Build apk file
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
+        timeout-minutes: 20
+      - name: Build aab file
+        run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}

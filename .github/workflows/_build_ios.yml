@@ -1,0 +1,36 @@
+name: build ios
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        type: string
+        required: true
+      target:
+        type: string
+        required: true
+
+jobs:
+  flutter_test:
+    name: ios build
+    runs-on: macos-latest
+    env:
+      FLUTTER_VERSION: "2.8.0"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+      - name: Get flutter dependencies
+        run: flutter pub get
+      - name: Generate icons
+        run: flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons/${{ inputs.flavor }}.yaml
+      - name: Build ios file
+        run: flutter build ios --no-codesign --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
+        timeout-minutes: 60

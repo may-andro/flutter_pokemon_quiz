@@ -1,0 +1,83 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  flutter_test:
+    name: flutter build and test
+    runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: "12.x"
+      FLUTTER_VERSION: "2.8.0"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Java environment
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{env.JAVA_VERSION}}
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+      - name: Get flutter dependencies
+        run: flutter pub get
+      - name: Check for any formatting issues in the code
+        run: flutter format --set-exit-if-changed
+      - name: Statically analyze the Dart code
+        run: flutter analyze
+      - name: Run widget tests for our flutter project
+        run: flutter test
+
+  build_android_kanto:
+    uses: ./.github/workflows/_build_android.yml
+    needs: flutter_test
+    with:
+      flavor: kanto
+      target: lib/main_kanto.dart
+
+  build_android_jhoto:
+    uses: ./.github/workflows/_build_android.yml
+    needs: flutter_test
+    with:
+      flavor: jhoto
+      target: lib/main_jhoto.dart
+
+  build_ios_kanto:
+    uses: ./.github/workflows/_build_ios.yml
+    needs: flutter_test
+    with:
+      flavor: kanto
+      target: lib/main_kanto.dart
+
+  build_ios_jhoto:
+    uses: ./.github/workflows/_build_ios.yml
+    needs: flutter_test
+    with:
+      flavor: jhoto
+      target: lib/main_jhoto.dart
+
+  build_web_kanto:
+    uses: ./.github/workflows/_build_web.yml
+    needs: flutter_test
+    with:
+      flavor: kanto
+      target: lib/main_kanto.dart
+
+  build_web_jhoto:
+    uses: ./.github/workflows/_build_web.yml
+    needs: flutter_test
+    with:
+      flavor: jhoto
+      target: lib/main_jhoto.dart
+
