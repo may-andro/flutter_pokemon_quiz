@@ -36,6 +36,9 @@ jobs:
       - name: Install NodeJS dependencies for firestore_uploader
         working-directory: ./tools/firestore_uploader
         run: npm install
+      - name: Convert .ts to .js
+        working-directory: ./tools/firestore_uploader
+        run: npm run build
       - name: Install dependencies for pokedex_builder
         working-directory: ./tools/pokedex_builder
         run: dart pub get
