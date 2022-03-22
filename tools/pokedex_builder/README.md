@@ -10,3 +10,6 @@ Run it with ```dart bin/main.dart -f << flavor >>```
 
 For example: ```dart bin/main.dart -f kanto```
 
+## Further Read
+[CLI in Flutter](https://dart.dev/tutorials/server/get-started#3-create-a-small-app)
+

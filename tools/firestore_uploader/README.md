@@ -17,3 +17,6 @@ CLI tool for moving data in-n-out of [Cloud Firestore](https://firebase.google.c
 
 ### Examples 
 ` npm run migrate i kanto pokedex_kanto.json`
+
+# Reference
+[Jeff Delaney](https://github.com/codediodeio/firestore-migrator)
