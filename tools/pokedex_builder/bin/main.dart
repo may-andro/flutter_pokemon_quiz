@@ -11,13 +11,13 @@ Future<void> main(List<String> arguments) async {
     final parser = _getArgParser();
     final parsedArguments = _getParsedArguments(parser, arguments);
     final flavor = parsedArguments['flavor'];
-    final filePath = 'pokedex/pokedex_$flavor';
+    final filePath = parsedArguments['filePath'];
     final startIndex = _fetchStartIndex(flavor);
     final endIndex = _fetchEndIndex(flavor);
     final pokemons = await pokedex_builder.fetchPokemon(startIndex, endIndex);
     await _saveToFile(
-      filePath,
-      _asFirebaseCollection(pokemons, flavor),
+      path: filePath,
+      collectionJson: _createCollectionJson(pokemons, flavor),
     );
     print('Successfully build pokedex and saved at $filePath');
   } catch (e) {
@@ -57,6 +57,12 @@ ArgParser _getArgParser() {
     help: 'flavor to fetch and export pokemon from',
   );
 
+  argParser.addOption(
+    'filePath',
+    abbr: 'p',
+    help: 'file path to save the json data',
+  );
+
   return argParser;
 }
 
@@ -70,23 +76,23 @@ ArgResults _getParsedArguments(ArgParser parser, List<String> arguments) {
   }
 }
 
-Future<void> _saveToFile(
-  String path,
-  Map<String, dynamic> collectionJson,
-) {
+Future<void> _saveToFile({
+  required String path,
+  required Map<String, dynamic> collectionJson,
+}) {
   return File(path).writeAsString(
     JsonEncoder.withIndent('  ').convert(collectionJson),
     mode: FileMode.write,
   );
 }
 
-Map<String, dynamic> _asFirebaseCollection(
+Map<String, dynamic> _createCollectionJson(
   List<Pokemon> pokemon,
-  String region,
+  String flavor,
 ) {
   return <String, dynamic>{
     'collection:pokedex': <String, dynamic>{
-      region: <String, dynamic>{
+      flavor: <String, dynamic>{
         'pokemon': pokemon,
       }
     }

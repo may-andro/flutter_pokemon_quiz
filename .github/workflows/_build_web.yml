@@ -15,7 +15,7 @@ jobs:
     name: apk and aab
     runs-on: ubuntu-latest
     env:
-      FLUTTER_VERSION: "2.8.0"
+      FLUTTER_VERSION: "2.10.3"
 
     steps:
       - name: Checkout repository
