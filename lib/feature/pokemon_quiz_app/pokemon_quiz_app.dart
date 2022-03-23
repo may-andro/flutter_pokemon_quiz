@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_quiz/feature/quiz_page/quiz_page.dart';
-import 'package:pokemon_quiz/feature/splash_page/splash_page.dart';
 import 'package:pokemon_quiz/model/build_config.dart';
 
 class PokemonQuizApp extends StatelessWidget {
-  const PokemonQuizApp({Key? key, required this.buildConfig}) : super(key: key);
+  const PokemonQuizApp({
+    required this.buildConfig,
+    Key? key,
+  }) : super(key: key);
 
   final BuildConfig buildConfig;
 

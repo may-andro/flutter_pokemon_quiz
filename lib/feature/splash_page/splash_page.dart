@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
-    Key? key,
     required this.onInitializationSuccess,
+    Key? key,
   }) : super(key: key);
 
   final VoidCallback onInitializationSuccess;
