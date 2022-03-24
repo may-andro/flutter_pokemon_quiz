@@ -5,11 +5,11 @@ abstract class LocalClient<T> {
 
   void putMany(List<T> entities);
 
-  void get(int id);
+  T? get(int id);
 
-  void getMany(List<int> ids);
+  List<T?> getMany(List<int> ids);
 
-  void getAll();
+  List<T?> getAll();
 
   void remove(int id);
 

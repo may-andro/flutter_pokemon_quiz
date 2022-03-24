@@ -1,3 +1,4 @@
+import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:network/network.dart';
 import 'package:pokemon_quiz/di/main_injector.dart';
@@ -13,11 +14,11 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firebaseClient = getIt.get<FirebaseClient>();
+    final pokedexDataSource = getIt.get<PokedexDataSource>();
 
     return Scaffold(
       body: FutureBuilder<RemotePokedex>(
-          future: firebaseClient.fetchPokedex(buildConfig.buildFlavor.name),
+          future: pokedexDataSource.fetchPokedex(buildConfig.buildFlavor.name),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(

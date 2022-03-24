@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:local/client/local_client.dart';
-import 'package:local/entity/pokemon/local_pokemon.dart';
+import 'package:local/entity/entities.dart';
 import 'package:local/objectbox.g.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -17,13 +17,13 @@ class PokemonLocalClient extends LocalClient<LocalPokemon> {
   void putMany(List<LocalPokemon> entities) => _pokemonBox.putMany(entities);
 
   @override
-  void get(int id) => _pokemonBox.get(id);
+  LocalPokemon? get(int id) => _pokemonBox.get(id);
 
   @override
-  void getMany(List<int> ids) => _pokemonBox.getMany(ids);
+  List<LocalPokemon?> getMany(List<int> ids) => _pokemonBox.getMany(ids);
 
   @override
-  void getAll() => _pokemonBox.getAll();
+  List<LocalPokemon?> getAll() => _pokemonBox.getAll();
 
   @override
   void remove(int id) => _pokemonBox.remove(id);

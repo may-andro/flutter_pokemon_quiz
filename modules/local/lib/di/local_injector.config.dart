@@ -10,8 +10,7 @@ import 'package:objectbox/objectbox.dart' as _i6;
 
 import '../client/local_client.dart' as _i3;
 import '../client/pokemon_local_client.dart' as _i5;
-import '../entity/pokemon/local_pokemon.dart'
-    as _i4; // ignore_for_file: unnecessary_lambdas
+import '../entity/entities.dart' as _i4; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]

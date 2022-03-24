@@ -9,6 +9,8 @@ environment:
   sdk: ">=2.16.1 <3.0.0"
 
 dependencies:
+  data:
+    path: modules/data
   dependencies:
     path: modules/dependencies
   flutter:
