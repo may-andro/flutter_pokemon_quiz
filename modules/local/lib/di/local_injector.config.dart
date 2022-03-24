@@ -4,23 +4,21 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:cloud_firestore/cloud_firestore.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
+import 'package:objectbox/objectbox.dart' as _i6;
 
-import '../client/firebase_client.dart' as _i4;
-import 'remote_module.dart' as _i5; // ignore_for_file: unnecessary_lambdas
+import '../client/local_client.dart' as _i3;
+import '../client/pokemon_local_client.dart' as _i5;
+import '../entity/pokemon/local_pokemon.dart'
+    as _i4; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
-_i1.GetIt $initNetworkGetIt(_i1.GetIt get,
+_i1.GetIt $initLocalGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
-  final remoteModule = _$RemoteModule();
-  gh.singleton<_i3.FirebaseFirestore>(remoteModule.firebaseFirestore);
-  gh.singleton<_i4.FirebaseClient>(
-      _i4.FirebaseClient(get<_i3.FirebaseFirestore>()));
+  gh.lazySingleton<_i3.LocalClient<_i4.LocalPokemon>>(
+      () => _i5.PokemonLocalClient(get<_i6.Store>()));
   return get;
 }
-
-class _$RemoteModule extends _i5.RemoteModule {}

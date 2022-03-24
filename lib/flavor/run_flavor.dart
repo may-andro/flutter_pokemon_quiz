@@ -9,7 +9,8 @@ Future<void> runFlavor(final BuildConfig buildConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  configureDependencies();
+  await configureDependencies();
+
   final splashPage = SplashPage(
     key: UniqueKey(),
     onInitializationSuccess: () => _runQuizPage(buildConfig),

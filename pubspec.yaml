@@ -13,16 +13,16 @@ dependencies:
     path: modules/dependencies
   flutter:
     sdk: flutter
-  get_it: ^7.2.0
+  local:
+    path: modules/local
   network:
     path: modules/network
-  injectable: ^1.5.3
 
 dev_dependencies:
-  build_runner: ^2.1.8
+  build_runner: 2.1.5
   flutter_test:
     sdk: flutter
-  injectable_generator: ^1.5.3
+  injectable_generator: ^1.5.0
 
 flutter:
   uses-material-design: true
