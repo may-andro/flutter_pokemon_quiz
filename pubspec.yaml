@@ -1,7 +1,7 @@
 name: pokemon_quiz
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: none
 
 version: 1.0.0+1
 
@@ -9,10 +9,13 @@ environment:
   sdk: ">=2.16.1 <3.0.0"
 
 dependencies:
+  dartz: ^0.10.1
   data:
     path: modules/data
   dependencies:
     path: modules/dependencies
+  domain:
+    path: modules/domain
   flutter:
     sdk: flutter
   local:

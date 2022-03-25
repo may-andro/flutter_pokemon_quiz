@@ -94,24 +94,24 @@ ModelDefinition getObjectBoxModel() {
           final nameOffset = fbb.writeString(object.name);
           final imageUrlOffset = fbb.writeString(object.imageUrl);
           fbb.startTable(5);
-          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.index);
           fbb.addOffset(2, nameOffset);
           fbb.addOffset(3, imageUrlOffset);
           fbb.finish(fbb.endTable());
-          return object.id ?? 0;
+          return object.id;
         },
         objectFromFB: (Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
           final object = LocalPokemon(
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4),
               index: const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0),
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
               imageUrl: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 10, ''));
+                  .vTableGet(buffer, rootOffset, 10, ''))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
         })

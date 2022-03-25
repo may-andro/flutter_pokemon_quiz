@@ -34,7 +34,6 @@ linter:
     - await_only_futures
     - camel_case_extensions
     - camel_case_types
-    - constant_identifier_names
     - curly_braces_in_flow_control_structures
     - do_not_use_environment
     - empty_catches
