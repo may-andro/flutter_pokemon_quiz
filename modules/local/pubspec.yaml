@@ -20,7 +20,6 @@ dev_dependencies:
   flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
-  injectable_generator: ^1.5.0
   objectbox_generator: ^1.4.1
 
 flutter:

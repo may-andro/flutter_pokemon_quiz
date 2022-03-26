@@ -1,5 +1,5 @@
 library domain;
 
-export 'usecase/usecase.dart';
-export 'model/model.dart';
-export 'di/domain_injector.dart';
+export 'src/usecase/usecase.dart';
+export 'src/model/model.dart';
+export 'src/main.dart';

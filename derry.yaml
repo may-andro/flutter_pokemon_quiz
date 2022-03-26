@@ -1,0 +1,22 @@
+build_runner:
+  - cd modules/network && flutter pub run build_runner build --delete-conflicting-outputs
+  - cd modules/local && flutter pub run build_runner build --delete-conflicting-outputs
+  - cd modules/data && flutter pub run build_runner build --delete-conflicting-outputs
+  - cd modules/domain && flutter pub run build_runner build --delete-conflicting-outputs
+  - cd modules/features/ui_core && pub run build_runner build --delete-conflicting-outputs
+  - cd modules/features/pokedex && pub run build_runner build --delete-conflicting-outputs
+  - flutter pub run build_runner build --delete-conflicting-outputs
+  - cd tools/pokedex_builder && flutter pub run build_runner build --delete-conflicting-outputs
+
+get_all:
+  - flutter pub get
+  - cd modules/dependencies && flutter pub get
+  - cd modules/local && flutter pub get
+  - cd modules/network && flutter pub get
+  - cd modules/data && flutter pub get
+  - cd modules/domain && flutter pub get
+  - cd modules/features/ui_core && flutter pub get
+  - cd modules/features/pokedex && flutter pub get
+  - cd tools/pokedex_builder && flutter pub get
+
+

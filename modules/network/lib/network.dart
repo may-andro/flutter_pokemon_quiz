@@ -1,5 +1,5 @@
 library network;
 
-export 'client/firebase_client.dart';
-export 'entity/entity.dart';
-export 'di/network_injector.dart';
+export 'src/client/firebase_client.dart';
+export 'src/entity/entity.dart';
+export 'src/main.dart';

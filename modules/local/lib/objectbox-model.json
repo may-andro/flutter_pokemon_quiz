@@ -4,28 +4,28 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:410713130744302865",
-      "lastPropertyId": "4:7056213256408983130",
+      "id": "1:1101949788672171074",
+      "lastPropertyId": "4:1750857584068499041",
       "name": "LocalPokemon",
       "properties": [
         {
-          "id": "1:4316318221017350317",
+          "id": "1:948738652830105515",
           "name": "id",
           "type": 6,
           "flags": 1
         },
         {
-          "id": "2:307382920563681150",
+          "id": "2:6685515080576467581",
           "name": "index",
           "type": 6
         },
         {
-          "id": "3:6261162324794107736",
+          "id": "3:6865180054726648182",
           "name": "name",
           "type": 9
         },
         {
-          "id": "4:7056213256408983130",
+          "id": "4:1750857584068499041",
           "name": "imageUrl",
           "type": 9
         }
@@ -33,7 +33,7 @@
       "relations": []
     }
   ],
-  "lastEntityId": "1:410713130744302865",
+  "lastEntityId": "1:1101949788672171074",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

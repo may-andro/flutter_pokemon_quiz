@@ -1,5 +1,5 @@
 library local;
 
-export 'entity/entities.dart';
-export 'client/clients.dart';
-export 'di/local_injector.dart';
+export 'src/entity/entities.dart';
+export 'src/client/clients.dart';
+export 'src/main.dart';

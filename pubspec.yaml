@@ -10,24 +10,23 @@ environment:
 
 dependencies:
   dartz: ^0.10.1
-  data:
-    path: modules/data
   dependencies:
     path: modules/dependencies
   domain:
     path: modules/domain
   flutter:
     sdk: flutter
-  local:
-    path: modules/local
-  network:
-    path: modules/network
+  pokedex:
+    path: modules/features/pokedex
+  ui_core:
+    path: modules/features/ui_core
 
 dev_dependencies:
   build_runner: 2.1.5
   flutter_test:
     sdk: flutter
-  injectable_generator: ^1.5.0
 
 flutter:
   uses-material-design: true
+
+scripts: derry.yaml

@@ -13,34 +13,34 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'entity/pokemon/local_pokemon.dart';
+import 'src/entity/pokemon/local_pokemon.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 410713130744302865),
+      id: const IdUid(1, 1101949788672171074),
       name: 'LocalPokemon',
-      lastPropertyId: const IdUid(4, 7056213256408983130),
+      lastPropertyId: const IdUid(4, 1750857584068499041),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
-            id: const IdUid(1, 4316318221017350317),
+            id: const IdUid(1, 948738652830105515),
             name: 'id',
             type: 6,
             flags: 1),
         ModelProperty(
-            id: const IdUid(2, 307382920563681150),
+            id: const IdUid(2, 6685515080576467581),
             name: 'index',
             type: 6,
             flags: 0),
         ModelProperty(
-            id: const IdUid(3, 6261162324794107736),
+            id: const IdUid(3, 6865180054726648182),
             name: 'name',
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 7056213256408983130),
+            id: const IdUid(4, 1750857584068499041),
             name: 'imageUrl',
             type: 9,
             flags: 0)
@@ -69,7 +69,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 410713130744302865),
+      lastEntityId: const IdUid(1, 1101949788672171074),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
