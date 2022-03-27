@@ -74,6 +74,16 @@ class GuessPokemonViewModel extends BaseViewModel {
     }
   }
 
+  void viewPokemon() {
+    _text = _pokemon?.name ?? 'Unknown';
+    if(_isListening) {
+      _stopSpeechService();
+      _isListening = false;
+    }
+    _isAnsweredCorrectly = true;
+    notifyListener();
+  }
+
   void _listenSpeechService() {
     _startSpeechToTextUseCase();
   }

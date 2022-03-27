@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
-import 'package:guess_pokemon/src/presentation/widget/app_bar_widget.dart';
-import 'package:guess_pokemon/src/presentation/widget/question_bg_image_widget.dart';
 import 'package:guess_pokemon/src/presentation/widget/widget.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +24,9 @@ class GuessPokemonPage extends StatelessWidget {
 
   Widget _buildMobile(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const AppBarWidget(),
+        SizedBox(height: context.getGridDimen(3)),
         QuestionTextWidget(
           height: context.height * 0.1,
           width: context.width * 0.8,
@@ -41,7 +40,9 @@ class GuessPokemonPage extends StatelessWidget {
           ),
         ),
         const SpeechTextWidget(),
-        SizedBox(height: context.getGridDimen(0))
+        SizedBox(height: context.getGridDimen(1)),
+        const ButtonRowWidget(),
+        SizedBox(height: context.getGridDimen(1))
       ],
     );
   }
@@ -98,17 +99,25 @@ class GuessPokemonPage extends StatelessWidget {
         Expanded(
           child: Column(
             children: [
-              const AppBarWidget(),
-              QuestionTextWidget(
-                height: context.height * 0.1,
-                width: context.width * 0.4,
+              Expanded(
+                child: QuestionTextWidget(
+                  height: context.height * 0.5,
+                  width: context.width * 0.8,
+                ),
               ),
               const SpeechTextWidget(),
-              SizedBox(height: context.getGridDimen(0))
+              const ButtonRowWidget(),
             ],
           ),
         ),
-        Expanded(child: _buildPokemonImage(context)),
+        Expanded(
+          child: Stack(
+            children: [
+              const QuestionBgImageWidget(),
+              _buildPokemonImage(context),
+            ],
+          ),
+        ),
       ],
     );
   }
