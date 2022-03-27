@@ -1,5 +1,4 @@
 import 'package:domain/domain.dart';
-import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 
 class PokedexViewModel extends BaseViewModel {

@@ -91,7 +91,7 @@ class PokedexPage extends StatelessWidget {
     final viewModel = context.read<PokedexViewModel>();
     final errorCode = viewModel.errorCode;
 
-    return const PokedexErrorWidget(error: 'Test');
+    return PokedexErrorWidget(error: 'Test $errorCode');
   }
 
   Widget _buildSuccessState(BuildContext context) {

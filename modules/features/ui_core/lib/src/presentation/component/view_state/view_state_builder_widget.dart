@@ -4,12 +4,12 @@ import 'package:ui_core/src/presentation/component/view_state/view.dart';
 
 class ViewStateBuilderWidget extends StatelessWidget {
   const ViewStateBuilderWidget({
-    Key? key,
     required this.viewState,
     required this.loadingBuilder,
     required this.builder,
     this.onRetry,
     this.errorBuilder,
+    Key? key,
   }) : super(key: key);
 
   final ViewState viewState;

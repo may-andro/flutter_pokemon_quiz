@@ -1,3 +1,13 @@
+analyze:
+  - cd modules/network && flutter analyze
+  - cd modules/local && flutter analyze
+  - cd modules/data && flutter analyze
+  - cd modules/domain && flutter analyze
+  - cd modules/features/ui_core && flutter analyze
+  - cd modules/features/pokedex && flutter analyze
+  - flutter analyze
+  - cd tools/pokedex_builder && flutter analyze
+  -
 build_runner:
   - cd modules/network && flutter pub run build_runner build --delete-conflicting-outputs
   - cd modules/local && flutter pub run build_runner build --delete-conflicting-outputs

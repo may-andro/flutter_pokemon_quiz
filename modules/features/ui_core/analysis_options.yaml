@@ -124,6 +124,3 @@ linter:
     - unrelated_type_equality_checks
     - use_key_in_widget_constructors
     - valid_regexps
-
-    # Error rules
-    - sort_pub_dependencies
