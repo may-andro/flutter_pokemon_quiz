@@ -18,10 +18,14 @@ class LottieLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Lottie.asset(
-      getLottiePath(),
-      package: 'ui_core',
-      repeat: true,
+    return Center(
+      child: Lottie.asset(
+        getLottiePath(),
+        height: height,
+        width: width,
+        package: 'ui_core',
+        repeat: true,
+      ),
     );
   }
 

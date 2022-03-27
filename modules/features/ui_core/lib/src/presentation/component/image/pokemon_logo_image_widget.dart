@@ -13,11 +13,13 @@ class PokemonLogoImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      Assets.images.pokemonLogo.path,
-      width: width,
-      height: height,
-      package: 'ui_core',
+    return Center(
+      child: Image.asset(
+        Assets.images.pokemonLogo.path,
+        width: width,
+        height: height,
+        package: 'ui_core',
+      ),
     );
   }
 }

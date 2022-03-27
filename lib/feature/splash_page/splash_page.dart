@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:pokemon_quiz/app/pq_app.dart';
+import 'package:pokemon_quiz/feature/splash_page/splash_widget.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
@@ -28,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return const PQApp(
       child: Scaffold(
-        body: Center(child: Text('Splash Page')),
+        body: SplashWidget(),
       ),
     );
   }

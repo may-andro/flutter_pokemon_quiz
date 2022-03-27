@@ -75,7 +75,9 @@ class PokedexPage extends StatelessWidget {
       right: 0,
       left: 0,
       child: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
         child: const Icon(Icons.close),
       ),
     );

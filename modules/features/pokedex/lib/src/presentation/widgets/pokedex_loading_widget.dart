@@ -18,9 +18,9 @@ class PokedexLoadingWidget extends StatelessWidget {
         const SizedBox(height: 24),
         Expanded(
           child: LottieLoadingWidget(
-            height: context.height * 0.3,
-            width: context.height * 0.3,
-            asset: LottieAsset.pokemon,
+            height: context.height * 0.2,
+            width: context.height * 0.2,
+            asset: LottieAsset.pokeball,
           ),
         ),
         const Spacer(),

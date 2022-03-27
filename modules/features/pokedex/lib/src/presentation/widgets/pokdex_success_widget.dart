@@ -52,19 +52,15 @@ class _PokemonItem extends StatelessWidget {
         fit: BoxFit.cover,
         progressIndicatorBuilder: (context, url, downloadProgress) {
           return Center(
-            child: SizedBox(
-              height: context.getGridDimen(2),
-              width: context.getGridDimen(2),
-              child: CircularProgressIndicator(
-                value: downloadProgress.progress,
-                strokeWidth: 1.5,
-              ),
+            child: PokeballImageWidget(
+              height: context.getGridDimen(4),
+              width: context.getGridDimen(4),
             ),
           );
         },
         errorWidget: (context, url, error) => Icon(
           Icons.error,
-          size: context.getGridDimen(2),
+          size: context.getGridDimen(4),
         ),
       ),
     );
