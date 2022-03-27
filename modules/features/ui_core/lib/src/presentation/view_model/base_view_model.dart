@@ -13,6 +13,11 @@ abstract class BaseViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void notifyListener() {
+    if (_isDisposed) return;
+    notifyListeners();
+  }
+
   void setLoadingState() => _setState(ViewState.loading);
 
   void setSuccessState() => _setState(ViewState.success);

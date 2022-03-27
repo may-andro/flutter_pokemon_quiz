@@ -17,7 +17,8 @@ class ViewModelProviderWidget<VM extends BaseViewModel> extends StatefulWidget {
   final Function(VM)? onViewModelProvided;
 
   @override
-  _ViewModelProviderWidgetState<VM> createState() => _ViewModelProviderWidgetState<VM>();
+  _ViewModelProviderWidgetState<VM> createState() =>
+      _ViewModelProviderWidgetState<VM>();
 }
 
 class _ViewModelProviderWidgetState<VM extends BaseViewModel>
@@ -33,9 +34,11 @@ class _ViewModelProviderWidgetState<VM extends BaseViewModel>
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<VM>(
-      create: (BuildContext context) => viewModel,
-      child: Consumer<VM>(builder: widget.builder),
+    return SafeArea(
+      child: ChangeNotifierProvider<VM>(
+        create: (context) => viewModel,
+        child: Consumer<VM>(builder: widget.builder),
+      ),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ui_core/src/presentation/device_resolution/device_resolution.dart';
 import 'package:ui_core/src/theme/color/color.dart';
+import 'package:ui_core/src/extension/context.dart';
 
 const _fontRegular = FontWeight.w400;
 const _fontMedium = FontWeight.w500;
@@ -110,4 +112,27 @@ class AppTheme {
       fontSize: 16.0,
     ),
   );
+
+  ColorPalette getColorPalette(BuildContext context) {
+    if (context.isDarkMode) {
+      return _darkColorPalette;
+    }
+    return _lightColorPalette;
+  }
+
+  double getGridDimen(BuildContext context, double dimen) {
+    var grid = 8;
+    switch (context.deviceResolution) {
+      case DeviceResolution.mobile:
+        grid = 8;
+        break;
+      case DeviceResolution.tablet:
+        grid = 12;
+        break;
+      case DeviceResolution.desktop:
+        grid = 16;
+        break;
+    }
+    return grid * dimen;
+  }
 }

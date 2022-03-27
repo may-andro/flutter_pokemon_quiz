@@ -1,6 +1,9 @@
 import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ui_core/src/presentation/device_resolution/device_resolution.dart';
+import 'package:ui_core/src/theme/app_theme.dart';
+import 'package:ui_core/src/theme/color/color.dart';
 
 extension BuildContextExtension on BuildContext {
   void showSnackBar(String message) {
@@ -45,4 +48,12 @@ extension BuildContextExtension on BuildContext {
         return DeviceResolution.desktop;
     }
   }
+
+  TextTheme get textTheme => Theme.of(this).textTheme;
+
+  AppTheme get appTheme => watch<AppTheme>();
+
+  ColorPalette get colorPalette => appTheme.getColorPalette(this);
+
+  double getGridDimen(double factor) => appTheme.getGridDimen(this, factor);
 }
