@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:guess_pokemon/guess_pokemon.dart';
 import 'package:pokemon_quiz/di/locator.dart';
 import 'package:pokemon_quiz/feature/home_page/home_page.dart';
 import 'package:pokemon_quiz/feature/splash_page/splash_page.dart';
@@ -24,9 +25,10 @@ Future<void> runFlavor(final BuildConfig buildConfig) async {
 
 Future<void> setupLocator(final BuildConfig buildConfig) async {
   setupAppModule(buildConfig);
-  setupDomainModule(getIt);
+  await setupDomainModule(getIt);
   setupUiCoreModule(getIt);
   setupPokedexFeature(getIt);
+  setupGuessPokemonFeature(getIt);
 }
 
 void _runQuizPage() {

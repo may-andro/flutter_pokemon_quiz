@@ -4,6 +4,8 @@ import 'package:data/src/repository/pokedex/pokedex_repository_impl.dart';
 import 'package:data/src/repository/pokemon/pokemon_repository.dart';
 import 'package:data/src/repository/pokemon/pokemon_repository_impl.dart';
 import 'package:get_it/get_it.dart';
+import 'package:local/local.dart';
+import 'package:network/network.dart';
 
 void setupDataDependencies(final GetIt getIt) {
   _setupDataSources(getIt);
@@ -12,11 +14,16 @@ void setupDataDependencies(final GetIt getIt) {
 
 void _setupDataSources(final GetIt getIt) {
   getIt.registerLazySingleton<PokedexDataSource>(
-      () => PokedexDataSourceImpl(getIt.get()),
-      instanceName: 'PokedexDataSourceImpl');
+    () => PokedexDataSourceImpl(getIt.get()),
+    instanceName: 'PokedexDataSourceImpl',
+  );
   getIt.registerLazySingleton<PokemonDataSource>(
-      () => PokemonDataSourceImpl(getIt.get()),
-      instanceName: 'PokemonDataSourceImpl');
+    () => PokemonDataSourceImpl(
+      getIt.get<PokemonLocalClient>(instanceName: 'PokemonLocalClient'),
+      getIt.get<RemoteClient>(instanceName: 'DioRemoteClient'),
+    ),
+    instanceName: 'PokemonDataSourceImpl',
+  );
 }
 
 void _setupDataRepositories(final GetIt getIt) {

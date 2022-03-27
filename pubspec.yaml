@@ -18,6 +18,8 @@ dependencies:
     sdk: flutter
   pokedex:
     path: modules/features/pokedex
+  guess_pokemon:
+    path: modules/features/guess_pokemon
   ui_core:
     path: modules/features/ui_core
 

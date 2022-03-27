@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/pokedex.dart';
+import 'package:guess_pokemon/guess_pokemon.dart';
 import 'package:pokemon_quiz/app/pq_app.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,6 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PQApp(child: PokedexPage());
+    return const PQApp(child: GuessPokemonPage());
   }
 }

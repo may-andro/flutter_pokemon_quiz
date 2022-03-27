@@ -1,0 +1,51 @@
+import 'package:domain/domain.dart';
+import 'package:get_it/get_it.dart';
+import 'package:guess_pokemon/src/data/speech_text_repository.dart';
+import 'package:guess_pokemon/src/domain/fetch_random_pokemon_usecase.dart';
+import 'package:guess_pokemon/src/domain/start_speech_to_text_usecase.dart';
+import 'package:guess_pokemon/src/domain/stop_speech_to_text_usecase.dart';
+import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+
+void setupFeatureDependencies(final GetIt getIt) {
+  _injectSpeechText(getIt);
+  _injectSpeechRepository(getIt);
+  _injectUseCase(getIt);
+  _injectViewModel(getIt);
+}
+
+void _injectSpeechText(final GetIt getIt) {
+  getIt.registerLazySingleton(() => SpeechToText());
+}
+
+void _injectSpeechRepository(final GetIt getIt) {
+  getIt.registerLazySingleton(
+    () => SpeechTextRepository(getIt.get<SpeechToText>()),
+  );
+}
+
+void _injectUseCase(final GetIt getIt) {
+  getIt.registerFactory(
+    () => StopSpeechToTextUseCase(getIt.get<SpeechTextRepository>()),
+  );
+  getIt.registerFactory(
+    () => StartSpeechToTextUseCase(getIt.get<SpeechTextRepository>()),
+  );
+  getIt.registerFactory(
+    () => FetchRandomPokemonUseCase(
+      getIt.get<FetchPokemonUseCase>(),
+      getIt.get<FetchPokedexStartIndexUseCase>(),
+      getIt.get<FetchPokedexEndIndexUseCase>(),
+    ),
+  );
+}
+
+void _injectViewModel(final GetIt getIt) {
+  getIt.registerLazySingleton(
+    () => GuessPokemonViewModel(
+      getIt.get<StartSpeechToTextUseCase>(),
+      getIt.get<StopSpeechToTextUseCase>(),
+      getIt.get<FetchRandomPokemonUseCase>(),
+    ),
+  );
+}

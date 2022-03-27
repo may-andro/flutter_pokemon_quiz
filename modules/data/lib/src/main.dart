@@ -3,8 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:local/local.dart';
 import 'package:network/network.dart';
 
-void setUpDataModule(final GetIt getIt) {
+Future<void> setUpDataModule(final GetIt getIt) async {
   setupDataDependencies(getIt);
-  setupLocalModule(getIt);
+  await setupLocalModule(getIt);
   setUpNetworkModule(getIt);
 }

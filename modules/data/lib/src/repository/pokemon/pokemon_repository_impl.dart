@@ -1,6 +1,8 @@
 import 'package:data/src/data_source/data_source.dart';
 import 'package:data/src/repository/pokemon/pokemon_repository.dart';
 import 'package:local/local.dart';
+import 'package:network/network.dart';
+
 
 class PokemonRepositoryImpl implements PokemonRepository {
   PokemonRepositoryImpl(this._pokemonDataSource);
@@ -25,5 +27,10 @@ class PokemonRepositoryImpl implements PokemonRepository {
         .getAllFavorites()
         .whereType<LocalPokemon>()
         .toList();
+  }
+
+  @override
+  Future<RemoteExtendedPokemon> fetchPokemon(int index) {
+    return _pokemonDataSource.fetchPokemon(index);
   }
 }

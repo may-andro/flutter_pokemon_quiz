@@ -1,0 +1,1 @@
+export 'page/guess_pokemon_page.dart';

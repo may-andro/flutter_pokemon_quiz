@@ -26,7 +26,7 @@ abstract class BaseViewModel extends ChangeNotifier {
 
   bool get isStateLoading => _state == ViewState.loading;
 
-  bool get isStateIdle => _state == ViewState.success;
+  bool get isStateSuccess => _state == ViewState.success;
 
   bool get isStateError => _state == ViewState.error;
 
