@@ -20,6 +20,8 @@ extension BuildContextExtension on BuildContext {
 
   double get height => size.height;
 
+  double get shortestSide => size.shortestSide;
+
   double get textScaleFactor => MediaQuery.textScaleFactorOf(this);
 
   bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;

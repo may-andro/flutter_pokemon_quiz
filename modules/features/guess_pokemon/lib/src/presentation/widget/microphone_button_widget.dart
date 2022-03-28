@@ -1,4 +1,3 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 import 'package:provider/provider.dart';
@@ -17,17 +16,11 @@ class MicrophoneButtonWidget extends StatelessWidget {
 
     final isClickable = fabIcon == Icons.mic || fabIcon == Icons.mic_none;
 
-    return AvatarGlow(
-      animate: viewModel.isListening,
-      glowColor: Colors.red,
-      endRadius: context.getGridDimen(5),
-      duration: const Duration(milliseconds: 2000),
-      repeatPauseDuration: const Duration(milliseconds: 100),
-      repeat: true,
-      child: FloatingActionButton(
-        onPressed: isClickable ? viewModel.listenToSpeech : null,
-        child: Icon(fabIcon),
-      ),
+    return FloatingActionButton(
+      backgroundColor:
+          viewModel.isListening ? Colors.green : context.colorPalette.secondary,
+      onPressed: isClickable ? viewModel.listenToSpeech : null,
+      child: Icon(fabIcon),
     );
   }
 }

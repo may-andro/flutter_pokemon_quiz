@@ -11,8 +11,8 @@ class PokedexSuccessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveContainerWidget(
-      mobileBuilder: (context) => _buildGridView(context, 5),
-      tabletBuilder: (context) => _buildGridView(context, 8),
+      mobileBuilder: (context) => _buildGridView(context, 3),
+      tabletBuilder: (context) => _buildGridView(context, 5),
       desktopBuilder: (context) => _buildGridView(context, 10),
     );
   }

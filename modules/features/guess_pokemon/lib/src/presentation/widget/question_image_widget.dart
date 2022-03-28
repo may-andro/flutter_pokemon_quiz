@@ -25,7 +25,7 @@ class QuestionImageWidget extends StatelessWidget {
       colorFilter: ColorFilter.mode(color, blendMode),
       child: CachedNetworkImage(
         imageUrl: url,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         progressIndicatorBuilder: (context, url, downloadProgress) {
           return Center(
             child: AnimatorLoadingWidget(

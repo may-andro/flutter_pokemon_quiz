@@ -17,33 +17,34 @@ class PokedexPage extends StatelessWidget {
         onViewModelProvided: (viewModel) => viewModel.onInit(),
         builder: (context, viewModel, widget) {
           return Stack(
+            fit: StackFit.expand,
             children: [
               _buildTopPokeball(context),
               _buildBottomPokeball(context),
-              NestedScrollView(
-                floatHeaderSlivers: true,
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverAppBar(
-                      backgroundColor: Colors.transparent,
-                      title: const PokedexTitleWidget(),
-                      floating: true,
-                      forceElevated: innerBoxIsScrolled,
-                    ),
-                  ];
-                },
-                body: ViewStateBuilderWidget(
-                  viewState: viewModel.viewState,
-                  loadingBuilder: _buildLoadingState,
-                  errorBuilder: _buildErrorState,
-                  builder: _buildSuccessState,
-                ),
-              ),
+              _buildPokemonsList(context),
               _buildFab(context),
             ],
           );
         },
       ),
+    );
+  }
+
+  Widget _buildPokemonsList(BuildContext context) {
+    final viewModel = context.read<PokedexViewModel>();
+
+    return Column(
+      children: [
+        const PokedexTitleWidget(),
+        Expanded(
+          child: ViewStateBuilderWidget(
+            viewState: viewModel.viewState,
+            loadingBuilder: _buildLoadingState,
+            errorBuilder: _buildErrorState,
+            builder: _buildSuccessState,
+          ),
+        ),
+      ],
     );
   }
 

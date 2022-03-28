@@ -19,37 +19,39 @@ class SpeechTextWidget extends StatelessWidget {
       package: 'guess_pokemon',
       color: Colors.green,
     );
+    final highlightedWord = HighlightedWord(
+      onTap: makePokemonNoise,
+      textStyle: highlightedStyle,
+    );
+
+    final textStyle = context.textTheme.headline2!.copyWith(
+      letterSpacing: 5,
+      overflow: TextOverflow.ellipsis,
+      fontFamily: FontFamily.pokemon,
+      package: 'guess_pokemon',
+    );
     final pokemonName = viewModel.pokemonName;
 
-    return Center(
-      child: TextHighlight(
-        text: viewModel.text,
-        words: {
-          pokemonName: HighlightedWord(
-            onTap: () => print(viewModel.pokemonName),
-            textStyle: highlightedStyle,
-          ),
-          pokemonName.toUpperCase(): HighlightedWord(
-            onTap: () => print(viewModel.pokemonName),
-            textStyle: highlightedStyle,
-          ),
-          pokemonName.toLowerCase(): HighlightedWord(
-            onTap: () => print(viewModel.pokemonName),
-            textStyle: highlightedStyle,
-          ),
-          pokemonName.replaceFirst(
-              pokemonName[0], pokemonName[0].toUpperCase()): HighlightedWord(
-            onTap: () => print(viewModel.pokemonName),
-            textStyle: highlightedStyle,
-          ),
-        },
-        textAlign: TextAlign.center,
-        textStyle: context.textTheme.headline2!.copyWith(
-          letterSpacing: 5,
-          fontFamily: FontFamily.pokemon,
-          package: 'guess_pokemon',
+    return SizedBox(
+      height: context.shortestSide * 0.25,
+      child: Center(
+        child: TextHighlight(
+          text: viewModel.text,
+          words: {
+            pokemonName: highlightedWord,
+            pokemonName.toUpperCase(): highlightedWord,
+            pokemonName.toLowerCase(): highlightedWord,
+            pokemonName.replaceFirst(
+              pokemonName[0],
+              pokemonName[0].toUpperCase(),
+            ): highlightedWord,
+          },
+          textAlign: TextAlign.center,
+          textStyle: textStyle,
         ),
       ),
     );
   }
+
+  void makePokemonNoise() {}
 }

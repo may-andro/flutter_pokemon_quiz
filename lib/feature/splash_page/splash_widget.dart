@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 
 class SplashWidget extends StatelessWidget {
-  const SplashWidget({Key? key}) : super(key: key);
+  const SplashWidget({
+    required this.initializationCompleted,
+    Key? key,
+  }) : super(key: key);
+
+  final VoidCallback initializationCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +24,7 @@ class SplashWidget extends StatelessWidget {
           height: context.height * 0.3,
           width: context.height * 0.3,
           asset: LottieAsset.pokemon,
+          onAnimationFinish: initializationCompleted,
         ),
         const Spacer(),
         Text(

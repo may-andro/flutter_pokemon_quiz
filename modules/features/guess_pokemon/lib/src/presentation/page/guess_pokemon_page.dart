@@ -31,18 +31,43 @@ class GuessPokemonPage extends StatelessWidget {
           height: context.height * 0.1,
           width: context.width * 0.8,
         ),
-        Expanded(
-          child: Stack(
-            children: [
-              const QuestionBgImageWidget(),
-              _buildPokemonImage(context),
-            ],
-          ),
-        ),
+        Expanded(child: _buildQuestion(context)),
         const SpeechTextWidget(),
         SizedBox(height: context.getGridDimen(1)),
         const ButtonRowWidget(),
-        SizedBox(height: context.getGridDimen(1))
+        SizedBox(height: context.getGridDimen(3))
+      ],
+    );
+  }
+
+  Widget _buildTablet(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            children: [
+              Expanded(
+                child: QuestionTextWidget(
+                  height: context.height * 0.3,
+                  width: context.width * 0.8,
+                ),
+              ),
+              const SpeechTextWidget(),
+              const ButtonRowWidget(),
+              SizedBox(height: context.getGridDimen(2))
+            ],
+          ),
+        ),
+        Expanded(child: _buildQuestion(context)),
+      ],
+    );
+  }
+
+  Widget _buildQuestion(BuildContext context) {
+    return Stack(
+      children: [
+        const QuestionBgImageWidget(),
+        _buildPokemonImage(context),
       ],
     );
   }
@@ -51,8 +76,8 @@ class GuessPokemonPage extends StatelessWidget {
     final viewModel = context.watch<GuessPokemonViewModel>();
 
     return Positioned.fill(
-      left: context.width * 0.2,
-      right: context.width * 0.2,
+      left: context.shortestSide * 0.2,
+      right: context.shortestSide * 0.2,
       child: ViewStateBuilderWidget(
         viewState: viewModel.viewState,
         loadingBuilder: _buildLoadingState,
@@ -75,8 +100,8 @@ class GuessPokemonPage extends StatelessWidget {
   Widget _buildLoadingState(BuildContext context) {
     return Center(
       child: AnimatorLoadingWidget(
-        height: context.width * 0.2,
-        width: context.width * 0.2,
+        height: context.shortestSide * 0.2,
+        width: context.shortestSide * 0.2,
       ),
     );
   }
@@ -90,35 +115,6 @@ class GuessPokemonPage extends StatelessWidget {
           size: context.height * 0.25,
         ),
       ),
-    );
-  }
-
-  Widget _buildTablet(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            children: [
-              Expanded(
-                child: QuestionTextWidget(
-                  height: context.height * 0.5,
-                  width: context.width * 0.8,
-                ),
-              ),
-              const SpeechTextWidget(),
-              const ButtonRowWidget(),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Stack(
-            children: [
-              const QuestionBgImageWidget(),
-              _buildPokemonImage(context),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
