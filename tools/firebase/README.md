@@ -53,7 +53,7 @@ These templates are stored locally as `json` files at `remote_config`.
 ## Get current RemoteConfig Template
 
 Gets the RemoteConfig template for a flavor (e.g. `kanto`). This uses the firebase projects defined by
-the `firestore_uploader` tool, check its [README]('TODO-LINK') to see which flavors are supported.
+the `firestore_uploader` tool, check its [README](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/tools/firestore_uploader/README.md) to see which flavors are supported.
 
 > Note: Templates are versioned with an `etag`. If for some reason, someone changes a RemoteConfig value on the UI
 > we need to make sure to get the newest template with the updated `etag` before we publish otherwise it won't work
@@ -68,7 +68,7 @@ for example:
 npm run rc get kanto remote_config/kanto.json
 ```
 
-will use the credentials from `../firestore_importer/data/kanto/credentials.json`.
+will use the credentials from `../firestore_uploader/data/kanto/credentials.json`.
 
 ## Validate a Template
 
@@ -138,14 +138,3 @@ npm run rc add-rc some_feature_toggle true 'this is a description' kanto,johto
 This is a convenience command. All changes to feature toggles can be done manually as well. But this is
 currently limited to adding feature toggles only. If you need to configure a feature toggle for a specific
 flavor after adding it, you have to do so in the template file manually. Refer to [Adding, deleting and updating RemoteConfig values](#adding-deleting-and-updating-remoteconfig-values) section.
-
-## Troubleshooting
-
-If you might run into an error like this:
-
-```
- message: '[VERSION_MISMATCH]: Expected version 0, found 3 for project: 878922201715'
-```
-
-In this case, you need to update the value of the `etag` field (at the end of the json): 
-Get the remote config template of the new (target) project and copy the `etag` value to your modified migration json template. 
