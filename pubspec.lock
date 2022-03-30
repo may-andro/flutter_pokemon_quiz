@@ -646,6 +646,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  pokemon_detail:
+    dependency: "direct main"
+    description:
+      path: "modules/features/pokemon_detail"
+      relative: true
+    source: path
+    version: "0.0.1"
   pool:
     dependency: transitive
     description:

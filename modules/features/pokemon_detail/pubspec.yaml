@@ -1,0 +1,28 @@
+name: pokemon_detail
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.16.1 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  ui_core:
+    path: ../../features/ui_core
+  dartz: ^0.10.1
+  dependencies:
+    path: ../../dependencies
+  domain:
+    path: ../../domain
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+
+scripts: ../../../derry.yaml

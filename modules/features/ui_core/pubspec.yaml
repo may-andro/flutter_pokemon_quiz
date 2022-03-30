@@ -34,6 +34,10 @@ flutter:
     - assets/images/
     - assets/lottie/
     - assets/gif/
+  fonts:
+    - family: Pokemon
+      fonts:
+        - asset: assets/fonts/Pokemon-Solid.ttf
 
 flutter_gen:
   output: lib/assets/

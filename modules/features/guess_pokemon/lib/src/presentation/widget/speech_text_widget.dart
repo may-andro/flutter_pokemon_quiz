@@ -1,7 +1,8 @@
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:guess_pokemon/assets/fonts.gen.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:ui_core/assets/fonts.gen.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
 
@@ -13,14 +14,14 @@ class SpeechTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
-    final highlightedStyle = context.textTheme.headlineLarge!.copyWith(
+    final highlightedStyle = context.textTheme.headline2!.copyWith(
       fontFamily: FontFamily.pokemon,
-      letterSpacing: 5,
-      package: 'guess_pokemon',
-      color: Colors.green,
+      letterSpacing: 12,
+      package: 'ui_core',
+      color: viewModel.typeColor,
     );
     final highlightedWord = HighlightedWord(
-      onTap: makePokemonNoise,
+      onTap: () => goToPokemonDetail(context, viewModel.pokemon),
       textStyle: highlightedStyle,
     );
 
@@ -28,7 +29,7 @@ class SpeechTextWidget extends StatelessWidget {
       letterSpacing: 5,
       overflow: TextOverflow.ellipsis,
       fontFamily: FontFamily.pokemon,
-      package: 'guess_pokemon',
+      package: 'ui_core',
     );
     final pokemonName = viewModel.pokemonName;
 
@@ -53,5 +54,8 @@ class SpeechTextWidget extends StatelessWidget {
     );
   }
 
-  void makePokemonNoise() {}
+  void goToPokemonDetail(BuildContext context, Pokemon? pokemon) {
+    if (pokemon == null) return;
+    Navigator.pushNamed(context, ROUTE_POKEMON_DETAIL, arguments: pokemon);
+  }
 }

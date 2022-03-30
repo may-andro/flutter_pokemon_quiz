@@ -7,3 +7,5 @@ export 'component/connectivity/connectivity.dart';
 export 'device_resolution/device_resolution.dart';
 export 'device_resolution/device_responsive_widget.dart';
 export 'component/image/image.dart';
+export 'component/button/primary_button.dart';
+export 'route/route.dart';

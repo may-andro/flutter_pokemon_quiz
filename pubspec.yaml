@@ -20,6 +20,8 @@ dependencies:
     path: modules/features/pokedex
   guess_pokemon:
     path: modules/features/guess_pokemon
+  pokemon_detail:
+    path: modules/features/pokemon_detail
   ui_core:
     path: modules/features/ui_core
 

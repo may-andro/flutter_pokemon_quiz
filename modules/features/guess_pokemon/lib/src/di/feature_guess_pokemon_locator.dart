@@ -6,6 +6,7 @@ import 'package:guess_pokemon/src/domain/start_speech_to_text_usecase.dart';
 import 'package:guess_pokemon/src/domain/stop_speech_to_text_usecase.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:ui_core/ui_core.dart';
 
 void setupFeatureDependencies(final GetIt getIt) {
   _injectSpeechText(getIt);
@@ -41,11 +42,12 @@ void _injectUseCase(final GetIt getIt) {
 }
 
 void _injectViewModel(final GetIt getIt) {
-  getIt.registerLazySingleton(
+  getIt.registerFactory(
     () => GuessPokemonViewModel(
       getIt.get<StartSpeechToTextUseCase>(),
       getIt.get<StopSpeechToTextUseCase>(),
       getIt.get<FetchRandomPokemonUseCase>(),
+      getIt.get<PokemonTypeColorMapper>(),
     ),
   );
 }

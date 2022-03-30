@@ -31,10 +31,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-  fonts:
-    - family: Pokemon
-      fonts:
-        - asset: assets/fonts/Pokemon-Solid.ttf
 
 
 flutter_gen:

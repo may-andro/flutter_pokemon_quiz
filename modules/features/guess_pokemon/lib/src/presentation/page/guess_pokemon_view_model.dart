@@ -1,4 +1,5 @@
 import 'package:domain/domain.dart';
+import 'package:flutter/material.dart';
 import 'package:guess_pokemon/src/domain/fetch_random_pokemon_usecase.dart';
 import 'package:guess_pokemon/src/domain/start_speech_to_text_usecase.dart';
 import 'package:guess_pokemon/src/domain/stop_speech_to_text_usecase.dart';
@@ -9,11 +10,13 @@ class GuessPokemonViewModel extends BaseViewModel {
     this._startSpeechToTextUseCase,
     this._stopSpeechToTextUseCase,
     this._fetchRandomPokemonUseCase,
+    this._pokemonTypeColorMapper,
   );
 
   final StartSpeechToTextUseCase _startSpeechToTextUseCase;
   final StopSpeechToTextUseCase _stopSpeechToTextUseCase;
   final FetchRandomPokemonUseCase _fetchRandomPokemonUseCase;
+  final PokemonTypeColorMapper _pokemonTypeColorMapper;
 
   late int _errorCode;
   Pokemon? _pokemon;
@@ -29,11 +32,15 @@ class GuessPokemonViewModel extends BaseViewModel {
 
   String get pokemonImage => _pokemon?.imageUrl ?? '';
 
-  String get pokemonName => _pokemon?.name ?? '';
+  String get pokemonName => _pokemon?.name ?? 'Fetching Pokémon';
+
+  Pokemon? get pokemon => _pokemon;
+
+  Color get typeColor => _pokemonTypeColorMapper.map(_pokemon?.types[0] ?? '');
 
   void onInit() async {
     _startSpeechToTextUseCase.textStream.listen((text) {
-      _text = text;
+      _text = text.toUpperCase();
       _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
       _isListening = false;
       notifyListener();
@@ -75,8 +82,8 @@ class GuessPokemonViewModel extends BaseViewModel {
   }
 
   void viewPokemon() {
-    _text = _pokemon?.name ?? 'Unknown';
-    if(_isListening) {
+    _text = _pokemon?.name.toUpperCase() ?? 'Unknown';
+    if (_isListening) {
       _stopSpeechService();
       _isListening = false;
     }
