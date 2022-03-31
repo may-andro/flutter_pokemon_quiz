@@ -17,9 +17,17 @@ class $AssetsGifGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/avatar_ryhorn.png
+  AssetGenImage get avatarRyhorn =>
+      const AssetGenImage('assets/images/avatar_ryhorn.png');
+
   /// File path: assets/images/badge_pokemon.png
   AssetGenImage get badgePokemon =>
       const AssetGenImage('assets/images/badge_pokemon.png');
+
+  /// File path: assets/images/pokemon_jhoto.jpeg
+  AssetGenImage get pokemonJhoto =>
+      const AssetGenImage('assets/images/pokemon_jhoto.jpeg');
 
   /// File path: assets/images/pokemon_logo.png
   AssetGenImage get pokemonLogo =>
@@ -103,6 +111,9 @@ class $AssetsImagesGen {
 
 class $AssetsLottieGen {
   const $AssetsLottieGen();
+
+  /// File path: assets/lottie/jhoto.json
+  String get jhoto => 'assets/lottie/jhoto.json';
 
   /// File path: assets/lottie/pokeball.json
   String get pokeball => 'assets/lottie/pokeball.json';

@@ -6,10 +6,10 @@ class DarkColorPalette extends ColorPalette {
   Brightness get brightness => Brightness.dark;
 
   @override
-  Color get primary => const Color(0xFF363946);
+  Color get primary => const Color(0xFF819595);
 
   @override
-  Color get primaryContainer => const Color(0xFF363946);
+  Color get primaryContainer => const Color(0xFF819595);
 
   @override
   Color get onPrimary => Colors.white;

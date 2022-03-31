@@ -6,10 +6,10 @@ class LightColorPalette extends ColorPalette {
   Brightness get brightness => Brightness.light;
 
   @override
-  Color get primary => const Color(0xFF6b2b06);
+  Color get primary => const Color(0xFFF4F4F4);
 
   @override
-  Color get primaryContainer => const Color(0xFF6b2b06);
+  Color get primaryContainer => const Color(0xFFF4F4F4);
 
   @override
   Color get onPrimary => const Color(0xFFFFFFFF);
