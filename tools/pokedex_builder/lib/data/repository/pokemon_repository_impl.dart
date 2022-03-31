@@ -1,9 +1,8 @@
+import 'package:pokedex_builder/data/data_source/pokemon_data_source.dart';
+import 'package:pokedex_builder/data/mapper/pokemon_model_entity_mapper.dart';
+import 'package:pokedex_builder/domain/model/pokemon.dart';
 import 'package:pokedex_builder/domain/model/response.dart';
-
-import '../../domain/model/pokemon.dart';
-import '../../domain/repository/pokemon_repository.dart';
-import '../data_source/pokemon_data_source.dart';
-import '../mapper/pokemon_model_entity_mapper.dart';
+import 'package:pokedex_builder/domain/repository/pokemon_repository.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
   PokemonRepositoryImpl(

@@ -1,8 +1,7 @@
+import 'package:pokedex_builder/domain/model/pokemon.dart';
+import 'package:pokedex_builder/domain/model/response.dart';
+import 'package:pokedex_builder/domain/usecase/fetch_pokemon_usecase.dart';
 import 'package:pokedex_builder/domain/usecase/usecase.dart';
-
-import '../model/pokemon.dart';
-import '../model/response.dart';
-import 'fetch_pokemon_usecase.dart';
 
 class FetchPokedexUseCase
     implements UseCase<FetchPokedexUseCaseParam, List<Pokemon>> {

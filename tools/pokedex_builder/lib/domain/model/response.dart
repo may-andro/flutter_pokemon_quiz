@@ -18,10 +18,10 @@ class Loading<T> extends Response<T> {
   Loading({this.data});
 }
 
-extension ResponseExtension on Response {
-  bool get isSuccess => this is Success;
+extension ResponseExtension<T> on Response {
+  bool get isSuccess => this is Success<T>;
 
-  bool get isLoading => this is Loading;
+  bool get isLoading => this is Loading<T>;
 
-  bool get isFailure => this is Failure;
+  bool get isFailure => this is Failure<T>;
 }

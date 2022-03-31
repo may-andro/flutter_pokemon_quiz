@@ -1,5 +1,4 @@
 import 'package:domain/src/mapper/model_entity_mapper.dart';
-import 'package:domain/src/mapper/pokemon/pokemon_stats_remote_mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:network/network.dart';
 

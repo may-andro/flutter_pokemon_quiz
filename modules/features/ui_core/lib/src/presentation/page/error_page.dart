@@ -8,7 +8,6 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
         title: Text(
           'Error Page',
           style: context.textTheme.displaySmall?.copyWith(

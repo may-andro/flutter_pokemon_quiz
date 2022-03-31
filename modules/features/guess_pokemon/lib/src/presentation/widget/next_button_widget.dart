@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 
 class NextButtonWidget extends StatelessWidget {
   const NextButtonWidget({Key? key}) : super(key: key);

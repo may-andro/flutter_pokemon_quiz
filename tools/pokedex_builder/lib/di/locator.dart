@@ -1,16 +1,15 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:pokedex_builder/data/data_source/pokemon_data_source.dart';
+import 'package:pokedex_builder/data/data_source/pokemon_data_source_impl.dart';
+import 'package:pokedex_builder/data/mapper/pokemon_model_entity_mapper.dart';
+import 'package:pokedex_builder/data/repository/pokemon_repository_impl.dart';
+import 'package:pokedex_builder/data/service/dio/dio_remote_client.dart';
+import 'package:pokedex_builder/data/service/remote_client.dart';
+import 'package:pokedex_builder/domain/repository/pokemon_repository.dart';
+import 'package:pokedex_builder/domain/usecase/fetch_pokedex_usecase.dart';
+import 'package:pokedex_builder/domain/usecase/fetch_pokemon_usecase.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-import '../data/data_source/pokemon_data_source.dart';
-import '../data/data_source/pokemon_data_source_impl.dart';
-import '../data/mapper/pokemon_model_entity_mapper.dart';
-import '../data/repository/pokemon_repository_impl.dart';
-import '../data/service/dio/dio_remote_client.dart';
-import '../data/service/remote_client.dart';
-import '../domain/repository/pokemon_repository.dart';
-import '../domain/usecase/fetch_pokedex_usecase.dart';
-import '../domain/usecase/fetch_pokemon_usecase.dart';
 
 GetIt locator = GetIt.instance;
 

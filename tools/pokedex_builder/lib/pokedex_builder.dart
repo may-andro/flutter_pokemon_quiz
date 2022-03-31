@@ -14,7 +14,7 @@ Future<List<Pokemon>> fetchPokemon(int startIndex, int endIndex) async {
   );
   final pokedexResponse = await fetchPokedexUseCase(fetchPokedexUseCaseParam);
 
-  if (pokedexResponse.isFailure) throw (pokedexResponse as Failure).error;
+  if (pokedexResponse.isFailure) throw (pokedexResponse as Failure<List<Pokemon>>).error;
 
-  return (pokedexResponse as Success).data;
+  return (pokedexResponse as Success<List<Pokemon>>).data;
 }

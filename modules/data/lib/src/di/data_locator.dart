@@ -1,8 +1,8 @@
 import 'package:data/src/data_source/data_source.dart';
 import 'package:data/src/data_source/feature_toggle/feature_toggle_data_source_impl.dart';
-import 'package:data/src/repository/repository.dart';
 import 'package:data/src/data_source/pokedex/pokedex_data_source_impl.dart';
 import 'package:data/src/data_source/pokemon/pokemon_data_source_impl.dart';
+import 'package:data/src/repository/repository.dart';
 import 'package:data/src/repository/feature_toggle/feature_toggle_repository_impl.dart';
 import 'package:data/src/repository/pokedex/pokedex_repository_impl.dart';
 import 'package:data/src/repository/pokemon/pokemon_repository_impl.dart';

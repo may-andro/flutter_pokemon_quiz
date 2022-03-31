@@ -38,4 +38,10 @@ get_all:
   - cd modules/features/setting && flutter pub get
   - cd tools/pokedex_builder && flutter pub get
 
+run_jhoto:
+  - flutter run lib/main_jhoto.dart --flavor jhoto
+
+run_kanto:
+  - flutter run lib/main_kanto.dart --flavor kanto
+
 

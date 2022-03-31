@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';

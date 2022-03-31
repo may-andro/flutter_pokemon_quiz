@@ -1,8 +1,7 @@
 import 'package:pokedex_builder/data/entity/remote_pokemon.dart';
-
-import '../../domain/model/pokemon.dart';
-import '../../domain/model/stats.dart';
-import 'model_entity_mapper.dart';
+import 'package:pokedex_builder/data/mapper/model_entity_mapper.dart';
+import 'package:pokedex_builder/domain/model/pokemon.dart';
+import 'package:pokedex_builder/domain/model/stats.dart';
 
 class PokemonModelEntityMapper
     extends ModelEntityMapper<Pokemon, RemotePokemon> {

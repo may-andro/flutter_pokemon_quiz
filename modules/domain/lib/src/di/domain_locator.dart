@@ -1,8 +1,6 @@
 import 'package:data/data.dart';
 import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
-import 'package:domain/src/usecase/feature_toggle/disable_feature_toggle_use_case.dart';
-import 'package:domain/src/usecase/feature_toggle/enable_feature_toggle_use_case.dart';
 import 'package:domain/src/usecase/usecase.dart';
 import 'package:get_it/get_it.dart';
 

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:pokedex_builder/data/service/remote_client.dart';
 import 'package:pokedex_builder/exceptions/exceptions.dart';
-
-import '../remote_client.dart';
 
 class DioRemoteClient implements RemoteClient {
   DioRemoteClient(this._dio);

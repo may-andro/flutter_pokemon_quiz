@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'stats.dart';
+import 'package:pokedex_builder/domain/model/stats.dart';
 
 part 'pokemon.g.dart';
 

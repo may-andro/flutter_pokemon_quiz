@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:pokedex_builder/domain/model/pokemon.dart';
-import 'package:pokedex_builder/pokedex_builder.dart' as pokedex_builder;
+import 'package:pokedex_builder/pokedex_builder.dart';
 
 Future<void> main(List<String> arguments) async {
   print('Pokedex builder started');
@@ -14,7 +14,7 @@ Future<void> main(List<String> arguments) async {
     final filePath = parsedArguments['filePath'];
     final startIndex = _fetchStartIndex(flavor);
     final endIndex = _fetchEndIndex(flavor);
-    final pokemons = await pokedex_builder.fetchPokemon(startIndex, endIndex);
+    final pokemons = await fetchPokemon(startIndex, endIndex);
     await _saveToFile(
       path: filePath,
       collectionJson: _createCollectionJson(pokemons, flavor),

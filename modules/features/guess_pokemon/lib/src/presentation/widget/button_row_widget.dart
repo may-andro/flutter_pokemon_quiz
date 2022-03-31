@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ui_core/ui_core.dart';
 import 'package:guess_pokemon/src/presentation/widget/next_button_widget.dart';
 import 'package:guess_pokemon/src/presentation/widget/pokedex_button_widget.dart';
-import 'package:ui_core/ui_core.dart';
 import 'package:guess_pokemon/src/presentation/widget/microphone_button_widget.dart';
 import 'package:guess_pokemon/src/presentation/widget/view_button_widget.dart';
 
