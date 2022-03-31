@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'remote_type.dart';
+import 'package:pokedex_builder/data/entity/remote_type.dart';
 
 part 'remote_types.g.dart';
 

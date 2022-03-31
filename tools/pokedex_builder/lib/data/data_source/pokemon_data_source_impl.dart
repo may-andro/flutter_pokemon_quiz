@@ -1,8 +1,7 @@
+import 'package:pokedex_builder/data/data_source/pokemon_data_source.dart';
 import 'package:pokedex_builder/data/entity/remote_pokemon.dart';
 import 'package:pokedex_builder/data/service/remote_client.dart';
 import 'package:pokedex_builder/exceptions/parse_failure_exception.dart';
-
-import 'pokemon_data_source.dart';
 
 class PokemonDataSourceImpl implements PokemonDataSource {
   PokemonDataSourceImpl(this._remoteClient);

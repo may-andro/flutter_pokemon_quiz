@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'remote_dreamworld.dart';
-import 'remote_home.dart';
-import 'remote_official_artwork.dart';
+import 'package:pokedex_builder/data/entity/remote_dreamworld.dart';
+import 'package:pokedex_builder/data/entity/remote_home.dart';
+import 'package:pokedex_builder/data/entity/remote_official_artwork.dart';
 
 part 'remote_other.g.dart';
 

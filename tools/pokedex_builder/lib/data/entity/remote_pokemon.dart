@@ -1,10 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'remote_abilities.dart';
-import 'remote_moves.dart';
-import 'remote_sprites.dart';
-import 'remote_stats.dart';
-import 'remote_types.dart';
+import 'package:pokedex_builder/data/entity/remote_abilities.dart';
+import 'package:pokedex_builder/data/entity/remote_moves.dart';
+import 'package:pokedex_builder/data/entity/remote_sprites.dart';
+import 'package:pokedex_builder/data/entity/remote_stats.dart';
+import 'package:pokedex_builder/data/entity/remote_types.dart';
 
 part 'remote_pokemon.g.dart';
 
