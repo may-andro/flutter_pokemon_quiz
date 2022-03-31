@@ -100,5 +100,22 @@
       loadMainDartJs();
     }
   </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCH6wdDaG7dV5dFVFgl9jlovmREYu96Hik",
+      authDomain: "pokemon-kento.firebaseapp.com",
+      projectId: "pokemon-kento",
+      storageBucket: "pokemon-kento.appspot.com",
+      messagingSenderId: "436938993963",
+      appId: "1:436938993963:web:92bdb1ba28864ffef0d56e",
+      measurementId: "G-T8SR0YCM5Q"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </body>
 </html>

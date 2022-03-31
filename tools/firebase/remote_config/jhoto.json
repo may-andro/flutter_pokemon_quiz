@@ -1,0 +1,55 @@
+{
+  "conditions": [],
+  "parameters": {},
+  "parameterGroups": {
+    "feature toggles": {
+      "description": "Feature toggles for johto",
+      "parameters": {
+        "test_feature_toggle_3": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "test from CI",
+          "valueType": "BOOLEAN"
+        },
+        "test_feature_toggle_4": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "test from CI",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_user_feedback": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Controls the user feedback feature",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_pokedex": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Controls the visibility of Pokedex Page in the app",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_pokemon_detail": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Controls the visibility of Pokemon Detail Page in the app",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_developer_option": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Controls the visibility of the developer option in the setting",
+          "valueType": "BOOLEAN"
+        }
+      }
+    }
+  },
+  "etag": "etag-550904117828-5",
+  "version": {}
+}

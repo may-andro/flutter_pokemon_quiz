@@ -19,6 +19,7 @@ class PokedexButtonWidget extends StatelessWidget {
         Navigator.pushNamed(context, PokedexRoute.root);
       },
       child: const Icon(Icons.catching_pokemon),
+      heroTag: null,
     );
   }
 }

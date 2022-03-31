@@ -11,10 +11,13 @@ class DeveloperPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconTheme.of(context).copyWith(
+          color: context.colorPalette.grey80,
+        ),
         automaticallyImplyLeading: true,
         title: Text(
           'Developer Option',
-          style: context.textTheme.displaySmall?.copyWith(
+          style: context.textTheme.headlineMedium?.copyWith(
             color: context.colorPalette.grey90,
           ),
         ),

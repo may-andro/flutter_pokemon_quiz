@@ -8,20 +8,23 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProviderWidget<SettingViewModel>(
-        onViewModelProvided: (viewModel) => viewModel.onInit(),
-        builder: (context, viewModel, _) {
-          return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: true,
-              title: Text(
-                'Setting',
-                style: context.textTheme.displaySmall?.copyWith(
-                  color: context.colorPalette.grey90,
-                ),
-              ),
-            ),
-            body: ListView(
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconTheme.of(context).copyWith(
+          color: context.colorPalette.grey80,
+        ),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Setting',
+          style: context.textTheme.headlineMedium?.copyWith(
+            color: context.colorPalette.grey90,
+          ),
+        ),
+      ),
+      body: ViewModelProviderWidget<SettingViewModel>(
+          onViewModelProvided: (viewModel) => viewModel.onInit(),
+          builder: (context, viewModel, _) {
+            return ListView(
               children: [
                 SizedBox(height: context.getGridDimen(3)),
                 _buildSettingTitle(context, 'General'),
@@ -33,9 +36,9 @@ class SettingPage extends StatelessWidget {
                 _buildDeveloperSettings(context),
                 SizedBox(height: context.getGridDimen(3)),
               ],
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 
   Widget _buildSettingTitle(BuildContext context, String label) {

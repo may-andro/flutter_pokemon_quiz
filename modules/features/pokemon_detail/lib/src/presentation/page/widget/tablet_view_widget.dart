@@ -26,6 +26,7 @@ class TabletViewWidget extends StatelessWidget {
       children: [
         _buildToolbar(context),
         const Expanded(child: PokemonImageWidget()),
+        _buildBottomNavigationBar(context),
       ],
     );
   }
@@ -39,7 +40,6 @@ class TabletViewWidget extends StatelessWidget {
             child: _buildContent(context),
           ),
         ),
-        _buildBottomNavigationBar(context),
         SizedBox(height: context.getGridDimen(1)),
       ],
     );
@@ -105,7 +105,7 @@ class TabletViewWidget extends StatelessWidget {
         return const PokemonInfoWidget();
       case 1:
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.getGridDimen(3)),
+          padding: EdgeInsets.all(context.getGridDimen(3)),
           child: const StatsCardWidget(),
         );
       default:

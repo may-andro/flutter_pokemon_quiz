@@ -9,8 +9,9 @@ class NextButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
     return FloatingActionButton(
-      onPressed: viewModel.loadPokemon,
+      onPressed: viewModel.isStateLoading ? null : viewModel.loadPokemon,
       child: const Icon(Icons.next_plan),
+      heroTag: null,
     );
   }
 }

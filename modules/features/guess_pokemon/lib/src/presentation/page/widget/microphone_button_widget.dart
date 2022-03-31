@@ -21,6 +21,7 @@ class MicrophoneButtonWidget extends StatelessWidget {
           viewModel.isListening ? Colors.green : context.colorPalette.secondary,
       onPressed: isClickable ? viewModel.listenToSpeech : null,
       child: Icon(fabIcon),
+      heroTag: null,
     );
   }
 }

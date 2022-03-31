@@ -12,20 +12,23 @@ class PokemonImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<PokemonDetailViewModel>();
-    return CachedNetworkImage(
-      imageUrl: viewModel.pokemonImage,
-      fit: BoxFit.contain,
-      progressIndicatorBuilder: (context, url, downloadProgress) {
-        return Center(
-          child: AnimatorLoadingWidget(
-            height: context.shortestSide * 0.25,
-            width: context.shortestSide * 0.25,
-          ),
-        );
-      },
-      errorWidget: (context, url, error) => Icon(
-        Icons.error,
-        size: context.getGridDimen(4),
+    return Hero(
+      tag: viewModel.pokemonImage,
+      child: CachedNetworkImage(
+        imageUrl: viewModel.pokemonImage,
+        fit: BoxFit.contain,
+        progressIndicatorBuilder: (context, url, downloadProgress) {
+          return Center(
+            child: AnimatorLoadingWidget(
+              height: context.shortestSide * 0.25,
+              width: context.shortestSide * 0.25,
+            ),
+          );
+        },
+        errorWidget: (context, url, error) => Icon(
+          Icons.error,
+          size: context.getGridDimen(4),
+        ),
       ),
     );
   }

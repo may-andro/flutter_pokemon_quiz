@@ -24,13 +24,18 @@ class GuessPokemonButtonWidget extends StatelessWidget {
             : null,
         backgroundColor: context.colorPalette.primary,
         child: Center(
-          child: Image.asset(
-            Assets.images.avatarRyhorn.path,
-            width: context.getGridDimen(6),
-            height: context.getGridDimen(6),
-            package: 'ui_core',
-            color: context.colorPalette.grey80,
-          ),
+          child: isInitialized
+              ? Image.asset(
+                  Assets.images.avatarRyhorn.path,
+                  width: context.getGridDimen(6),
+                  height: context.getGridDimen(6),
+                  package: 'ui_core',
+                  color: context.colorPalette.grey80,
+                )
+              : AnimatorLoadingWidget(
+                  width: context.getGridDimen(6),
+                  height: context.getGridDimen(6),
+                ),
         ),
       ),
     );

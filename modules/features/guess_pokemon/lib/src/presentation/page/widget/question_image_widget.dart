@@ -23,20 +23,23 @@ class QuestionImageWidget extends StatelessWidget {
 
     return ColorFiltered(
       colorFilter: ColorFilter.mode(color, blendMode),
-      child: CachedNetworkImage(
-        imageUrl: url,
-        fit: BoxFit.contain,
-        progressIndicatorBuilder: (context, url, downloadProgress) {
-          return Center(
-            child: AnimatorLoadingWidget(
-              height: context.width * 0.2,
-              width: context.width * 0.2,
-            ),
-          );
-        },
-        errorWidget: (context, url, error) => Icon(
-          Icons.error,
-          size: context.getGridDimen(4),
+      child: Hero(
+        tag: url,
+        child: CachedNetworkImage(
+          imageUrl: url,
+          fit: BoxFit.contain,
+          progressIndicatorBuilder: (context, url, downloadProgress) {
+            return Center(
+              child: AnimatorLoadingWidget(
+                height: context.width * 0.2,
+                width: context.width * 0.2,
+              ),
+            );
+          },
+          errorWidget: (context, url, error) => Icon(
+            Icons.error,
+            size: context.getGridDimen(4),
+          ),
         ),
       ),
     );

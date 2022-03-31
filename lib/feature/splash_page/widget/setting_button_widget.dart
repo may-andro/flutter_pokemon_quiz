@@ -19,7 +19,12 @@ class SettingButtonWidget extends StatelessWidget {
       onPressed: isInitialized
           ? () => Navigator.pushNamed(context, SettingRoute.root)
           : null,
-      child: Icon(Icons.settings, color: context.colorPalette.grey80),
+      child: isInitialized
+          ? Icon(Icons.settings, color: context.colorPalette.grey80)
+          : AnimatorLoadingWidget(
+              width: context.getGridDimen(4),
+              height: context.getGridDimen(4),
+            ),
     );
   }
 }
