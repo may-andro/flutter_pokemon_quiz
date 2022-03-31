@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
-import 'package:pokemon_detail/src/presentation/widget/pokemon_type_widget.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_core/assets/fonts.gen.dart';
+import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
+import 'package:pokemon_detail/src/presentation/page/widget/pokemon_type_widget.dart';
 
 class PokemonInfoWidget extends StatelessWidget {
   const PokemonInfoWidget({

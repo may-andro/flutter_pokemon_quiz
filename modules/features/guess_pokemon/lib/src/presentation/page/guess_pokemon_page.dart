@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
-import 'package:guess_pokemon/src/presentation/widget/widget.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
+import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
+import 'package:guess_pokemon/src/presentation/page/widget/widget.dart';
 
 class GuessPokemonPage extends StatelessWidget {
   const GuessPokemonPage({Key? key}) : super(key: key);

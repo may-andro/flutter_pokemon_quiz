@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:domain/domain.dart';
-import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
-import 'package:pokemon_detail/src/presentation/widget/mobile_view_widget.dart';
-import 'package:pokemon_detail/src/presentation/widget/tablet_view_widget.dart';
 import 'package:ui_core/ui_core.dart';
+import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
+import 'package:pokemon_detail/src/presentation/page/widget/mobile_view_widget.dart';
+import 'package:pokemon_detail/src/presentation/page/widget/tablet_view_widget.dart';
 
 class PokemonDetailPage extends StatelessWidget {
   const PokemonDetailPage({required this.pokemon, Key? key}) : super(key: key);

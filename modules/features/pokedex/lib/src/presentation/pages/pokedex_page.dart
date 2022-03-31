@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/src/presentation/pages/pokedex_view_model.dart';
-import 'package:pokedex/src/presentation/widgets/pokdex_success_widget.dart';
-import 'package:pokedex/src/presentation/widgets/pokedex_error_widget.dart';
-import 'package:pokedex/src/presentation/widgets/pokedex_loading_widget.dart';
-import 'package:pokedex/src/presentation/widgets/pokedex_title_widget.dart';
+import 'package:pokedex/src/presentation/pages/widgets/pokdex_success_widget.dart';
+import 'package:pokedex/src/presentation/pages/widgets/pokedex_error_widget.dart';
+import 'package:pokedex/src/presentation/pages/widgets/pokedex_loading_widget.dart';
+import 'package:pokedex/src/presentation/pages/widgets/pokedex_title_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_core/ui_core.dart';
 

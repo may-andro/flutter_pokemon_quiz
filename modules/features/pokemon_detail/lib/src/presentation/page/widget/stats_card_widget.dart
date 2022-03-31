@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_detail/src/presentation/widget/progress_bar_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:domain/domain.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
+import 'package:pokemon_detail/src/presentation/page/widget/progress_bar_widget.dart';
 
 class StatsCardWidget extends StatelessWidget {
   const StatsCardWidget({Key? key}) : super(key: key);

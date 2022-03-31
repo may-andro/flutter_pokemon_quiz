@@ -19,10 +19,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Setup Java environment
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{env.JAVA_VERSION}}
       - name: Setup the flutter environment
         uses: subosito/flutter-action@v2
         with:
