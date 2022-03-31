@@ -10,7 +10,6 @@ environment:
 dependencies:
   ui_core:
     path: ../../features/ui_core
-  dartz: ^0.10.1
   dependencies:
     path: ../../dependencies
   domain:

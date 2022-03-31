@@ -15,7 +15,7 @@ dependencies:
   pretty_dio_logger: ^1.1.1
 
 dev_dependencies:
-  lints: ^1.0.1
+  flutter_lints: ^1.0.4
   test: ^1.20.2
   build_runner: ^2.1.8
   json_serializable: ^6.1.5

@@ -226,7 +226,7 @@ packages:
     source: hosted
     version: "2.2.1"
   dartz:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: dartz
       url: "https://pub.dartlang.org"
@@ -356,6 +356,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.0"
+  flutter_lints:
+    dependency: "direct dev"
+    description:
+      name: flutter_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter_svg:
     dependency: transitive
     description:
@@ -464,6 +471,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   local:
     dependency: transitive
     description:
