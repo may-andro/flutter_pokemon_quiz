@@ -1,5 +1,6 @@
-
-const String ROUTE_HOME = '/home';
-const String ROUTE_POKEDEX = '/pokedex';
-const String ROUTE_GUESS_POKEMON = '/guess_pokemon';
-const String ROUTE_POKEMON_DETAIL = '/pokemon_detail';
+export 'feature_route/main_route.dart';
+export 'feature_route/pokedex_route.dart';
+export 'feature_route/pokemon_detail_route.dart';
+export 'feature_route/guess_pokemon_route.dart';
+export 'feature_route/setting_route.dart';
+export 'module_route.dart';

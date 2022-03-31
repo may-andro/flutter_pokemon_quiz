@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_quiz/feature/route/route_generator.dart';
+import 'package:guess_pokemon/guess_pokemon.dart';
+import 'package:pokedex/pokedex.dart';
+import 'package:pokemon_detail/pokemon_detail.dart';
+import 'package:pokemon_quiz/route/main_module_route.dart';
+import 'package:setting/setting.dart';
 import 'package:ui_core/ui_core.dart';
 
 class PQApp extends StatelessWidget {
@@ -15,7 +19,17 @@ class PQApp extends StatelessWidget {
         return AppThemeProviderWidget(child: child!);
       },
       initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
+      onGenerateRoute: generateRoute,
     );
+  }
+
+  Route<dynamic>? generateRoute(RouteSettings routeSettings) {
+    final routesMap = <String, MaterialPageRoute>{};
+    routesMap.addAll(MainModuleRoute().getRoutes(routeSettings));
+    routesMap.addAll(PokedexModuleRoute().getRoutes(routeSettings));
+    routesMap.addAll(GuessPokemonModuleRoute().getRoutes(routeSettings));
+    routesMap.addAll(PokemonDetailModuleRoute().getRoutes(routeSettings));
+    routesMap.addAll(SettingModuleRoute().getRoutes(routeSettings));
+    return routesMap[routeSettings.name];
   }
 }

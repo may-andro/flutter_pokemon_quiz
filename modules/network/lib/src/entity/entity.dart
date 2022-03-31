@@ -15,3 +15,4 @@ export 'extended_pokemon/remote_extended_stat.dart';
 export 'extended_pokemon/remote_extended_stats.dart';
 export 'extended_pokemon/remote_extended_types.dart';
 export 'extended_pokemon/remote_extended_type.dart';
+export 'remote_config/remote_config_feature.dart';

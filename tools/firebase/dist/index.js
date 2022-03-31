@@ -174,7 +174,7 @@ function publishRemoteConfig(flavorArgument, templateFilePath) {
     });
 }
 function getCredentialsFilePath(flavor) {
-    var serviceAccountCredentialsPath = '../../firestore_uploader/data/' + flavor + "/credentials.json";
+    var serviceAccountCredentialsPath = '../../firestore_uploader/src/data/' + flavor + "/credentials.json";
     return serviceAccountCredentialsPath;
 }
 function getServiceAccount(flavorArgument) {

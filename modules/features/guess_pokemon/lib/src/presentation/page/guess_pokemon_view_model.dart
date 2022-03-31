@@ -10,12 +10,14 @@ class GuessPokemonViewModel extends BaseViewModel {
     this._startSpeechToTextUseCase,
     this._stopSpeechToTextUseCase,
     this._fetchRandomPokemonUseCase,
+    this._isFeatureEnabledUseCase,
     this._pokemonTypeColorMapper,
   );
 
   final StartSpeechToTextUseCase _startSpeechToTextUseCase;
   final StopSpeechToTextUseCase _stopSpeechToTextUseCase;
   final FetchRandomPokemonUseCase _fetchRandomPokemonUseCase;
+  final IsFeatureEnabledUseCase _isFeatureEnabledUseCase;
   final PokemonTypeColorMapper _pokemonTypeColorMapper;
 
   late int _errorCode;
@@ -32,11 +34,16 @@ class GuessPokemonViewModel extends BaseViewModel {
 
   String get pokemonImage => _pokemon?.imageUrl ?? '';
 
-  String get pokemonName => _pokemon?.name ?? 'Fetching Pokémon';
+  String get pokemonName => _pokemon?.name.toUpperCase() ?? '';
 
   Pokemon? get pokemon => _pokemon;
 
   Color get typeColor => _pokemonTypeColorMapper.map(_pokemon?.types[0] ?? '');
+
+  bool get isPokemonDetailFeatureEnabled =>
+      _isFeatureEnabledUseCase(Feature.pokemon_detail);
+
+  bool get isPokedexFeatureEnabled => _isFeatureEnabledUseCase(Feature.pokedex);
 
   void onInit() async {
     _startSpeechToTextUseCase.textStream.listen((text) {

@@ -47,6 +47,7 @@ void _injectViewModel(final GetIt getIt) {
       getIt.get<StartSpeechToTextUseCase>(),
       getIt.get<StopSpeechToTextUseCase>(),
       getIt.get<FetchRandomPokemonUseCase>(),
+      getIt.get<IsFeatureEnabledUseCase>(),
       getIt.get<PokemonTypeColorMapper>(),
     ),
   );

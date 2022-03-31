@@ -7,9 +7,10 @@ analyze:
   - cd modules/features/pokedex && flutter analyze
   - cd modules/features/guess_pokemon && flutter analyze
   - cd modules/features/pokemon_detail && flutter analyze
+  - cd modules/features/setting && flutter analyze
   - flutter analyze
   - cd tools/pokedex_builder && flutter analyze
-  -
+
 build_runner:
   - cd modules/network && flutter pub run build_runner build --delete-conflicting-outputs
   - cd modules/local && flutter pub run build_runner build --delete-conflicting-outputs
@@ -19,6 +20,7 @@ build_runner:
   - cd modules/features/pokedex && flutter pub run build_runner build --delete-conflicting-outputs
   - cd modules/features/guess_pokemon && flutter pub run build_runner build --delete-conflicting-outputs
   - cd modules/features/pokemon_detail && flutter pub run build_runner build --delete-conflicting-outputs
+  - cd modules/features/setting && flutter pub run build_runner build --delete-conflicting-outputs
   - flutter pub run build_runner build --delete-conflicting-outputs
   - cd tools/pokedex_builder && flutter pub run build_runner build --delete-conflicting-outputs
 
@@ -33,6 +35,7 @@ get_all:
   - cd modules/features/pokedex && flutter pub get
   - cd modules/features/guess_pokemon && flutter pub get
   - cd modules/features/pokemon_detail && flutter pub get
+  - cd modules/features/setting && flutter pub get
   - cd tools/pokedex_builder && flutter pub get
 
 

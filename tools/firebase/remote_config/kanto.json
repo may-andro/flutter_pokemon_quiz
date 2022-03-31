@@ -5,23 +5,37 @@
     "feature toggles": {
       "description": "Feature toggles for kanto",
       "parameters": {
-        "test_feature_toggle_3": {
+        "feature_toggle_user_feedback": {
           "defaultValue": {
             "value": "true"
           },
-          "description": "test from CI",
+          "description": "Controls the user feedback feature",
           "valueType": "BOOLEAN"
         },
-        "test_feature_toggle_4": {
+        "feature_toggle_pokedex": {
           "defaultValue": {
             "value": "true"
           },
-          "description": "test from CI",
+          "description": "Controls the visibility of Pokedex Page in the app",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_pokemon_detail": {
+          "defaultValue": {
+            "value": "false"
+          },
+          "description": "Controls the visibility of Pokemon Detail Page in the app",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_developer_option": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Controls the visibility of the developer option in the setting",
           "valueType": "BOOLEAN"
         }
       }
     }
   },
-  "etag": "etag-436938993963-9",
+  "etag": "etag-436938993963-12",
   "version": {}
 }

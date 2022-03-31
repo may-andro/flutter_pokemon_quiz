@@ -9,3 +9,4 @@ export 'device_resolution/device_responsive_widget.dart';
 export 'component/image/image.dart';
 export 'component/button/primary_button.dart';
 export 'route/route.dart';
+export 'page/error_page.dart';

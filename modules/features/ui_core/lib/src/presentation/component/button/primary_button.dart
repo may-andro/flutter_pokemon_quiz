@@ -3,12 +3,12 @@ import 'package:ui_core/src/extension/context.dart';
 
 class RoundedButton extends StatelessWidget {
   RoundedButton({
-    required this.onPressed,
     required this.label,
+    this.onPressed,
     Key? key,
   }) : super(key: key);
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String label;
 
   @override

@@ -13,7 +13,6 @@ dependencies:
 
   # UI
   url_launcher: ^6.0.20
-  package_info: ^2.0.2
 
   # Core
   get_it: ^7.2.0

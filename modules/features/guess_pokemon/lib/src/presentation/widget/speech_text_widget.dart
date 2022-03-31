@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
@@ -21,7 +23,10 @@ class SpeechTextWidget extends StatelessWidget {
       color: viewModel.typeColor,
     );
     final highlightedWord = HighlightedWord(
-      onTap: () => goToPokemonDetail(context, viewModel.pokemon),
+      onTap: () {
+        if (!viewModel.isPokemonDetailFeatureEnabled) return;
+        goToPokemonDetail(context, viewModel.pokemon);
+      },
       textStyle: highlightedStyle,
     );
 
@@ -40,12 +45,6 @@ class SpeechTextWidget extends StatelessWidget {
           text: viewModel.text,
           words: {
             pokemonName: highlightedWord,
-            pokemonName.toUpperCase(): highlightedWord,
-            pokemonName.toLowerCase(): highlightedWord,
-            pokemonName.replaceFirst(
-              pokemonName[0],
-              pokemonName[0].toUpperCase(),
-            ): highlightedWord,
           },
           textAlign: TextAlign.center,
           textStyle: textStyle,
@@ -56,6 +55,6 @@ class SpeechTextWidget extends StatelessWidget {
 
   void goToPokemonDetail(BuildContext context, Pokemon? pokemon) {
     if (pokemon == null) return;
-    Navigator.pushNamed(context, ROUTE_POKEMON_DETAIL, arguments: pokemon);
+    Navigator.pushNamed(context, PokemonDetailRoute.root, arguments: pokemon);
   }
 }

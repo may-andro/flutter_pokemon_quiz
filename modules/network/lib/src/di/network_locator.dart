@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +14,7 @@ void setupNetworkDependencies(final GetIt getIt) {
 
 void _injectFirebaseDependencies(final GetIt getIt) {
   getIt.registerLazySingleton(() => FirebaseFirestore.instance);
+  getIt.registerLazySingleton(() => FirebaseRemoteConfig.instance);
 }
 
 void _setupDioClient(final GetIt getIt) {
@@ -23,6 +25,9 @@ void _setupDioClient(final GetIt getIt) {
 void _injectRemoteClients(final GetIt getIt) {
   getIt.registerLazySingleton(
     () => FirebaseClient(getIt.get<FirebaseFirestore>()),
+  );
+  getIt.registerLazySingleton(
+    () => RemoteConfigClient(getIt.get<FirebaseRemoteConfig>()),
   );
   getIt.registerSingleton<RemoteClient>(
     DioRemoteClient(getIt<Dio>()),

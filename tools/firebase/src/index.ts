@@ -104,7 +104,7 @@ async function publishRemoteConfig(flavorArgument, templateFilePath) {
 }
 
 function getCredentialsFilePath(flavor: string) {
-    let serviceAccountCredentialsPath = '../../firestore_uploader/data/' + flavor + "/credentials.json"
+    let serviceAccountCredentialsPath = '../../firestore_uploader/src/data/' + flavor + "/credentials.json"
 
     return serviceAccountCredentialsPath
 }

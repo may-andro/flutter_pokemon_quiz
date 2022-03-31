@@ -22,6 +22,8 @@ dependencies:
     path: modules/features/guess_pokemon
   pokemon_detail:
     path: modules/features/pokemon_detail
+  setting:
+    path: modules/features/setting
   ui_core:
     path: modules/features/ui_core
 

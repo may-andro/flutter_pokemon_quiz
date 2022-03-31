@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:guess_pokemon/guess_pokemon.dart';
 import 'package:pokedex/pokedex.dart';
 import 'package:pokemon_quiz/di/locator.dart';
+import 'package:setting/setting.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:pokemon_detail/pokemon_detail.dart';
 
@@ -14,8 +15,11 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  late bool _isInitialized;
+
   @override
   void initState() {
+    _isInitialized = false;
     _setupLocator();
     super.initState();
   }
@@ -36,29 +40,13 @@ class _SplashPageState extends State<SplashPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: context.getGridDimen(1)),
-        PokemonLogoImageWidget(
-          height: context.height * 0.25,
-          width: context.width * 0.7,
-        ),
+        _buildPokemonLogo(),
         SizedBox(height: context.getGridDimen(3)),
-        LottieLoadingWidget(
-          height: context.shortestSide * 0.7,
-          width: context.shortestSide * 0.7,
-          asset: LottieAsset.pokemon,
-        ),
+        _buildSplashImage(),
         const Spacer(),
         _buildGuessPokemonButton(context.shortestSide * 0.8),
         SizedBox(height: context.getGridDimen(2)),
-        _buildPokedexButton(context.shortestSide * 0.8),
-        SizedBox(height: context.getGridDimen(3)),
-        Text(
-          'Loading pokemons ...',
-          style: context.textTheme.bodyMedium?.copyWith(
-            color: context.colorPalette.grey80,
-          ),
-        ),
-        SizedBox(height: context.getGridDimen(0.5)),
-        const LinearProgressIndicator(),
+        _buildSettingButton(context.shortestSide * 0.8),
         SizedBox(height: context.getGridDimen(2)),
       ],
     );
@@ -71,33 +59,15 @@ class _SplashPageState extends State<SplashPage> {
         Expanded(
           child: Column(
             children: [
-              Expanded(
-                child: PokemonLogoImageWidget(
-                  height: context.height * 0.25,
-                  width: context.width * 0.7,
-                ),
-              ),
+              Expanded(child: _buildPokemonLogo()),
               _buildGuessPokemonButton(context.shortestSide * 0.8),
               SizedBox(height: context.getGridDimen(1)),
-              _buildPokedexButton(context.shortestSide * 0.8),
-              SizedBox(height: context.getGridDimen(3)),
-              Text(
-                'Loading pokemons ...',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorPalette.grey80,
-                ),
-              ),
-              SizedBox(height: context.getGridDimen(0.5)),
-              const LinearProgressIndicator(),
+              _buildSettingButton(context.shortestSide * 0.8),
               SizedBox(height: context.getGridDimen(1)),
             ],
           ),
         ),
-        LottieLoadingWidget(
-          height: context.shortestSide * 0.7,
-          width: context.shortestSide * 0.7,
-          asset: LottieAsset.pokemon,
-        ),
+        _buildSplashImage(),
       ],
     );
   }
@@ -109,61 +79,54 @@ class _SplashPageState extends State<SplashPage> {
         Expanded(
           child: Column(
             children: [
-              Expanded(
-                child: PokemonLogoImageWidget(
-                  height: context.height * 0.25,
-                  width: context.width * 0.7,
-                ),
-              ),
+              Expanded(child: _buildPokemonLogo()),
               _buildGuessPokemonButton(context.shortestSide * 0.8),
               SizedBox(height: context.getGridDimen(1)),
-              _buildPokedexButton(context.shortestSide * 0.8),
-              SizedBox(height: context.getGridDimen(3)),
-              Text(
-                'Loading pokemons ...',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorPalette.grey80,
-                ),
-              ),
-              SizedBox(height: context.getGridDimen(1)),
-              const LinearProgressIndicator(),
+              _buildSettingButton(context.shortestSide * 0.8),
               SizedBox(height: context.getGridDimen(0.5)),
             ],
           ),
         ),
-        LottieLoadingWidget(
-          height: context.shortestSide * 0.7,
-          width: context.shortestSide * 0.7,
-          asset: LottieAsset.pokemon,
-        ),
+        _buildSplashImage(),
       ],
     );
   }
 
-  Widget _buildPokedexButton(
-    final double width,
-  ) {
+  Widget _buildPokemonLogo() {
+    return PokemonLogoImageWidget(
+      height: context.height * 0.25,
+      width: context.width * 0.7,
+    );
+  }
+
+  Widget _buildSplashImage() {
+    return LottieLoadingWidget(
+      height: context.shortestSide * 0.7,
+      width: context.shortestSide * 0.7,
+      asset: LottieAsset.pokemon,
+    );
+  }
+
+  Widget _buildSettingButton(final double width) {
     return SizedBox(
       width: width,
       child: RoundedButton(
-        label: 'Pokedex',
-        onPressed: () {
-          Navigator.pushNamed(context, ROUTE_POKEDEX);
-        },
+        label: _isInitialized ? 'Setting' : 'Loading',
+        onPressed: _isInitialized
+            ? () => Navigator.pushNamed(context, SettingRoute.root)
+            : null,
       ),
     );
   }
 
-  Widget _buildGuessPokemonButton(
-    final double width,
-  ) {
+  Widget _buildGuessPokemonButton(final double width) {
     return SizedBox(
       width: width,
       child: RoundedButton(
-        label: 'Guess Pokemon',
-        onPressed: () {
-          Navigator.pushNamed(context, ROUTE_GUESS_POKEMON);
-        },
+        label: _isInitialized ? "Who's that Pokemon" : 'Loading',
+        onPressed: _isInitialized
+            ? () => Navigator.pushNamed(context, GuessPokemonRoute.root)
+            : null,
       ),
     );
   }
@@ -174,5 +137,9 @@ class _SplashPageState extends State<SplashPage> {
     setupPokedexFeature(getIt);
     setupGuessPokemonFeature(getIt);
     setupPokemonDetailFeature(getIt);
+    setupSettingFeature(getIt);
+    setState(() {
+      _isInitialized = true;
+    });
   }
 }
