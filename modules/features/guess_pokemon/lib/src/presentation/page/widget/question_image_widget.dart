@@ -22,11 +22,10 @@ class QuestionImageWidget extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        FittedBox(
-          fit: BoxFit.fill,
+        Positioned.fill(
           child: Image.asset(
             Assets.questionBg.path,
-            fit: BoxFit.fill,
+            fit: BoxFit.contain,
             color: context.isDarkMode
                 ? context.colorPalette.grey70
                 : context.colorPalette.grey30,
