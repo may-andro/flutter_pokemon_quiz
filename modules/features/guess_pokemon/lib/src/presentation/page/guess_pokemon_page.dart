@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:guess_pokemon/src/presentation/page/widget/next_button_widget.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
@@ -34,7 +35,7 @@ class GuessPokemonPage extends StatelessWidget {
         Expanded(child: _buildQuestion(context)),
         const SpeechTextWidget(),
         SizedBox(height: context.getGridDimen(1)),
-        const ButtonRowWidget(),
+        _buildButtons(context),
         SizedBox(height: context.getGridDimen(3))
       ],
     );
@@ -44,17 +45,25 @@ class GuessPokemonPage extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Column(
+          child: Stack(
             children: [
-              Expanded(
+              Positioned(
+                top: context.getGridDimen(3),
+                left: 0,
+                right: 0,
                 child: QuestionTextWidget(
-                  height: context.height * 0.3,
+                  height: context.height * 0.2,
                   width: context.width * 0.8,
                 ),
               ),
-              const SpeechTextWidget(),
-              const ButtonRowWidget(),
-              SizedBox(height: context.getGridDimen(2))
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  children: [const SpeechTextWidget(), _buildButtons(context)],
+                ),
+              ),
             ],
           ),
         ),
@@ -114,6 +123,26 @@ class GuessPokemonPage extends StatelessWidget {
           Icons.error,
           size: context.height * 0.25,
         ),
+      ),
+    );
+  }
+
+  Widget _buildButtons(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: context.getGridDimen(3)),
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: const [
+          MicrophoneButtonWidget(),
+          Align(
+            alignment: Alignment.centerRight,
+            child: NextButtonWidget(),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ViewButtonWidget(),
+          ),
+        ],
       ),
     );
   }

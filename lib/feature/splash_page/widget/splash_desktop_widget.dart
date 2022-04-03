@@ -6,8 +6,8 @@ import 'package:pokemon_quiz/feature/splash_page/widget/setting_button_widget.da
 import 'package:pokemon_quiz/feature/splash_page/widget/splash_image_widget.dart';
 import 'package:ui_core/ui_core.dart';
 
-class SplashMobileWidget extends StatelessWidget {
-  const SplashMobileWidget({Key? key}) : super(key: key);
+class SplashDesktopWidget extends StatelessWidget {
+  const SplashDesktopWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +16,23 @@ class SplashMobileWidget extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Positioned(
-          height: context.height * 0.25,
-          top: context.height * 0.05,
+          top: 0,
           left: 0,
-          right: 0,
+          bottom: 0,
+          right: context.width * 0.5,
           child: const PokemonLogoImageWidget(),
         ),
         Positioned(
-          bottom: context.height * 0.25,
-          top: context.height * 0.25,
+          top: 0,
           right: 0,
-          left: 0,
+          left: context.width * 0.4,
+          bottom: 0,
           child: const SplashImageWidget(),
         ),
         Positioned(
-          bottom: context.height * 0.05,
-          left: context.width * 0.05,
-          right: context.width * 0.05,
+          bottom: 0,
+          left: 0,
+          right: context.width * 0.5,
           child: _buildButtons(context),
         ),
       ],

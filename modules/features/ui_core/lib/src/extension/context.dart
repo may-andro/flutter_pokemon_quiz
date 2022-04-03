@@ -47,7 +47,7 @@ extension BuildContextExtension on BuildContext {
       case AdaptiveWindowType.xlarge:
         return DeviceResolution.desktop;
       default:
-        return DeviceResolution.desktop;
+        return DeviceResolution.mobile;
     }
   }
 

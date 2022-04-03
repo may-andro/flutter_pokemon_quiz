@@ -14,8 +14,6 @@ class Assets {
       AssetGenImage('assets/guess_pokemon.png');
   static const AssetGenImage questionBg =
       AssetGenImage('assets/question_bg.png');
-  static const AssetGenImage questionCard =
-      AssetGenImage('assets/question_card.png');
 }
 
 class AssetGenImage extends AssetImage {
