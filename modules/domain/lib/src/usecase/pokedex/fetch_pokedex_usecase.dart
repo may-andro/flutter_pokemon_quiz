@@ -18,7 +18,7 @@ class FetchPokedexUseCase {
       final pokedex = _pokedexRemoteMapper.mapFromEntityToModel(remotePokedex);
       return Right(pokedex);
     } catch (e) {
-      return Left(Failure(ERROR_SERVER_ID));
+      return const Left(Failure(ERROR_SERVER_ID));
     }
   }
 }

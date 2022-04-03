@@ -22,9 +22,9 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  List<LocalPokemon> getAllFavorites() {
+  List<LocalPokemon> getAllFavoritePokemons() {
     return _pokemonDataSource
-        .getAllFavorites()
+        .getAllFavoritePokemons()
         .whereType<LocalPokemon>()
         .toList();
   }

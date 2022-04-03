@@ -6,7 +6,7 @@ abstract class PokemonRepository {
 
   void removeFavoritePokemon(int id);
 
-  List<LocalPokemon> getAllFavorites();
+  List<LocalPokemon> getAllFavoritePokemons();
 
   Future<RemoteExtendedPokemon> fetchPokemon(int index);
 }

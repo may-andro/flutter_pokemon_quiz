@@ -14,13 +14,13 @@ class FetchFavouritePokemonsUseCase {
 
   Either<Failure, List<FavouritePokemon>> call() {
     try {
-      final localPokemons = _pokemonRepository.getAllFavorites();
+      final localPokemons = _pokemonRepository.getAllFavoritePokemons();
       final pokemons = localPokemons
           .map(_favouritePokemonLocalMapper.mapFromEntityToModel)
           .toList();
       return Right(pokemons);
     } catch (e) {
-      return Left(Failure(ERROR_SERVER_ID));
+      return const Left(Failure(ERROR_SERVER_ID));
     }
   }
 }

@@ -22,7 +22,7 @@ void _setupDataSources(final GetIt getIt) {
   );
   getIt.registerLazySingleton<PokemonDataSource>(
     () => PokemonDataSourceImpl(
-      getIt.get<PokemonLocalClient>(instanceName: 'PokemonLocalClient'),
+      getIt.get<LocalClient<LocalPokemon>>(instanceName: 'PokemonLocalClient'),
       getIt.get<RemoteClient>(instanceName: 'DioRemoteClient'),
     ),
     instanceName: 'PokemonDataSourceImpl',

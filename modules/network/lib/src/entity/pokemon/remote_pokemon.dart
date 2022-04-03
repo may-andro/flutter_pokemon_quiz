@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:network/src/entity/pokemon/remote_stats.dart';
+import 'package:equatable/equatable.dart';
 
 part 'remote_pokemon.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RemotePokemon {
-  RemotePokemon({
+class RemotePokemon extends Equatable {
+  const RemotePokemon({
     required this.index,
     required this.name,
     required this.baseExperience,
@@ -52,4 +53,18 @@ class RemotePokemon {
 
   @JsonKey(name: 'stats')
   final List<RemoteStats> stats;
+
+  @override
+  List<Object?> get props => [
+        index,
+        name,
+        baseExperience,
+        weight,
+        height,
+        imageUrl,
+        abilities,
+        moves,
+        types,
+        stats,
+      ];
 }

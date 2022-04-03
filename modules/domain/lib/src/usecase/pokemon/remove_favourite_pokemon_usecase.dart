@@ -11,7 +11,7 @@ class RemoveFavouritePokemonUseCase {
     try {
       return Right(_pokemonRepository.removeFavoritePokemon(params));
     } catch (e) {
-      return Left(Failure(ERROR_DB_ID));
+      return const Left(Failure(ERROR_DB_ID));
     }
   }
 }

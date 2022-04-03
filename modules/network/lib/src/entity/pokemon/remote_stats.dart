@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:equatable/equatable.dart';
 
 part 'remote_stats.g.dart';
 
 @JsonSerializable()
-class RemoteStats {
-  RemoteStats(
+class RemoteStats extends Equatable {
+  const RemoteStats(
     this.baseStat,
     this.effort,
     this.name,
@@ -27,4 +28,7 @@ class RemoteStats {
 
   @JsonKey(name: 'url')
   final String url;
+
+  @override
+  List<Object?> get props => [baseStat, effort, name, url];
 }

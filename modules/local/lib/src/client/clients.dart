@@ -1,1 +1,1 @@
-export 'pokemon_local_client.dart';
+export 'local_client.dart';

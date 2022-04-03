@@ -6,11 +6,11 @@ import 'package:network/network.dart';
 class PokemonDataSourceImpl implements PokemonDataSource {
   PokemonDataSourceImpl(this._localClient, this._remoteClient);
 
-  final PokemonLocalClient _localClient;
+  final LocalClient<LocalPokemon> _localClient;
   final RemoteClient _remoteClient;
 
   @override
-  List<LocalPokemon?> getAllFavorites() {
+  List<LocalPokemon?> getAllFavoritePokemons() {
     return _localClient.getAll();
   }
 

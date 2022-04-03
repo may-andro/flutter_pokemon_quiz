@@ -20,7 +20,7 @@ class FetchPokemonUseCase {
       );
       return Right(pokemon);
     } catch (e) {
-      return Left(Failure(ERROR_SERVER_ID));
+      return const Left(Failure(ERROR_SERVER_ID));
     }
   }
 }

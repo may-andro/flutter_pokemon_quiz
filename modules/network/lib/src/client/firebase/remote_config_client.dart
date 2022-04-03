@@ -13,7 +13,7 @@ class RemoteConfigClient {
     RemoteConfigFeature.feature_toggle_user_feedback.name: false,
   };
 
-  Future initialise() async {
+  Future<bool> initialise() async {
     await _firebaseRemoteConfig.setDefaults(_defaultConfig);
     try {
       await _firebaseRemoteConfig.setConfigSettings(RemoteConfigSettings(
@@ -25,8 +25,7 @@ class RemoteConfigClient {
       // Handle error
       print('exception: $exception');
     }
-    final isActivated = await _firebaseRemoteConfig.activate();
-    print('isActivated: $isActivated');
+    return _firebaseRemoteConfig.activate();
   }
 
   bool getValue(RemoteConfigFeature remoteConfigFeature) {

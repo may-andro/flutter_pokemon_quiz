@@ -44,4 +44,16 @@ run_jhoto:
 run_kanto:
   - flutter run lib/main_kanto.dart --flavor kanto
 
+test:
+  - cd modules/dependencies && flutter test
+  - cd modules/local && flutter test
+  - cd modules/network && flutter test
+  - cd modules/data && flutter test
+  - cd modules/domain && flutter test
+  - cd modules/features/ui_core && flutter test
+  - cd modules/features/pokedex && flutter test
+  - cd modules/features/guess_pokemon && flutter test
+  - cd modules/features/pokemon_detail && flutter test
+  - cd modules/features/setting && flutter test
+  - flutter test
 

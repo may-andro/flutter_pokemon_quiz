@@ -4,7 +4,7 @@ import 'package:network/network.dart';
 class PokedexDataSourceImpl implements PokedexDataSource {
   PokedexDataSourceImpl(this._firebaseClient);
 
-  final FirebaseClient _firebaseClient;
+  final FireStoreClient _firebaseClient;
 
   @override
   Future<RemotePokedex> fetchPokedex(String flavor) {

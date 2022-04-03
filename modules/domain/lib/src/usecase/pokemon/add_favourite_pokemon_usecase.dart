@@ -13,13 +13,11 @@ class AddFavouritePokemonUseCase {
   final PokemonLocalMapper _pokemonLocalMapper;
 
   Either<Failure, void> call(Pokemon params) {
-    final localPokemon = _pokemonLocalMapper.mapFromModelToEntity(
-      params,
-    );
+    final localPokemon = _pokemonLocalMapper.mapFromModelToEntity(params);
     try {
       return Right(_pokemonRepository.putFavoritePokemon(localPokemon));
     } catch (e) {
-      return Left(Failure(ERROR_DB_ID));
+      return const Left(Failure(ERROR_DB_ID));
     }
   }
 }

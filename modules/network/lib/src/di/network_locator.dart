@@ -24,7 +24,7 @@ void _setupDioClient(final GetIt getIt) {
 
 void _injectRemoteClients(final GetIt getIt) {
   getIt.registerLazySingleton(
-    () => FirebaseClient(getIt.get<FirebaseFirestore>()),
+    () => FireStoreClient(getIt.get<FirebaseFirestore>()),
   );
   getIt.registerLazySingleton(
     () => RemoteConfigClient(getIt.get<FirebaseRemoteConfig>()),

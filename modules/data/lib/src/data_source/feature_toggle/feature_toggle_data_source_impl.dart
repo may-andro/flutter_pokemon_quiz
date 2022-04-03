@@ -5,15 +5,15 @@ class FeatureToggleDataSourceImpl implements FeatureToggleDataSource {
   FeatureToggleDataSourceImpl(RemoteConfigClient _remoteConfigClient)
       : _cachedRemoteFeatureConfigs = {
           for (var remoteConfigFeature in RemoteConfigFeature.values)
-            remoteConfigFeature:
-                _remoteConfigClient.getValue(remoteConfigFeature)
+            remoteConfigFeature: _remoteConfigClient.getValue(
+              remoteConfigFeature,
+            )
         };
 
   final Map<RemoteConfigFeature, bool> _cachedRemoteFeatureConfigs;
 
   @override
   bool getFeatureToggleValue(RemoteConfigFeature remoteConfigFeature) {
-    //return _remoteConfigClient.getValue(remoteConfigFeature);
     return _cachedRemoteFeatureConfigs[remoteConfigFeature] ?? false;
   }
 
