@@ -37,7 +37,7 @@ class SpeechTextWidget extends StatelessWidget {
     final pokemonName = viewModel.pokemonName;
 
     return SizedBox(
-      height: context.shortestSide * 0.25,
+      height: context.height * 0.1,
       child: Center(
         child: TextHighlight(
           text: viewModel.text,
