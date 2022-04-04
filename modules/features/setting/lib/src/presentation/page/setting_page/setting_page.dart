@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:setting/src/presentation/page/setting_page/setting_view_model.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -81,7 +82,7 @@ class SettingPage extends StatelessWidget {
           context,
           'Github',
           Icons.code,
-          () {},
+          () => launch('https://github.com/may-andro/flutter_pokemon_quiz'),
         ),
         viewModel.isDeveloperModeEnabled
             ? _buildListItem(

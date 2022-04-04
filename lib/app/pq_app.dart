@@ -14,12 +14,13 @@ class PQApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pokemon Quiz',
       builder: (_, child) {
         return AppThemeProviderWidget(child: child!);
       },
       initialRoute: '/',
       onGenerateRoute: generateRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 

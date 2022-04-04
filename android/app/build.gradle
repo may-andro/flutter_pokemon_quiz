@@ -49,10 +49,26 @@ android {
         versionName flutterVersionName
     }
 
-    buildTypes {
-        release {
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+    signingConfigs {
+        kanto {
+            def keystorePropertiesFile = rootProject.file("app/src/kanto/keystore.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+        jhoto {
+            def keystorePropertiesFile = rootProject.file("app/src/jhoto/keystore.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
 
@@ -61,10 +77,12 @@ android {
         kanto {
             dimension "region"
             applicationIdSuffix ".kanto"
+            signingConfig signingConfigs.kanto
         }
         jhoto {
             dimension "region"
             applicationIdSuffix ".jhoto"
+            signingConfig signingConfigs.jhoto
         }
     }
 }
