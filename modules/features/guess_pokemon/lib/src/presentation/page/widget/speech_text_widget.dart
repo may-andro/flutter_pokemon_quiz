@@ -44,6 +44,8 @@ class SpeechTextWidget extends StatelessWidget {
           words: {
             pokemonName: highlightedWord,
           },
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
           textStyle: textStyle,
         ),

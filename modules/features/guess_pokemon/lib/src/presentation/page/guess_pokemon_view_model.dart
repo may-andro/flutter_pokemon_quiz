@@ -45,17 +45,17 @@ class GuessPokemonViewModel extends BaseViewModel {
 
   void onInit() async {
     _startSpeechToTextUseCase.textStream.listen((text) {
-      _text = text.toUpperCase();
+      _text = text.toUpperCase().replaceAll('-', '');
       _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
       notifyListener();
     });
 
     _startSpeechToTextUseCase.statusStream.listen((status) {
       print('status: $status');
-      if(status == 'done') {
-        _stopSpeechService();
-      } else {
+      if (status == 'listening') {
         _isListening = true;
+      } else {
+        _stopSpeechService();
       }
       notifyListener();
     });
