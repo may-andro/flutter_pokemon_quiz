@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_quiz/feature/splash_page/splash_view_model.dart';
 import 'package:pokemon_quiz/feature/splash_page/widget/splash_desktop_widget.dart';
 import 'package:pokemon_quiz/feature/splash_page/widget/splash_mobile_widget.dart';
 import 'package:pokemon_quiz/feature/splash_page/widget/splash_tablet_widget.dart';
@@ -10,11 +11,14 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResponsiveContainerWidget(
-        mobileBuilder: (_) => const SplashMobileWidget(),
-        tabletBuilder: (_) => const SplashTabletWidget(),
-        desktopBuilder: (_) => const SplashDesktopWidget(),
-      ),
+      body: ViewModelProviderWidget<SplashViewModel>(
+          builder: (context, viewModel, widget) {
+        return ResponsiveContainerWidget(
+          mobileBuilder: (_) => const SplashMobileWidget(),
+          tabletBuilder: (_) => const SplashTabletWidget(),
+          desktopBuilder: (_) => const SplashDesktopWidget(),
+        );
+      }),
     );
   }
 }

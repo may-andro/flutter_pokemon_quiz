@@ -18,13 +18,15 @@ class MicrophoneButtonWidget extends StatelessWidget {
     final isClickable = fabIcon == Icons.mic || fabIcon == Icons.mic_none;
 
     return AvatarGlow(
+      animate: viewModel.isListening,
       glowColor: context.colorPalette.grey70,
       endRadius: context.getGridDimen(6),
       child: FloatingActionButton.large(
         elevation: 16,
         tooltip: "Who's that Pokémon",
-        backgroundColor:
-            viewModel.isListening ? Colors.green : context.colorPalette.secondary,
+        backgroundColor: viewModel.isListening
+            ? Colors.teal
+            : context.colorPalette.secondary,
         onPressed: isClickable ? viewModel.listenToSpeech : null,
         child: Icon(fabIcon),
         heroTag: null,

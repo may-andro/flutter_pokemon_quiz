@@ -62,6 +62,18 @@ class SettingPage extends StatelessWidget {
           Icons.info,
           () => Navigator.pushNamed(context, SettingRoute.about),
         ),
+        _buildListItem(
+          context,
+          'Privacy Policy',
+          Icons.privacy_tip,
+          () => launch(viewModel.privacyPolicy),
+        ),
+        _buildListItem(
+          context,
+          'Terms & Conditions',
+          Icons.insert_link,
+          () => launch(viewModel.termsAndConditions),
+        ),
         viewModel.isFeedbackFeatureEnabled
             ? _buildListItem(
                 context,

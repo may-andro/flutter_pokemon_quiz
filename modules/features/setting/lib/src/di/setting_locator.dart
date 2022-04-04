@@ -27,6 +27,9 @@ void _injectViewModel(GetIt getIt) {
   );
 
   getIt.registerFactory(
-    () => SettingViewModel(getIt.get<IsFeatureEnabledUseCase>()),
+    () => SettingViewModel(
+      getIt.get<IsFeatureEnabledUseCase>(),
+      getIt.get<BuildConfig>(),
+    ),
   );
 }

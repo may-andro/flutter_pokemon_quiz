@@ -7,13 +7,6 @@ class SpeechTextRepository {
 
   bool get _isListening => _speechToText.isListening;
 
-  Future<bool> _initSpeechText() async {
-    return _speechToText.initialize(
-      onStatus: (status) => print('onStatus: $status'),
-      onError: (error) => print('Error: $error'),
-    );
-  }
-
   bool stopSpeechText() {
     if (_isListening) {
       _speechToText.stop();
@@ -24,11 +17,15 @@ class SpeechTextRepository {
 
   void listenSpeech({
     required Function(String text) onListenResult,
+    required Function(String status) onListenStatus,
   }) async {
     final isStopped = stopSpeechText();
     if (isStopped) return;
 
-    final isAvailable = await _initSpeechText();
+    final isAvailable = await _speechToText.initialize(
+      onStatus: (status) => onListenStatus(status),
+      onError: (error) => onListenResult(error.errorMsg),
+    );
 
     if (isAvailable) {
       _speechToText.listen(

@@ -43,13 +43,20 @@ class GuessPokemonViewModel extends BaseViewModel {
   bool get isPokemonDetailFeatureEnabled =>
       _isFeatureEnabledUseCase(Feature.pokemon_detail);
 
-  bool get isPokedexFeatureEnabled => _isFeatureEnabledUseCase(Feature.pokedex);
-
   void onInit() async {
     _startSpeechToTextUseCase.textStream.listen((text) {
       _text = text.toUpperCase();
       _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
-      _isListening = false;
+      notifyListener();
+    });
+
+    _startSpeechToTextUseCase.statusStream.listen((status) {
+      print('status: $status');
+      if(status == 'done') {
+        _stopSpeechService();
+      } else {
+        _isListening = true;
+      }
       notifyListener();
     });
 
@@ -58,22 +65,18 @@ class GuessPokemonViewModel extends BaseViewModel {
 
   void listenToSpeech() {
     if (!_isListening) {
-      _isListening = true;
       _listenSpeechService();
     } else {
-      _isListening = false;
       _stopSpeechService();
     }
-    notifyListener();
   }
 
   Future<void> loadPokemon() async {
-    final pokemon = await _fetchRandomPokemonUseCase.call();
-
     _text = 'Press the button and speak';
-    _isListening = false;
+    _stopSpeechService();
     _isAnsweredCorrectly = false;
 
+    final pokemon = await _fetchRandomPokemonUseCase.call();
     if (pokemon.isLeft()) {
       _errorCode = pokemon.asLeft().errorId;
 
@@ -90,10 +93,7 @@ class GuessPokemonViewModel extends BaseViewModel {
 
   void viewPokemon() {
     _text = _pokemon?.name.toUpperCase() ?? 'Unknown';
-    if (_isListening) {
-      _stopSpeechService();
-      _isListening = false;
-    }
+    _stopSpeechService();
     _isAnsweredCorrectly = true;
     notifyListener();
   }
@@ -103,6 +103,7 @@ class GuessPokemonViewModel extends BaseViewModel {
   }
 
   void _stopSpeechService() {
+    _isListening = false;
     _stopSpeechToTextUseCase();
   }
 
