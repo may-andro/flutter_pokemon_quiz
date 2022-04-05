@@ -7,15 +7,15 @@ import 'package:dartz/dartz.dart';
 import '../../mock/repository/pokemon/mocked_pokemon_repository.dart';
 
 void main() {
-  group(RemoveFavouritePokemonUseCase, () {
+  group(RemoveFavoritePokemonUseCase, () {
     late MockedPokemonRepository mockedPokemonRepository;
 
-    late RemoveFavouritePokemonUseCase removeFavouritePokemonUseCase;
+    late RemoveFavoritePokemonUseCase removeFavouritePokemonUseCase;
 
     setUp(() {
       mockedPokemonRepository = MockedPokemonRepository();
 
-      removeFavouritePokemonUseCase = RemoveFavouritePokemonUseCase(
+      removeFavouritePokemonUseCase = RemoveFavoritePokemonUseCase(
         mockedPokemonRepository,
       );
     });
@@ -30,7 +30,7 @@ void main() {
       test(
           'should return ${Left<Failure, void>} when '
           '$PokemonRepository throw exception', () {
-        mockedPokemonRepository.mockRemoveFavoritePokemonThrowException();
+        mockedPokemonRepository.mockRemovePokemonThrowException();
 
         final result = removeFavouritePokemonUseCase(1);
 

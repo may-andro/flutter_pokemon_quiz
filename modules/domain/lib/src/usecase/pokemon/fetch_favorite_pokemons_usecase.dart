@@ -3,18 +3,18 @@ import 'package:data/data.dart';
 import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 
-class FetchFavouritePokemonsUseCase {
-  FetchFavouritePokemonsUseCase(
+class FetchFavoritePokemonsUseCase {
+  FetchFavoritePokemonsUseCase(
     this._pokemonRepository,
     this._favouritePokemonLocalMapper,
   );
 
   final PokemonRepository _pokemonRepository;
-  final FavouritePokemonLocalMapper _favouritePokemonLocalMapper;
+  final CapturedPokemonLocalMapper _favouritePokemonLocalMapper;
 
-  Either<Failure, List<FavouritePokemon>> call() {
+  Either<Failure, List<CapturedPokemon>> call() {
     try {
-      final localPokemons = _pokemonRepository.getAllFavoritePokemons();
+      final localPokemons = _pokemonRepository.queryFavoritePokemons();
       final pokemons = localPokemons
           .map(_favouritePokemonLocalMapper.mapFromEntityToModel)
           .toList();

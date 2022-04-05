@@ -9,29 +9,29 @@ import 'package:dartz/dartz.dart';
 import '../../mock/repository/pokemon/mocked_pokemon_repository.dart';
 
 void main() {
-  group(FetchFavouritePokemonsUseCase, () {
+  group(FetchFavoritePokemonsUseCase, () {
     late MockedPokemonRepository mockedPokemonRepository;
-    late FavouritePokemonLocalMapper favouritePokemonLocalMapper;
+    late CapturedPokemonLocalMapper favouritePokemonLocalMapper;
 
-    late FetchFavouritePokemonsUseCase fetchFavouritePokemonsUseCase;
+    late FetchFavoritePokemonsUseCase fetchFavouritePokemonsUseCase;
 
     setUp(() {
       mockedPokemonRepository = MockedPokemonRepository();
-      favouritePokemonLocalMapper = FavouritePokemonLocalMapper();
+      favouritePokemonLocalMapper = CapturedPokemonLocalMapper();
 
-      fetchFavouritePokemonsUseCase = FetchFavouritePokemonsUseCase(
+      fetchFavouritePokemonsUseCase = FetchFavoritePokemonsUseCase(
         mockedPokemonRepository,
         favouritePokemonLocalMapper,
       );
     });
 
     group('call', () {
-      test('should return ${Right<Failure, List<FavouritePokemon>>} ', () {
+      test('should return ${Right<Failure, List<CapturedPokemon>>} ', () {
         final localPokemons = [
           LocalPokemon(index: 1, name: 'name', imageUrl: 'imageUrl'),
           LocalPokemon(index: 2, name: 'name', imageUrl: 'imageUrl'),
         ];
-        mockedPokemonRepository.mockGetAllFavoritePokemons(localPokemons);
+        mockedPokemonRepository.mockGetPokemons(localPokemons);
 
         final result = fetchFavouritePokemonsUseCase();
 
@@ -39,16 +39,26 @@ void main() {
         expect(
           result.asRight(),
           const [
-            FavouritePokemon(index: 1, avatar: 'imageUrl', name: 'name'),
-            FavouritePokemon(index: 2, avatar: 'imageUrl', name: 'name')
+            CapturedPokemon(
+              index: 1,
+              avatar: 'imageUrl',
+              name: 'name',
+              isCaptured: true,
+            ),
+            CapturedPokemon(
+              index: 2,
+              avatar: 'imageUrl',
+              name: 'name',
+              isCaptured: true,
+            )
           ],
         );
       });
 
       test(
-          'should return ${Left<Failure, List<FavouritePokemon>>} when '
+          'should return ${Left<Failure, List<CapturedPokemon>>} when '
           '$PokemonRepository throw exception', () {
-        mockedPokemonRepository.mockGetAllFavoritePokemonsThrowsException();
+        mockedPokemonRepository.mockGetPokemonsThrowsException();
 
         final result = fetchFavouritePokemonsUseCase();
 

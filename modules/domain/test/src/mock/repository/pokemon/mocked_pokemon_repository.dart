@@ -4,12 +4,12 @@ import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
 
 class MockedPokemonRepository extends Mock implements PokemonRepository {
-  void mockGetAllFavoritePokemons(List<LocalPokemon> expected) {
-    when(getAllFavoritePokemons).thenReturn(expected);
+  void mockGetPokemons(List<LocalPokemon> expected) {
+    when(getPokemons).thenReturn(expected);
   }
 
-  void mockGetAllFavoritePokemonsThrowsException() {
-    when(getAllFavoritePokemons).thenThrow(Exception());
+  void mockGetPokemonsThrowsException() {
+    when(getPokemons).thenThrow(Exception());
   }
 
   void mockFetchPokemon(RemoteExtendedPokemon expected) {
@@ -21,14 +21,14 @@ class MockedPokemonRepository extends Mock implements PokemonRepository {
   }
 
   void mockPutFavoritePokemon() {
-    when(() => putFavoritePokemon(any())).thenReturn(null);
+    when(() => putPokemon(any())).thenReturn(null);
   }
 
-  void mockPutFavoritePokemonThrowException() {
-    when(() => putFavoritePokemon(any())).thenThrow(Exception());
+  void mockPutPokemonThrowException() {
+    when(() => putPokemon(any())).thenThrow(Exception());
   }
 
-  void mockRemoveFavoritePokemonThrowException() {
-    when(() => removeFavoritePokemon(any())).thenThrow(Exception());
+  void mockRemovePokemonThrowException() {
+    when(() => removePokemon(any())).thenThrow(Exception());
   }
 }

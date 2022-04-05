@@ -1,19 +1,18 @@
 import 'package:domain/domain.dart';
+import 'package:pokedex/src/data/fetch_pokemons_usecase.dart';
 import 'package:ui_core/ui_core.dart';
 
 class PokedexViewModel extends BaseViewModel {
   PokedexViewModel(
-    this._fetchPokedexUseCase,
-    this._buildConfig,
+    this._fetchPokemonsUseCase,
   );
 
-  final FetchPokedexUseCase _fetchPokedexUseCase;
-  final BuildConfig _buildConfig;
+  final FetchPokemonsUseCase _fetchPokemonsUseCase;
 
-  late Pokedex _pokedex;
+  late Map<Pokemon, bool> _pokemons;
   late int _errorCode;
 
-  Pokedex get pokedex => _pokedex;
+  Map<Pokemon, bool> get pokemonsMap => _pokemons;
 
   int get errorCode => _errorCode;
 
@@ -22,18 +21,11 @@ class PokedexViewModel extends BaseViewModel {
   }
 
   Future<void> _loadPokedex() async {
-    final pokedex = await _fetchPokedexUseCase.call(
-      _buildConfig.buildFlavor.name,
-    );
-
-    if (pokedex.isLeft()) {
-      _errorCode = pokedex.asLeft().errorId;
-      setErrorState();
-    }
-
-    if (pokedex.isRight()) {
-      _pokedex = pokedex.asRight();
+    try {
+      _pokemons = await _fetchPokemonsUseCase.call();
       setSuccessState();
+    } catch (e) {
+      _errorCode = 1;
     }
   }
 }

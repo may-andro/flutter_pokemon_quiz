@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>550904117828-vufm5p537a52bjkoitaif5li2lh2tl4a.apps.googleusercontent.com</string>
+	<string>436938993963-13hn7urfsmt51quck0jqivj9n1vgar8u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.550904117828-vufm5p537a52bjkoitaif5li2lh2tl4a</string>
+	<string>com.googleusercontent.apps.436938993963-13hn7urfsmt51quck0jqivj9n1vgar8u</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB_RaKNdIswTRIS6MmDmuLnBZmX_gVmZas</string>
+	<string>AIzaSyCDvRxZuZ0lLNIj5geUaoQsDoOUPKsoI9c</string>
 	<key>GCM_SENDER_ID</key>
-	<string>550904117828</string>
+	<string>436938993963</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mayando.pokemonQuiz.jhoto</string>
+	<string>com.mayando.pokemonQuiz.kanto</string>
 	<key>PROJECT_ID</key>
-	<string>pokemon-jhoto</string>
+	<string>pokemon-kento</string>
 	<key>STORAGE_BUCKET</key>
-	<string>pokemon-jhoto.appspot.com</string>
+	<string>pokemon-kento.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:550904117828:ios:bcc0c7947d655c51945a11</string>
+	<string>1:436938993963:ios:a75cf19b1f49c329f0d56e</string>
 </dict>
 </plist>

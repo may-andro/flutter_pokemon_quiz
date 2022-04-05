@@ -49,6 +49,7 @@ void _injectViewModel(final GetIt getIt) {
       getIt.get<FetchRandomPokemonUseCase>(),
       getIt.get<IsFeatureEnabledUseCase>(),
       getIt.get<PokemonTypeColorMapper>(),
+      getIt.get<CapturePokemonUseCase>(),
     ),
   );
 }

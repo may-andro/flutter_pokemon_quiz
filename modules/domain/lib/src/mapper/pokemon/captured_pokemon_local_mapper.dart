@@ -2,19 +2,20 @@ import 'package:domain/src/mapper/model_entity_mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:local/local.dart';
 
-class FavouritePokemonLocalMapper
-    extends ModelEntityMapper<FavouritePokemon, LocalPokemon> {
+class CapturedPokemonLocalMapper
+    extends ModelEntityMapper<CapturedPokemon, LocalPokemon> {
   @override
-  FavouritePokemon mapFromEntityToModel(LocalPokemon entity) {
-    return FavouritePokemon(
+  CapturedPokemon mapFromEntityToModel(LocalPokemon entity) {
+    return CapturedPokemon(
       index: entity.index,
       avatar: entity.imageUrl,
       name: entity.name,
+      isCaptured: entity.isCaptured
     );
   }
 
   @override
-  LocalPokemon mapFromModelToEntity(FavouritePokemon model) {
+  LocalPokemon mapFromModelToEntity(CapturedPokemon model) {
     throw UnimplementedError();
   }
 }

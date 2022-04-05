@@ -21,7 +21,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 1101949788672171074),
       name: 'LocalPokemon',
-      lastPropertyId: const IdUid(4, 1750857584068499041),
+      lastPropertyId: const IdUid(7, 1234477189370874837),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -43,6 +43,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(4, 1750857584068499041),
             name: 'imageUrl',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 6601190172237139464),
+            name: 'isFavorite',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 1234477189370874837),
+            name: 'isCaptured',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -75,7 +85,7 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [5436361408594617941],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -93,11 +103,13 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (LocalPokemon object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final imageUrlOffset = fbb.writeString(object.imageUrl);
-          fbb.startTable(5);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id);
           fbb.addInt64(1, object.index);
           fbb.addOffset(2, nameOffset);
           fbb.addOffset(3, imageUrlOffset);
+          fbb.addBool(4, object.isFavorite);
+          fbb.addBool(6, object.isCaptured);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -110,7 +122,11 @@ ModelDefinition getObjectBoxModel() {
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
               imageUrl: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 10, ''))
+                  .vTableGet(buffer, rootOffset, 10, ''),
+              isFavorite: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 12, false),
+              isCaptured: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 16, false))
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
@@ -137,4 +153,12 @@ class LocalPokemon_ {
   /// see [LocalPokemon.imageUrl]
   static final imageUrl =
       QueryStringProperty<LocalPokemon>(_entities[0].properties[3]);
+
+  /// see [LocalPokemon.isFavorite]
+  static final isFavorite =
+      QueryBooleanProperty<LocalPokemon>(_entities[0].properties[4]);
+
+  /// see [LocalPokemon.isCaptured]
+  static final isCaptured =
+      QueryBooleanProperty<LocalPokemon>(_entities[0].properties[5]);
 }

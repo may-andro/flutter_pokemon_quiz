@@ -12,6 +12,7 @@ class GuessPokemonViewModel extends BaseViewModel {
     this._fetchRandomPokemonUseCase,
     this._isFeatureEnabledUseCase,
     this._pokemonTypeColorMapper,
+    this._capturePokemonUseCase,
   );
 
   final StartSpeechToTextUseCase _startSpeechToTextUseCase;
@@ -19,6 +20,7 @@ class GuessPokemonViewModel extends BaseViewModel {
   final FetchRandomPokemonUseCase _fetchRandomPokemonUseCase;
   final IsFeatureEnabledUseCase _isFeatureEnabledUseCase;
   final PokemonTypeColorMapper _pokemonTypeColorMapper;
+  final CapturePokemonUseCase _capturePokemonUseCase;
 
   late int _errorCode;
   Pokemon? _pokemon;
@@ -47,6 +49,7 @@ class GuessPokemonViewModel extends BaseViewModel {
     _startSpeechToTextUseCase.textStream.listen((text) {
       _text = text.toUpperCase().replaceAll('-', '');
       _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
+      if(_isAnsweredCorrectly) _capturePokemonUseCase.call(_pokemon!);
       notifyListener();
     });
 
@@ -95,6 +98,7 @@ class GuessPokemonViewModel extends BaseViewModel {
     _text = _pokemon?.name.toUpperCase() ?? 'Unknown';
     _stopSpeechService();
     _isAnsweredCorrectly = true;
+    _capturePokemonUseCase.call(_pokemon!);
     notifyListener();
   }
 

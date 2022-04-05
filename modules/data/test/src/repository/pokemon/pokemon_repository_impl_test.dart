@@ -28,35 +28,35 @@ void main() {
           imageUrl: 'imageUrl',
         );
 
-        pokemonRepository.putFavoritePokemon(localPokemon);
+        pokemonRepository.putPokemon(localPokemon);
 
-        verify(() => mockedPokemonDataSource.putFavoritePokemon(localPokemon))
+        verify(() => mockedPokemonDataSource.putPokemon(localPokemon))
             .called(1);
       });
     });
 
     group('removeFavoritePokemon', () {
       test('should call $PokemonDataSource', () {
-        pokemonRepository.removeFavoritePokemon(1);
+        pokemonRepository.removePokemon(1);
 
-        verify(() => mockedPokemonDataSource.removeFavoritePokemon(1))
+        verify(() => mockedPokemonDataSource.removePokemon(1))
             .called(1);
       });
     });
 
     group('getAllFavorites', () {
       test('should return $LocalPokemon list ', () {
-        mockedPokemonDataSource.mockGetAllFavoritePokemons([]);
+        mockedPokemonDataSource.mockGetPokemons([]);
 
-        final result = pokemonRepository.getAllFavoritePokemons();
+        final result = pokemonRepository.getPokemons();
 
-        verify(() => mockedPokemonDataSource.getAllFavoritePokemons())
+        verify(() => mockedPokemonDataSource.getPokemons())
             .called(1);
         expect(result, []);
       });
 
       test('should return non nullable $LocalPokemon list ', () {
-        mockedPokemonDataSource.mockGetAllFavoritePokemons([
+        mockedPokemonDataSource.mockGetPokemons([
           LocalPokemon(
             index: 1,
             name: 'name',
@@ -70,9 +70,9 @@ void main() {
           ),
         ]);
 
-        final result = pokemonRepository.getAllFavoritePokemons();
+        final result = pokemonRepository.getPokemons();
 
-        verify(() => mockedPokemonDataSource.getAllFavoritePokemons())
+        verify(() => mockedPokemonDataSource.getPokemons())
             .called(1);
         expect(result.length, 2);
       });

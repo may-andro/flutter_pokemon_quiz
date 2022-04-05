@@ -12,7 +12,7 @@ void setupDomainDependencies(final GetIt getIt) {
 void _setupMappers(final GetIt getIt) {
   getIt.registerFactory(() => PokedexRemoteMapper(getIt.get()));
   getIt.registerFactory(ExtendedPokemonRemoteMapper.new);
-  getIt.registerFactory(FavouritePokemonLocalMapper.new);
+  getIt.registerFactory(CapturedPokemonLocalMapper.new);
   getIt.registerFactory(PokemonLocalMapper.new);
   getIt.registerFactory(() => PokemonRemoteMapper(getIt.get()));
   getIt.registerFactory(PokemonStatsRemoteMapper.new);
@@ -33,19 +33,19 @@ void _setUpUseCases(final GetIt getIt) {
     ),
   );
   getIt.registerFactory(
-    () => AddFavouritePokemonUseCase(
+    () => AddFavoritePokemonUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
       getIt.get<PokemonLocalMapper>(),
     ),
   );
   getIt.registerFactory(
-    () => FetchFavouritePokemonsUseCase(
+    () => FetchFavoritePokemonsUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
-      getIt.get<FavouritePokemonLocalMapper>(),
+      getIt.get<CapturedPokemonLocalMapper>(),
     ),
   );
   getIt.registerFactory(
-    () => RemoveFavouritePokemonUseCase(
+    () => RemoveFavoritePokemonUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
     ),
   );
@@ -82,9 +82,30 @@ void _setUpUseCases(final GetIt getIt) {
   getIt.registerFactory(
     () => DisableFeatureToggleUseCase(
       getIt.get<FeatureToggleRepository>(
-        instanceName: 'FeatureToggleRepositoryImpl',
-      ),
+          instanceName: 'FeatureToggleRepositoryImpl'),
       getIt.get<FeatureToggleMapper>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => FetchCapturedPokemonsUseCase(
+      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
+      getIt.get<CapturedPokemonLocalMapper>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => IsFavouritePokemonUseCase(
+      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
+      getIt.get<CapturedPokemonLocalMapper>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => IsCapturedPokemonUseCase(
+      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
+    ),
+  );
+  getIt.registerFactory(
+    () => CapturePokemonUseCase(
+      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
     ),
   );
 }

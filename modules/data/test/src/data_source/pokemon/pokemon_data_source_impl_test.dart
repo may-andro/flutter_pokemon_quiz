@@ -32,7 +32,7 @@ void main() {
           'when $LocalClient return empty list', () {
         final localPokemons = <LocalPokemon?>[];
 
-        final result = pokemonDataSource.getAllFavoritePokemons();
+        final result = pokemonDataSource.getPokemons();
 
         expect(result, localPokemons);
       });
@@ -49,7 +49,7 @@ void main() {
         ];
         fakePokemonLocalClient.putMany(localPokemons);
 
-        final result = pokemonDataSource.getAllFavoritePokemons();
+        final result = pokemonDataSource.getPokemons();
 
         expect(result, localPokemons);
       });
@@ -64,16 +64,16 @@ void main() {
         );
         fakePokemonLocalClient.put(localPokemon);
 
-        pokemonDataSource.putFavoritePokemon(localPokemon);
+        pokemonDataSource.putPokemon(localPokemon);
 
         expect(
           pokemonDataSource
-              .getAllFavoritePokemons()
+              .getPokemons()
               .firstWhere((element) => element?.index == localPokemon.index),
           localPokemon,
         );
         expect(
-          pokemonDataSource.getAllFavoritePokemons().length,
+          pokemonDataSource.getPokemons().length,
           2,
         );
       });
@@ -88,10 +88,10 @@ void main() {
         );
         fakePokemonLocalClient.put(localPokemon);
 
-        pokemonDataSource.removeFavoritePokemon(localPokemon.id);
+        pokemonDataSource.removePokemon(localPokemon.id);
 
         expect(
-          pokemonDataSource.getAllFavoritePokemons().length,
+          pokemonDataSource.getPokemons().length,
           0,
         );
       });
@@ -100,16 +100,16 @@ void main() {
     group('fetchPokemon', () {
       test('should return $RemoteExtendedPokemon', () async {
         final responseMap = <String, dynamic>{
-          "id": 1,
-          "name": "bulbasaur",
-          "base_experience": 64,
-          "weight": 69,
-          "height": 7,
-          "abilities": [],
-          "moves": [],
-          "types": [],
-          "stats": [],
-          "sprites": null,
+          'id': 1,
+          'name': 'bulbasaur',
+          'base_experience': 64,
+          'weight': 69,
+          'height': 7,
+          'abilities': [],
+          'moves': [],
+          'types': [],
+          'stats': [],
+          'sprites': null,
         };
         final response = Response<Map<String, dynamic>>(
           data: responseMap,
@@ -124,16 +124,16 @@ void main() {
 
       test('should throw $ParsingException when parsing fails', () async {
         final responseMap = <String, dynamic>{
-          "id": 1,
-          "name": "bulbasaur",
-          "baseExperience": 64,
-          "weight": 69,
-          "height": 7,
-          "abilities": [],
-          "moves": [],
-          "types": [],
-          "stats": [],
-          "sprites": null,
+          'id': 1,
+          'name': 'bulbasaur',
+          'baseExperience': 64,
+          'weight': 69,
+          'height': 7,
+          'abilities': [],
+          'moves': [],
+          'types': [],
+          'stats': [],
+          'sprites': null,
         };
         final response = Response<Map<String, dynamic>>(
           data: responseMap,

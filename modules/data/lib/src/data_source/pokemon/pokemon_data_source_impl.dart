@@ -1,6 +1,7 @@
 import 'package:data/src/data_source/pokemon/pokemon_data_source.dart';
 import 'package:data/src/exception/parse_failure_exception.dart';
 import 'package:local/local.dart';
+import 'package:local/objectbox.g.dart';
 import 'package:network/network.dart';
 
 class PokemonDataSourceImpl implements PokemonDataSource {
@@ -10,17 +11,17 @@ class PokemonDataSourceImpl implements PokemonDataSource {
   final RemoteClient _remoteClient;
 
   @override
-  List<LocalPokemon?> getAllFavoritePokemons() {
+  List<LocalPokemon?> getPokemons() {
     return _localClient.getAll();
   }
 
   @override
-  void putFavoritePokemon(LocalPokemon localPokemon) {
+  void putPokemon(LocalPokemon localPokemon) {
     _localClient.put(localPokemon);
   }
 
   @override
-  void removeFavoritePokemon(int id) {
+  void removePokemon(int id) {
     _localClient.remove(id);
   }
 
@@ -34,5 +35,10 @@ class PokemonDataSourceImpl implements PokemonDataSource {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  List<LocalPokemon> queryPokemon(Condition<LocalPokemon> condition) {
+    return _localClient.query(condition);
   }
 }

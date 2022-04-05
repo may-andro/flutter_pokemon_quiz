@@ -1,12 +1,15 @@
 import 'package:local/local.dart';
+import 'package:local/objectbox.g.dart';
 import 'package:network/network.dart';
 
 abstract class PokemonDataSource {
-  void putFavoritePokemon(LocalPokemon localPokemon);
+  void putPokemon(LocalPokemon localPokemon);
 
-  void removeFavoritePokemon(int id);
+  void removePokemon(int id);
 
-  List<LocalPokemon?> getAllFavoritePokemons();
+  List<LocalPokemon?> getPokemons();
 
   Future<RemoteExtendedPokemon> fetchPokemon(int index);
+
+  List<LocalPokemon> queryPokemon(Condition<LocalPokemon> condition);
 }

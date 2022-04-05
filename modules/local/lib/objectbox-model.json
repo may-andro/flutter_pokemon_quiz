@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:1101949788672171074",
-      "lastPropertyId": "4:1750857584068499041",
+      "lastPropertyId": "7:1234477189370874837",
       "name": "LocalPokemon",
       "properties": [
         {
@@ -28,6 +28,16 @@
           "id": "4:1750857584068499041",
           "name": "imageUrl",
           "type": 9
+        },
+        {
+          "id": "5:6601190172237139464",
+          "name": "isFavorite",
+          "type": 1
+        },
+        {
+          "id": "7:1234477189370874837",
+          "name": "isCaptured",
+          "type": 1
         }
       ],
       "relations": []
@@ -41,7 +51,9 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    5436361408594617941
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

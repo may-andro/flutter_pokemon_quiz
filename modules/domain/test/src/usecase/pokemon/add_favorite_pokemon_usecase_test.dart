@@ -23,7 +23,7 @@ const _pokemon = Pokemon(
 );
 
 void main() {
-  group(AddFavouritePokemonUseCase, () {
+  group(AddFavoritePokemonUseCase, () {
     setUpAll(() {
       registerFallbackValue(
         LocalPokemon(index: 1, name: 'name', imageUrl: 'imageUrl'),
@@ -33,13 +33,13 @@ void main() {
     late MockedPokemonRepository mockedPokemonRepository;
     late PokemonLocalMapper pokemonLocalMapper;
 
-    late AddFavouritePokemonUseCase addFavouritePokemonUseCase;
+    late AddFavoritePokemonUseCase addFavouritePokemonUseCase;
 
     setUp(() {
       mockedPokemonRepository = MockedPokemonRepository();
       pokemonLocalMapper = PokemonLocalMapper();
 
-      addFavouritePokemonUseCase = AddFavouritePokemonUseCase(
+      addFavouritePokemonUseCase = AddFavoritePokemonUseCase(
         mockedPokemonRepository,
         pokemonLocalMapper,
       );
@@ -59,7 +59,7 @@ void main() {
       test(
           'should return $Left when '
           '$PokemonRepository throw exception', () {
-        mockedPokemonRepository.mockPutFavoritePokemonThrowException();
+        mockedPokemonRepository.mockPutPokemonThrowException();
 
         final result = addFavouritePokemonUseCase(_pokemon);
 
