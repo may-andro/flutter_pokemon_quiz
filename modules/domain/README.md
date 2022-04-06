@@ -1,23 +1,29 @@
 ## Purpose
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This module has all the basic business domain logic required of the app. It exposes usecases for the app.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+The module exposed ```main.dart``` which has a function ```setupDomainModule``` which can be used for setup of this module.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  domain:
+    path: ../domain
 ```
 
-## Additional information
+## Dependencies
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```yaml
+dependencies:
+  data:
+    path: ../data
+```
+
+This module depends on the data module for the data fetch.
+
+## Testing
+
+TODO

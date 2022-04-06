@@ -1,5 +1,5 @@
 import 'package:domain/domain.dart';
-import 'package:pokedex/src/data/fetch_pokemons_usecase.dart';
+import 'package:pokedex/src/domain/fetch_pokemons_usecase.dart';
 import 'package:ui_core/ui_core.dart';
 
 class PokedexViewModel extends BaseViewModel {
