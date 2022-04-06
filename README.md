@@ -38,7 +38,7 @@ Local modules handles the data storage for the App
 
 Network modules handles the networking/services for the App
 
-### [Data Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/domain/README.md)
+### [Data Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/data/README.md)
 
 Data modules exposes the repositories for the app and handles the data management from different sources.
 
@@ -87,3 +87,9 @@ The app has two flavours ```Kanto``` & ```Johto``` for the two different regions
 <img width="419" alt="Screenshot 2022-04-04 at 10 37 50" src="https://user-images.githubusercontent.com/16761273/161986654-7bf74dcd-6221-459f-bddc-ca065cfb1653.png">
 
 <img width="417" alt="Screenshot 2022-04-04 at 10 38 12" src="https://user-images.githubusercontent.com/16761273/161986657-40d2d4ab-bf61-44fb-875b-2e10b9206584.png">
+
+## App Video
+
+https://user-images.githubusercontent.com/16761273/161990198-ddea9726-03e9-432b-8a46-08b8b4ddb0a1.mov
+
+https://user-images.githubusercontent.com/16761273/161990224-9c1c4b63-a9ff-4d7e-925f-cf99200f8d11.mov
