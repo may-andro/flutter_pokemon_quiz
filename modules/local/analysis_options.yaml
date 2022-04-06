@@ -12,7 +12,6 @@ linter:
     - always_require_non_null_named_parameters
     - annotate_overrides
     - avoid_bool_literals_in_conditional_expressions
-    - avoid_catches_without_on_clauses
     - avoid_escaping_inner_quotes
     - avoid_field_initializers_in_const_classes
     - avoid_function_literals_in_foreach_calls
@@ -104,7 +103,6 @@ linter:
 
     # Error rules
     - avoid_empty_else
-    - avoid_print
     - avoid_returning_null_for_future
     - avoid_type_to_string
     - avoid_relative_lib_imports

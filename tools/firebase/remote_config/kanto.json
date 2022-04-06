@@ -12,16 +12,9 @@
           "description": "Controls the user feedback feature",
           "valueType": "BOOLEAN"
         },
-        "feature_toggle_pokedex": {
-          "defaultValue": {
-            "value": "true"
-          },
-          "description": "Controls the visibility of Pokedex Page in the app",
-          "valueType": "BOOLEAN"
-        },
         "feature_toggle_pokemon_detail": {
           "defaultValue": {
-            "value": "false"
+            "value": "true"
           },
           "description": "Controls the visibility of Pokemon Detail Page in the app",
           "valueType": "BOOLEAN"
@@ -36,6 +29,14 @@
       }
     }
   },
-  "etag": "etag-436938993963-12",
-  "version": {}
+  "etag": "etag-436938993963-25",
+  "version": {
+    "versionNumber": "25",
+    "updateOrigin": "CONSOLE",
+    "updateType": "INCREMENTAL_UPDATE",
+    "updateUser": {
+      "email": "mayank271993@gmail.com"
+    },
+    "updateTime": "Wed, 06 Apr 2022 08:45:09 GMT"
+  }
 }

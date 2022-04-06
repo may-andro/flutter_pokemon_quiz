@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_core/src/extension/context.dart';
 
 class RoundedButton extends StatelessWidget {
-  RoundedButton({
+  const RoundedButton({
     required this.label,
     this.onPressed,
     Key? key,

@@ -5,23 +5,38 @@
     "feature toggles": {
       "description": "Feature toggles for johto",
       "parameters": {
-        "test_feature_toggle_3": {
+        "feature_toggle_user_feedback": {
           "defaultValue": {
-            "value": "true"
+            "value": "false"
           },
-          "description": "test from CI",
+          "description": "Controls the user feedback feature",
           "valueType": "BOOLEAN"
         },
-        "test_feature_toggle_4": {
+        "feature_toggle_pokemon_detail": {
           "defaultValue": {
             "value": "true"
           },
-          "description": "test from CI",
+          "description": "Controls the visibility of Pokemon Detail Page in the app",
+          "valueType": "BOOLEAN"
+        },
+        "feature_toggle_developer_option": {
+          "defaultValue": {
+            "value": "true"
+          },
+          "description": "Controls the visibility of the developer option in the setting",
           "valueType": "BOOLEAN"
         }
       }
     }
   },
-  "etag": "etag-550904117828-4",
-  "version": {}
+  "etag": "etag-550904117828-14",
+  "version": {
+    "versionNumber": "14",
+    "updateOrigin": "CONSOLE",
+    "updateType": "INCREMENTAL_UPDATE",
+    "updateUser": {
+      "email": "mayank271993@gmail.com"
+    },
+    "updateTime": "Wed, 06 Apr 2022 11:09:11 GMT"
+  }
 }

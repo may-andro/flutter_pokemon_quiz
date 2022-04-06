@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network/src/client/client.dart';
@@ -31,29 +29,29 @@ void main() {
           'should return pokemon when '
           'fire store returns a response', () async {
         final responseMap = <String, dynamic>{
-          "pokemon": [
+          'pokemon': [
             {
-              "index": 1,
-              "name": "bulbasaur",
-              "base_experience": 64,
-              "weight": 69,
-              "height": 7,
-              "image_url": "",
-              "abilities": ["overgrow"],
-              "moves": ["razor-wind"],
-              "types": ["grass"],
-              "stats": [
+              'index': 1,
+              'name': 'bulbasaur',
+              'base_experience': 64,
+              'weight': 69,
+              'height': 7,
+              'image_url': '',
+              'abilities': ['overgrow'],
+              'moves': ['razor-wind'],
+              'types': ['grass'],
+              'stats': [
                 {
-                  "base_stat": 65,
-                  "effort": 0,
-                  "name": "special-defense",
-                  "url": "https://pokeapi.co/api/v2/stat/5/",
+                  'base_stat': 65,
+                  'effort': 0,
+                  'name': 'special-defense',
+                  'url': 'https://pokeapi.co/api/v2/stat/5/',
                 },
                 {
-                  "base_stat": 65,
-                  "effort": 0,
-                  "name": "special-defense",
-                  "url": "https://pokeapi.co/api/v2/stat/5/",
+                  'base_stat': 65,
+                  'effort': 0,
+                  'name': 'special-defense',
+                  'url': 'https://pokeapi.co/api/v2/stat/5/',
                 },
               ]
             },

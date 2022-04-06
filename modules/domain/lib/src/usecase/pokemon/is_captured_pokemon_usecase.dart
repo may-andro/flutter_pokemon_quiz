@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 
 class IsCapturedPokemonUseCase {

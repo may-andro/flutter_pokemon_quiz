@@ -19,7 +19,7 @@ void main() {
 
     group('fetchPokedex', () {
       test('should return $RemotePokedex', () async {
-        final remotePokedex = RemotePokedex([]);
+        const remotePokedex = RemotePokedex([]);
         mockedFireStoreClient.mockFetchPokedex(remotePokedex);
 
         final result = await pokedexDataSource.fetchPokedex('');

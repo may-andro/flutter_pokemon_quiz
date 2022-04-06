@@ -24,7 +24,7 @@ class FetchPokemonsUseCase {
 
     if (pokedexResponse.isRight()) {
       final pokedex = pokedexResponse.asRight();
-      pokedex.pokemons.forEach((pokemon) {
+      for (var pokemon in pokedex.pokemons) {
         var isCaptured = false;
         final capturedResponse = _isCapturedPokemonUseCase.call(pokemon.index);
         if (capturedResponse.isLeft()) {
@@ -33,7 +33,7 @@ class FetchPokemonsUseCase {
           isCaptured = capturedResponse.asRight();
         }
         pokemonMap[pokemon] = isCaptured;
-      });
+      }
     }
 
     return pokemonMap;

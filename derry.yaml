@@ -57,3 +57,8 @@ test:
   - cd modules/features/setting && flutter test
   - flutter test
 
+
+  npm run rc validate kanto remote_config/kanto.json
+  npm run rc publish kanto remote_config/kanto.json
+  npm run rc get kanto remote_config/kanto.json
+  npm run rc add-rc feature_toggle_pokedex true 'Controls the visibility of Pokedex page' kanto,johto

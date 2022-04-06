@@ -13,7 +13,6 @@ jobs:
     name: flutter build and test
     runs-on: ubuntu-latest
     env:
-      JAVA_VERSION: "12.x"
       FLUTTER_VERSION: "2.10.3"
 
     steps:
@@ -29,7 +28,7 @@ jobs:
       - name: Get flutter dependencies
         run: flutter pub get
       - name: Statically analyze the Dart code
-        run: flutter analyze
+        run: flutter analyze lib module
       - name: Run widget tests for our flutter project
         run: flutter test
 
