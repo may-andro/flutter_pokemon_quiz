@@ -61,6 +61,10 @@ build_app_bundle:
   - flutter build appbundle --flavor kanto -t lib/main_kanto.dart
   - flutter build appbundle --flavor jhoto -t lib/main_jhoto.dart
 
+build_apk_bundle:
+  - flutter build apk --flavor kanto -t lib/main_kanto.dart
+  - flutter build apk --flavor jhoto -t lib/main_jhoto.dart
+
 validate_kanto_rc:
   - npm run rc validate kanto remote_config/kanto.json
 
