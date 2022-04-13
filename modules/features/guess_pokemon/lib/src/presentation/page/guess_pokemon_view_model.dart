@@ -49,7 +49,7 @@ class GuessPokemonViewModel extends BaseViewModel {
     _startSpeechToTextUseCase.textStream.listen((text) {
       _text = text.toUpperCase().replaceAll('-', '');
       _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
-      if(_isAnsweredCorrectly) _capturePokemonUseCase.call(_pokemon!);
+      if (_isAnsweredCorrectly) _capturePokemonUseCase.call(_pokemon!);
       notifyListener();
     });
 

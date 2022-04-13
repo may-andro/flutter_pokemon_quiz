@@ -63,23 +63,23 @@ class DarkColorPalette extends ColorPalette {
   Color get grey20 => const Color(0xFF292929);
 
   @override
-  Color get grey30 =>  const Color(0xFF3A3A3A);
+  Color get grey30 => const Color(0xFF3A3A3A);
 
   @override
-  Color get grey40 =>  const Color(0xFF616161);
+  Color get grey40 => const Color(0xFF616161);
 
   @override
-  Color get grey50 =>  const Color(0xFF8C8C8C);
+  Color get grey50 => const Color(0xFF8C8C8C);
 
   @override
-  Color get grey60 =>  const Color(0xFFB3B3B3);
+  Color get grey60 => const Color(0xFFB3B3B3);
 
   @override
-  Color get grey70 =>  const Color(0xFFCCCCCC);
+  Color get grey70 => const Color(0xFFCCCCCC);
 
   @override
-  Color get grey80 =>  const Color(0xFFE3E3E3);
+  Color get grey80 => const Color(0xFFE3E3E3);
 
   @override
-  Color get grey90 =>  const Color(0xFFF9F7F7);
+  Color get grey90 => const Color(0xFFF9F7F7);
 }

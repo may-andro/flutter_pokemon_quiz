@@ -1,7 +1,7 @@
 class ParsingException implements Exception {
   ParsingException(
-      this.message,
-      );
+    this.message,
+  );
 
   final String message;
 }

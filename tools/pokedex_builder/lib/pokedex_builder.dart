@@ -15,11 +15,10 @@ Future<List<Pokemon>> fetchPokemon(final String region) async {
 
 void logInfo(String message) {
   final toolLogger = locator.get<ToolLogger>();
-  toolLogger.i(message);
+  toolLogger.d(message);
 }
 
 void logError(String message) {
   final toolLogger = locator.get<ToolLogger>();
   toolLogger.e(message);
 }
-

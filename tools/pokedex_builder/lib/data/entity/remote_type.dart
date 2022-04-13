@@ -5,9 +5,9 @@ part 'remote_type.g.dart';
 @JsonSerializable()
 class RemoteType {
   RemoteType(
-      this.name,
-      this.url,
-      );
+    this.name,
+    this.url,
+  );
 
   @JsonKey(name: 'name')
   final String name;

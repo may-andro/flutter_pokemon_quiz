@@ -6,10 +6,10 @@ part 'remote_stats.g.dart';
 @JsonSerializable()
 class RemoteStats {
   RemoteStats(
-      this.baseStat,
-      this.effort,
-      this.stat,
-      );
+    this.baseStat,
+    this.effort,
+    this.stat,
+  );
 
   @JsonKey(name: 'base_stat')
   final int baseStat;

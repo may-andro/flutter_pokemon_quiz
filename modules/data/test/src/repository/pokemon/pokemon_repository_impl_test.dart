@@ -39,8 +39,7 @@ void main() {
       test('should call $PokemonDataSource', () {
         pokemonRepository.removePokemon(1);
 
-        verify(() => mockedPokemonDataSource.removePokemon(1))
-            .called(1);
+        verify(() => mockedPokemonDataSource.removePokemon(1)).called(1);
       });
     });
 
@@ -50,8 +49,7 @@ void main() {
 
         final result = pokemonRepository.getPokemons();
 
-        verify(() => mockedPokemonDataSource.getPokemons())
-            .called(1);
+        verify(() => mockedPokemonDataSource.getPokemons()).called(1);
         expect(result, []);
       });
 
@@ -72,8 +70,7 @@ void main() {
 
         final result = pokemonRepository.getPokemons();
 
-        verify(() => mockedPokemonDataSource.getPokemons())
-            .called(1);
+        verify(() => mockedPokemonDataSource.getPokemons()).called(1);
         expect(result.length, 2);
       });
     });

@@ -4,7 +4,6 @@ import 'package:network/network.dart';
 
 class ExtendedPokemonRemoteMapper
     implements ModelEntityMapper<Pokemon, RemoteExtendedPokemon> {
-
   @override
   Pokemon mapFromEntityToModel(RemoteExtendedPokemon entity) {
     final imageUrl = entity.sprites?.other?.officialArtwork?.frontDefault ??

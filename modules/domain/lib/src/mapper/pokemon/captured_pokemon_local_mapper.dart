@@ -10,7 +10,7 @@ class CapturedPokemonLocalMapper
       index: entity.index,
       avatar: entity.imageUrl,
       name: entity.name,
-      isCaptured: entity.isCaptured
+      isCaptured: entity.isCaptured,
     );
   }
 

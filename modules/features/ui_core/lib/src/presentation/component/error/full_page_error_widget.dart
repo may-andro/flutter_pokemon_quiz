@@ -8,4 +8,3 @@ class FullPageErrorWidget extends StatelessWidget {
     return Container();
   }
 }
-
