@@ -8,7 +8,7 @@ const program = new Command();
 program.version('0.4.0');
 
 var flavor = process.argv[3];
-var serviceAccount = require('../data/' + flavor + '/fb_credentials.json');
+var serviceAccount = require('../credentials.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
@@ -22,7 +22,7 @@ program.command('import <flavor> <file>')
     .option('-m, --merge', 'Merge Firestore documents. Default is Replace.')
     .option('-p, --coll-prefix [prefix]', '(Sub-)Collection prefix.', 'collection')
     .action((_, fileName, collections, options) => {
-        var collectionsToImportFilePath = 'data/' + flavor + '/' + fileName;
+        var collectionsToImportFilePath = fileName;
         importCollection.execute(collectionsToImportFilePath, collections, options);
     });
 
