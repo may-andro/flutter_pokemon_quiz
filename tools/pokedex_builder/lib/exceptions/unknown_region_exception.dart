@@ -1,0 +1,1 @@
+class UnknownRegionException implements Exception {}

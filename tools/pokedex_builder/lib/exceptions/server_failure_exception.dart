@@ -1,9 +1,6 @@
 class ServerFailureException implements Exception {
-  ServerFailureException(
-    this.message, {
-    this.code,
-  });
+  ServerFailureException(this.message, {this.responseStatusCode});
 
   final String message;
-  int? code;
+  int? responseStatusCode;
 }

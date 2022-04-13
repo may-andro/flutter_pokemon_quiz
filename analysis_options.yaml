@@ -121,3 +121,11 @@ linter:
     - unrelated_type_equality_checks
     - use_key_in_widget_constructors
     - valid_regexps
+
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.gen.dart"
+    - "tools/**"
+    - "**/generated_plugin_registrant.dart"

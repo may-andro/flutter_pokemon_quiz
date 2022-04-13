@@ -6,46 +6,23 @@ import 'package:pokedex_builder/domain/model/pokemon.dart';
 import 'package:pokedex_builder/pokedex_builder.dart';
 
 Future<void> main(List<String> arguments) async {
-  print('Pokedex builder started');
+  setupPokedexBuilder();
+  logInfo('Pokedex builder started');
   try {
     final parser = _getArgParser();
     final parsedArguments = _getParsedArguments(parser, arguments);
     final flavor = parsedArguments['flavor'];
     final filePath = parsedArguments['filePath'];
-    final startIndex = _fetchStartIndex(flavor);
-    final endIndex = _fetchEndIndex(flavor);
-    final pokemons = await fetchPokemon(startIndex, endIndex);
+    final pokemons = await fetchPokemon(flavor);
     await _saveToFile(
       path: filePath,
       collectionJson: _createCollectionJson(pokemons, flavor),
     );
-    print('Successfully build pokedex and saved at $filePath');
+    logInfo('Successfully build pokedex and saved at $filePath');
   } catch (e) {
-    print('Caught error:$e');
+    logError('Caught error:$e');
   } finally {
     exit(0);
-  }
-}
-
-int _fetchStartIndex(String flavor) {
-  switch (flavor) {
-    case 'kanto':
-      return 1;
-    case 'jhoto':
-      return 152;
-    default:
-      throw Exception('Not a valid flavor');
-  }
-}
-
-int _fetchEndIndex(String flavor) {
-  switch (flavor) {
-    case 'kanto':
-      return 151;
-    case 'jhoto':
-      return 251;
-    default:
-      throw Exception('Not a valid flavor');
   }
 }
 
@@ -71,7 +48,7 @@ ArgResults _getParsedArguments(ArgParser parser, List<String> arguments) {
   if (argResults.wasParsed('flavor')) {
     return argResults;
   } else {
-    print(parser.usage);
+    logInfo(parser.usage);
     exit(0);
   }
 }
@@ -81,7 +58,7 @@ Future<void> _saveToFile({
   required Map<String, dynamic> collectionJson,
 }) {
   return File(path).writeAsString(
-    JsonEncoder.withIndent('  ').convert(collectionJson),
+    const JsonEncoder.withIndent('  ').convert(collectionJson),
     mode: FileMode.write,
   );
 }

@@ -21,7 +21,7 @@ class DioRemoteClient implements RemoteClient {
     } on DioError catch (e) {
       throw ServerFailureException(
         e.message,
-        code: e.response?.statusCode,
+        responseStatusCode: e.response?.statusCode,
       );
     } catch (e) {
       throw UnknownServerFailureException();
@@ -44,7 +44,7 @@ class DioRemoteClient implements RemoteClient {
     } on DioError catch (e) {
       throw ServerFailureException(
         e.message,
-        code: e.response?.statusCode,
+        responseStatusCode: e.response?.statusCode,
       );
     } catch (e) {
       throw UnknownServerFailureException();

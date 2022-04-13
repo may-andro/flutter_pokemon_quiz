@@ -9,6 +9,7 @@ analyze:
   - cd modules/features/pokemon_detail && flutter analyze
   - cd modules/features/setting && flutter analyze
   - flutter analyze
+  - cd tools/firebase_cred_builder && flutter analyze
   - cd tools/pokedex_builder && flutter analyze
 
 build_runner:
@@ -36,6 +37,7 @@ get_all:
   - cd modules/features/guess_pokemon && flutter pub get
   - cd modules/features/pokemon_detail && flutter pub get
   - cd modules/features/setting && flutter pub get
+  - cd tools/firebase_cred_builder && flutter pub get
   - cd tools/pokedex_builder && flutter pub get
 
 run_jhoto:

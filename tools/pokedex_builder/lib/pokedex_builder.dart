@@ -1,20 +1,25 @@
-import 'package:pokedex_builder/domain/model/response.dart';
+import 'package:pokedex_builder/logger/tool_logger.dart';
 
 import 'di/locator.dart';
 import 'domain/model/pokemon.dart';
 import 'domain/usecase/fetch_pokedex_usecase.dart';
 
-Future<List<Pokemon>> fetchPokemon(int startIndex, int endIndex) async {
+void setupPokedexBuilder() {
   setupLocator();
-
-  final fetchPokedexUseCase = locator.get<FetchPokedexUseCase>();
-  final fetchPokedexUseCaseParam = FetchPokedexUseCaseParam(
-    startIndex,
-    endIndex,
-  );
-  final pokedexResponse = await fetchPokedexUseCase(fetchPokedexUseCaseParam);
-
-  if (pokedexResponse.isFailure) throw (pokedexResponse as Failure<List<Pokemon>>).error;
-
-  return (pokedexResponse as Success<List<Pokemon>>).data;
 }
+
+Future<List<Pokemon>> fetchPokemon(final String region) async {
+  final fetchPokedexUseCase = locator.get<FetchPokedexUseCase>();
+  return await fetchPokedexUseCase(region);
+}
+
+void logInfo(String message) {
+  final toolLogger = locator.get<ToolLogger>();
+  toolLogger.i(message);
+}
+
+void logError(String message) {
+  final toolLogger = locator.get<ToolLogger>();
+  toolLogger.e(message);
+}
+
