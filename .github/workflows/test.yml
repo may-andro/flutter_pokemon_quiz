@@ -40,6 +40,12 @@ jobs:
     with:
       flavor: kanto
       target: lib/main_kanto.dart
+    secrets:
+      SIGNING_KEYSTORE: ${{ secrets.KANTO_KEYSTORE }}
+      SIGNING_KEY_ALIAS: ${{ secrets.KANTO_SIGNING_KEY_ALIAS }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+
 
   build_android_jhoto:
     uses: ./.github/workflows/_build_android.yml
@@ -47,6 +53,11 @@ jobs:
     with:
       flavor: jhoto
       target: lib/main_jhoto.dart
+    secrets:
+      SIGNING_KEYSTORE: ${{ secrets.JHOTO_KEYSTORE }}
+      SIGNING_KEY_ALIAS: ${{ secrets.JHOTO_SIGNING_KEY_ALIAS }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
   build_ios_kanto:
     uses: ./.github/workflows/_build_ios.yml
@@ -68,11 +79,6 @@ jobs:
     with:
       flavor: kanto
       target: lib/main_kanto.dart
-    secrets:
-      SIGNING_KEYSTORE: ${{ secrets.KANTO_KEYSTORE }}
-      SIGNING_KEY_ALIAS: ${{ secrets.KANTO_SIGNING_KEY_ALIAS }}
-      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
   build_web_jhoto:
     uses: ./.github/workflows/_build_web.yml
@@ -80,9 +86,5 @@ jobs:
     with:
       flavor: jhoto
       target: lib/main_jhoto.dart
-    secrets:
-      SIGNING_KEYSTORE: ${{ secrets.JHOTO_KEYSTORE }}
-      SIGNING_KEY_ALIAS: ${{ secrets.JHOTO_SIGNING_KEY_ALIAS }}
-      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+
 

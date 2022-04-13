@@ -1,9 +1,8 @@
 name: upload-all-pokedex
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   upload-kanto_pokedex:
