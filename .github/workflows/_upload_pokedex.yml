@@ -57,7 +57,7 @@ jobs:
         working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
         run: npm run build
       - name: Upload pokedex to Firestore
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
         run: npm run migrate import ${{ inputs.flavor }} pokedex.json
 
 
