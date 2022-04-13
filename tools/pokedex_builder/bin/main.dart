@@ -7,7 +7,7 @@ import 'package:pokedex_builder/pokedex_builder.dart';
 
 Future<void> main(List<String> arguments) async {
   setupPokedexBuilder();
-  logInfo('Pokedex builder started');
+  print('Pokedex builder started');
   try {
     final parser = _getArgParser();
     final parsedArguments = _getParsedArguments(parser, arguments);
@@ -18,10 +18,9 @@ Future<void> main(List<String> arguments) async {
       path: filePath,
       collectionJson: _createCollectionJson(pokemons, flavor),
     );
-    logInfo('Successfully build pokedex and saved at $filePath');
     print('Successfully build pokedex and saved at $filePath');
   } catch (e) {
-    logError('Caught error:$e');
+    print('Caught error:$e');
   } finally {
     exit(0);
   }
