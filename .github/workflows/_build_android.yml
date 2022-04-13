@@ -9,14 +9,27 @@ on:
       target:
         type: string
         required: true
+    secrets:
+      SIGNING_KEYSTORE:
+        required: true
+      SIGNING_KEY_ALIAS:
+        required: true
+      SIGNING_KEY_PASSWORD:
+        required: true
+      SIGNING_STORE_PASSWORD:
+        required: true
+
 jobs:
-  flutter_test:
+  build_android:
     name: apk and aab
     runs-on: ubuntu-latest
     env:
       JAVA_VERSION: "12.x"
       FLUTTER_VERSION: "2.10.3"
-
+      SIGNING_KEYSTORE: ${{ secrets.SIGNING_KEYSTORE }}
+      SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -36,7 +49,7 @@ jobs:
       - name: Generate icons
         run: flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons/${{ inputs.flavor }}.yaml
       - name: Build apk file
-        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --release
         timeout-minutes: 20
       - name: Build aab file
-        run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
+        run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --release
