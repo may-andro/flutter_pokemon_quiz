@@ -38,12 +38,6 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Install NodeJS dependencies for firestore_uploader
-        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
-        run: npm install
-      - name: Convert .ts to .js
-        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
-        run: npm run build
       - name: Install dependencies for pokedex_builder
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart pub get
@@ -56,6 +50,12 @@ jobs:
       - name: Build credential.json for firebase project
         working-directory: ${{ env.PATH_FIREBASE_CRED_BUILDER }}
         run: dart bin/main.dart -c ${{ secrets.FIREBASE_CREDENTIALS }} -p ../firestore_uploader/credentials.json
+      - name: Install NodeJS dependencies for firestore_uploader
+        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
+        run: npm install
+      - name: Convert .ts to .js
+        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
+        run: npm run build
       - name: Upload pokedex to Firestore
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: npm run migrate import ${{ inputs.flavor }} pokedex.json
