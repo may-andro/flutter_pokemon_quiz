@@ -23,7 +23,6 @@ class RemoteConfigClient {
       await _firebaseRemoteConfig.fetch();
     } catch (exception) {
       // Handle error
-      print('exception: $exception');
     }
     return _firebaseRemoteConfig.activate();
   }

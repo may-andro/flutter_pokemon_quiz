@@ -5,7 +5,6 @@ import 'package:guess_pokemon/src/presentation/page/widget/tablet_view_widget.da
 import 'package:ui_core/ui_core.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 
-// ignore: prefer_const_constructors
 class GuessPokemonPage extends StatelessWidget {
   const GuessPokemonPage({Key? key}) : super(key: key);
 
@@ -16,9 +15,9 @@ class GuessPokemonPage extends StatelessWidget {
           onViewModelProvided: (viewModel) => viewModel.onInit(),
           builder: (context, viewModel, widget) {
             return ResponsiveContainerWidget(
-              mobileBuilder: (_) => MobileViewWidget(),
-              tabletBuilder: (_) => TabletViewWidget(),
-              desktopBuilder: (_) => DesktopViewWidget(),
+              mobileBuilder: (_) => const MobileViewWidget(),
+              tabletBuilder: (_) => const TabletViewWidget(),
+              desktopBuilder: (_) => const DesktopViewWidget(),
             );
           }),
     );

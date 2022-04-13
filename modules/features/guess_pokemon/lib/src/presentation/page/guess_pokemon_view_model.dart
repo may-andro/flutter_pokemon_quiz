@@ -54,7 +54,6 @@ class GuessPokemonViewModel extends BaseViewModel {
     });
 
     _startSpeechToTextUseCase.statusStream.listen((status) {
-      print('status: $status');
       if (status == 'listening') {
         _isListening = true;
       } else {

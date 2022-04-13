@@ -8,7 +8,7 @@ const program = new Command();
 program.version('0.4.0');
 
 var flavor = process.argv[3];
-var serviceAccount = require('../data/' + flavor + '/credentials.json');
+var serviceAccount = require('../data/' + flavor + '/fb_credentials.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
