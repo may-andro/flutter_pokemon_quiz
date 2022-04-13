@@ -19,6 +19,7 @@ Future<void> main(List<String> arguments) async {
       collectionJson: _createCollectionJson(pokemons, flavor),
     );
     logInfo('Successfully build pokedex and saved at $filePath');
+    print('Successfully build pokedex and saved at $filePath');
   } catch (e) {
     logError('Caught error:$e');
   } finally {

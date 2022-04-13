@@ -1,44 +1,11 @@
 analyze:
-  - cd modules/network && flutter analyze
-  - cd modules/local && flutter analyze
-  - cd modules/data && flutter analyze
-  - cd modules/domain && flutter analyze
-  - cd modules/features/ui_core && flutter analyze
-  - cd modules/features/pokedex && flutter analyze
-  - cd modules/features/guess_pokemon && flutter analyze
-  - cd modules/features/pokemon_detail && flutter analyze
-  - cd modules/features/setting && flutter analyze
-  - flutter analyze
-  - cd tools/firebase_cred_builder && flutter analyze
-  - cd tools/pokedex_builder && flutter analyze
+  - find ./ -name pubspec.yaml -execdir sh -c "flutter analyze" \;
 
 build_runner:
-  - cd modules/network && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/local && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/data && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/domain && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/features/ui_core && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/features/pokedex && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/features/guess_pokemon && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/features/pokemon_detail && flutter pub run build_runner build --delete-conflicting-outputs
-  - cd modules/features/setting && flutter pub run build_runner build --delete-conflicting-outputs
-  - flutter pub run build_runner build --delete-conflicting-outputs
-  - cd tools/pokedex_builder && flutter pub run build_runner build --delete-conflicting-outputs
+  - find ./ -name pubspec.yaml -execdir sh -c "flutter pub run build_runner build --delete-conflicting-outputs" \;
 
 get_all:
-  - flutter pub get
-  - cd modules/dependencies && flutter pub get
-  - cd modules/local && flutter pub get
-  - cd modules/network && flutter pub get
-  - cd modules/data && flutter pub get
-  - cd modules/domain && flutter pub get
-  - cd modules/features/ui_core && flutter pub get
-  - cd modules/features/pokedex && flutter pub get
-  - cd modules/features/guess_pokemon && flutter pub get
-  - cd modules/features/pokemon_detail && flutter pub get
-  - cd modules/features/setting && flutter pub get
-  - cd tools/firebase_cred_builder && flutter pub get
-  - cd tools/pokedex_builder && flutter pub get
+  - find ./ -name pubspec.yaml -execdir sh -c "flutter pub get" \;
 
 run_jhoto:
   - flutter run lib/main_jhoto.dart --flavor jhoto
