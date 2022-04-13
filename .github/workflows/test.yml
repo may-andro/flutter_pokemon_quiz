@@ -25,10 +25,12 @@ jobs:
           cache: true
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
+      - name: Format the Dart code
+        run: flutter format . --set-exit-if-changed
       - name: Get flutter dependencies
-        run: flutter pub get
+        run: find ./ -name pubspec.yaml -execdir sh -c "flutter pub get" \;
       - name: Statically analyze the Dart code
-        run: flutter analyze lib module
+        run: flutter analyze
       - name: Run widget tests for our flutter project
         run: flutter test
 

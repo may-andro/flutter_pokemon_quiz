@@ -13,7 +13,6 @@ import 'package:pokedex_builder/domain/usecase/fetch_pokedex_start_index_usecase
 import 'package:pokedex_builder/domain/usecase/fetch_pokedex_usecase.dart';
 import 'package:pokedex_builder/domain/usecase/fetch_pokemon_usecase.dart';
 import 'package:pokedex_builder/logger/tool_logger.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -44,16 +43,6 @@ void _setupLogger() {
 
 void _setupRemoteClient() {
   final dioInstance = Dio(BaseOptions(baseUrl: 'https://pokeapi.co/api/v2/'));
-  dioInstance.interceptors.add(
-    PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: false,
-      compact: false,
-    ),
-  );
-
   locator.registerSingleton<Dio>(dioInstance);
   locator.registerSingleton<RemoteClient>(DioRemoteClient(locator<Dio>()));
 }

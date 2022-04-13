@@ -13,6 +13,5 @@ Future<void> saveToFile({
 
 Map<String, dynamic> createJson(String credential) {
   final map = jsonDecode(credential);
-  print(map);
   return map;
 }
