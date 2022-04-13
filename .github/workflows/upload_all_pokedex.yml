@@ -4,17 +4,17 @@ on:
   push:
     branches:
       - master
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   upload-kanto_pokedex:
     uses: ./.github/workflows/_upload_pokedex.yml
     with:
       flavor: "kanto"
-      credentials: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
+    secrets:
+      FIREBASE_CREDENTIALS: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
   upload-jhoto_pokedex:
     uses: ./.github/workflows/_upload_pokedex.yml
     with:
       flavor: "jhoto"
-      credentials: ${{ secrets.JHOTO_FIREBASE_CREDENTIALS }}
+    secrets:
+      FIREBASE_CREDENTIALS: ${{ secrets.JHOTO_FIREBASE_CREDENTIALS }}

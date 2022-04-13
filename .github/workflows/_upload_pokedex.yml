@@ -9,8 +9,8 @@ on:
       flavor:
         type: string
         required: true
-      credentials:
-        type: string
+    secrets:
+      FIREBASE_CREDENTIALS:
         required: true
 
 jobs:
@@ -50,7 +50,7 @@ jobs:
         run: dart bin/main.dart -f ${{ inputs.flavor }} -p ../firestore_uploader/data/${{ inputs.flavor }}/pokedex.json
       - name: Build credential.json for firebase project
         working-directory: ./tools/firebase_cred_builder
-        run: dart bin/main.dart -c ${{ inputs.credentials }} -p ../firestore_uploader/data/${{ inputs.flavor }}/credentials.json
+        run: dart bin/main.dart -c ${{ secrets.FIREBASE_CREDENTIALS }} -p ../firestore_uploader/data/${{ inputs.flavor }}/credentials.json
       - name: Upload pokedex to Firestore
         working-directory: ./tools/firestore_uploader
         run: npm run migrate import ${{ inputs.flavor }} pokedex.json
