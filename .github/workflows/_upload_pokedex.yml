@@ -1,8 +1,5 @@
 name: Upload pokedex
 
-env:
-  DART_SDK_VERSION: 2.16.1
-
 on:
   workflow_call:
     inputs:
@@ -16,6 +13,11 @@ on:
 jobs:
   upload:
     runs-on: ubuntu-latest
+    env:
+      DART_SDK_VERSION: 2.16.1
+      PATH_FIRESTORE_UPLOADER: ./tools/firestore_uploader
+      PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
+      PATH_FIREBASE_CRED_BUILDER: ./tools/firebase_cred_builder
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -37,22 +39,25 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install NodeJS dependencies for firestore_uploader
-        working-directory: ./tools/firestore_uploader
+        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
         run: npm install
       - name: Convert .ts to .js
-        working-directory: ./tools/firestore_uploader
+        working-directory: ${{ env.PATH_FIRESTORE_UPLOADER }}
         run: npm run build
       - name: Install dependencies for pokedex_builder
-        working-directory: ./tools/pokedex_builder
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart pub get
       - name: Build pokedex using pokedex_builder
-        working-directory: ./tools/pokedex_builder
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart bin/main.dart -f ${{ inputs.flavor }} -p ../firestore_uploader/data/${{ inputs.flavor }}/pokedex.json
+      - name: Install dependencies for firebase_cred_builder
+        working-directory: ${{ env.PATH_FIREBASE_CRED_BUILDER }}
+        run: dart pub get
       - name: Build credential.json for firebase project
-        working-directory: ./tools/firebase_cred_builder
+        working-directory: ${{ env.PATH_FIREBASE_CRED_BUILDER }}
         run: dart bin/main.dart -c ${{ secrets.FIREBASE_CREDENTIALS }} -p ../firestore_uploader/data/${{ inputs.flavor }}/credentials.json
       - name: Upload pokedex to Firestore
-        working-directory: ./tools/firestore_uploader
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: npm run migrate import ${{ inputs.flavor }} pokedex.json
 
 
