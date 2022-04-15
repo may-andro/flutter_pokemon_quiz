@@ -72,19 +72,3 @@ jobs:
     with:
       flavor: jhoto
       target: lib/main_jhoto.dart
-
-  build_web_kanto:
-    uses: ./.github/workflows/_build_web.yml
-    needs: flutter_test
-    with:
-      flavor: kanto
-      target: lib/main_kanto.dart
-
-  build_web_jhoto:
-    uses: ./.github/workflows/_build_web.yml
-    needs: flutter_test
-    with:
-      flavor: jhoto
-      target: lib/main_jhoto.dart
-
-
