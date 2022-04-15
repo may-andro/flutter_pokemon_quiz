@@ -51,24 +51,46 @@ android {
 
     signingConfigs {
         kanto {
-            def keystorePropertiesFile = rootProject.file("app/src/kanto/keystore.properties")
-            def keystoreProperties = new Properties()
-            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            //def keystorePropertiesFile = rootProject.file("app/src/kanto/keystore.properties")
+            //def keystoreProperties = new Properties()
+            //keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            //keyAlias keystoreProperties['keyAlias']
+            //keyPassword keystoreProperties['keyPassword']
+            //storeFile file(keystoreProperties['storeFile'])
+            //storePassword keystoreProperties['storePassword']
 
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
+            def allFilesFromDir = new File(tmpFilePath).listFiles()
+            if (allFilesFromDir != null) {
+                def keystoreFile = allFilesFromDir.first()
+                keystoreFile.renameTo("keystore/kanto.jks")
+            }
+            storeFile = file("keystore/kanto.jks")
+            keyAlias System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword System.getenv("SIGNING_KEY_PASSWORD")
+            storePassword System.getenv("SIGNING_STORE_PASSWORD")
+            v2SigningEnabled true
         }
         jhoto {
-            def keystorePropertiesFile = rootProject.file("app/src/jhoto/keystore.properties")
-            def keystoreProperties = new Properties()
-            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            //def keystorePropertiesFile = rootProject.file("app/src/jhoto/keystore.properties")
+            //def keystoreProperties = new Properties()
+            //keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            //keyAlias keystoreProperties['keyAlias']
+            //keyPassword keystoreProperties['keyPassword']
+            //storeFile file(keystoreProperties['storeFile'])
+            //storePassword keystoreProperties['storePassword']
 
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
+            def allFilesFromDir = new File(tmpFilePath).listFiles()
+            if (allFilesFromDir != null) {
+                def keystoreFile = allFilesFromDir.first()
+                keystoreFile.renameTo("keystore/jhoto.jks")
+            }
+            storeFile = file("keystore/jhoto.jks")
+            keyAlias System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword System.getenv("SIGNING_KEY_PASSWORD")
+            storePassword System.getenv("SIGNING_STORE_PASSWORD")
+            v2SigningEnabled true
         }
     }
 
