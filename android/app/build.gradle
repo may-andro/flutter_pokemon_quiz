@@ -107,6 +107,10 @@ android {
             signingConfig signingConfigs.jhoto
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 flutter {

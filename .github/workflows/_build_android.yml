@@ -56,7 +56,7 @@ jobs:
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/${{ inputs.flavor }}.jks
       - name: Build apk file
-        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --split-per-abi
         timeout-minutes: 20
       - name: Build aab file
         run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
