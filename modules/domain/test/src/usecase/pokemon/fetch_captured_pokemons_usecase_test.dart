@@ -48,20 +48,6 @@ void main() {
       });
 
       test('should throw $Exception', () async {
-        const pokemon = Pokemon(
-          index: 1,
-          name: 'name',
-          baseExperience: 1,
-          weight: 1,
-          height: 1,
-          imageUrl: 'imageUrl',
-          abilities: [],
-          moves: [],
-          types: [],
-          stats: [],
-          isFavorite: false,
-          isCaptured: false,
-        );
         mockedFetchPokedexUseCase.mockLeftCall(const Failure(1));
 
         final result = await fetchCapturedPokemonsUseCase('');

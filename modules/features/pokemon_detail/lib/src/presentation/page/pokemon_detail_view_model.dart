@@ -19,7 +19,7 @@ class PokemonDetailViewModel extends BaseViewModel {
 
   late Pokemon _pokemon;
 
-  late int _errorCode;
+  int? _errorCode;
 
   int _selectedTabIndex = 0;
 
@@ -32,6 +32,8 @@ class PokemonDetailViewModel extends BaseViewModel {
   int get selectedTabIndex => _selectedTabIndex;
 
   bool get isFavorite => _isFavoritePokemonUseCase(pokemonIndex);
+
+  int? get errorCode => _errorCode;
 
   List<PokemonStat> get pokemonStats => _pokemon.stats;
 
@@ -50,31 +52,34 @@ class PokemonDetailViewModel extends BaseViewModel {
   }
 
   void _addFavoritePokemon() {
+    _errorCode = null;
+
     final eitherPokemon = _addFavoritePokemonUseCase(_pokemon);
 
     if (eitherPokemon.isLeft()) {
       _errorCode = eitherPokemon.asLeft().errorId;
-      setErrorState();
     }
 
     if (eitherPokemon.isRight()) {
       _pokemon = eitherPokemon.asRight();
-      setSuccessState();
     }
+
+    notifyListener();
   }
 
   void _removeFavoritePokemon() {
+    _errorCode = null;
     final eitherPokemon = _removeFavoritePokemonUseCase(_pokemon);
 
     if (eitherPokemon.isLeft()) {
       _errorCode = eitherPokemon.asLeft().errorId;
-      setErrorState();
     }
 
     if (eitherPokemon.isRight()) {
       _pokemon = eitherPokemon.asRight();
-      setSuccessState();
     }
+
+    notifyListener();
   }
 
   void toggleFavoritePokemon() {
