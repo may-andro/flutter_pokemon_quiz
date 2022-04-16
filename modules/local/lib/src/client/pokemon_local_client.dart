@@ -12,13 +12,15 @@ class PokemonLocalClient extends LocalClient<LocalPokemon> {
   @override
   int put(LocalPokemon entity) {
     final pokemons = getAll();
-    final pokemon = pokemons.firstWhereOrNull((pokemon) => entity.id == pokemon.id);
+    final pokemon =
+        pokemons.firstWhereOrNull((pokemon) => entity.id == pokemon.id);
     if (pokemon == null) return _pokemonBox.put(entity, mode: PutMode.insert);
     return _pokemonBox.put(entity, mode: PutMode.update);
   }
 
   @override
-  List<int> putMany(List<LocalPokemon> entities) => _pokemonBox.putMany(entities);
+  List<int> putMany(List<LocalPokemon> entities) =>
+      _pokemonBox.putMany(entities);
 
   @override
   LocalPokemon? get(int id) => _pokemonBox.get(id);

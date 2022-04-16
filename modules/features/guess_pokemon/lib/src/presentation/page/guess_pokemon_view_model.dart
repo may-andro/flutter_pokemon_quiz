@@ -116,7 +116,6 @@ class GuessPokemonViewModel extends BaseViewModel {
       _pokemon = eitherPokemon.asRight();
     }
 
-
     notifyListener();
   }
 

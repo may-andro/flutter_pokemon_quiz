@@ -52,7 +52,8 @@ void main() {
         verify(() => mockedPokemonDataSource.removePokemon(1)).called(1);
       });
 
-      test('should return true when'
+      test(
+          'should return true when'
           ' $PokemonDataSource does not removes a value', () {
         mockedPokemonDataSource.mockRemovePokemon(false);
 
@@ -124,7 +125,7 @@ void main() {
     group('queryIsCapturedPokemon', () {
       test(
           'should return false when '
-              'query returns empty list', () {
+          'query returns empty list', () {
         final pokemons = <LocalPokemon>[];
         mockedPokemonDataSource.mockQueryPokemon(pokemons);
 
@@ -136,7 +137,7 @@ void main() {
 
       test(
           'should return true when query returns non empty list &'
-              ' isCaptured is true ', () {
+          ' isCaptured is true ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
@@ -155,7 +156,7 @@ void main() {
 
       test(
           'should return false when query returns non empty list &'
-              ' isCaptured is false ', () {
+          ' isCaptured is false ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
@@ -175,7 +176,7 @@ void main() {
     group('queryIsFavoritePokemon', () {
       test(
           'should return false when '
-              'query returns empty list', () {
+          'query returns empty list', () {
         final pokemons = <LocalPokemon>[];
         mockedPokemonDataSource.mockQueryPokemon(pokemons);
 
@@ -187,7 +188,7 @@ void main() {
 
       test(
           'should return true when query returns non empty list &'
-              ' isFavorite is true ', () {
+          ' isFavorite is true ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
@@ -206,7 +207,7 @@ void main() {
 
       test(
           'should return false when query returns non empty list &'
-              ' isFavorite is false ', () {
+          ' isFavorite is false ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
