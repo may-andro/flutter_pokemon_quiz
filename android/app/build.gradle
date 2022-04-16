@@ -66,6 +66,7 @@ android {
             if (allFilesFromDir != null) {
                 def keystoreFile = allFilesFromDir.first()
                 keystoreFile.renameTo("keystore/kanto.jks")
+                println("keystoreFile: $keystoreFile")
             }
             storeFile file("keystore/kanto.jks")
             keyAlias System.getenv("SIGNING_KEY_ALIAS")
