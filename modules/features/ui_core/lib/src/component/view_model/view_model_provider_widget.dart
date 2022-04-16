@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_core/src/component/view_model/base_view_model.dart';
-import 'package:ui_core/ui_core.dart';
+import 'package:ui_core/src/main.dart';
 
 class ViewModelProviderWidget<VM extends BaseViewModel> extends StatefulWidget {
   const ViewModelProviderWidget({

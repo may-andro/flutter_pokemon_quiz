@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
 import 'package:ui_core/ui_core.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 class PokemonImageWidget extends StatelessWidget {

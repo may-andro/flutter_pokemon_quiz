@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:ui_core/src/extension/extension.dart';
 
 class SmallFABWidget extends StatelessWidget {
