@@ -1,6 +1,21 @@
+## Motivation
+
+The ideology behind this module is to combine different common aspects of presentation layer in one place.
+This helps with:
+- [x] Usability
+- [x] Accessibility to core dependencies
+- [x] Efficient Maintainability
+
 ## Purpose
 
 This module contain the core objects required for the presentation layer in the app.
+- [x] Theme
+- [x] Common Widgets
+- [x] Provider State Management Setup
+- [x] Extensions
+- [x] Routing Management
+
+![ui_core](https://user-images.githubusercontent.com/16761273/163684416-a577efe9-eaf6-477c-8026-e9d396ee4c3a.jpg)
 
 ## Usage
 Add this module in pubspec.ymal to get all the dependencies.
@@ -9,13 +24,6 @@ dependencies:
   dependencies:
     path: modules/dependencies
 ```
-
-## Additional information
-
-The dependencies are inserted in the GetIt.
-It exposes the view model and provider setup.
-It base navigation setup required for the modules which needs the navigation handling.
-It consists of the basic widgets.
 
 ## Module Setup
 
@@ -30,4 +38,5 @@ dependencies:
 
 ## Testing
 
-TODO
+- [] Widget [TODO]
+- [] Provider [TODO]

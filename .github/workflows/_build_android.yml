@@ -54,8 +54,6 @@ jobs:
         run: |
           TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
-          echo $GITHUB_REF
-          echo ${TMP_KEYSTORE_FILE_PATH}
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/${{ inputs.flavor }}.jks
       - name: Build apk file
         run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --split-per-abi

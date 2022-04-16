@@ -71,4 +71,4 @@ Repositories are collection of data sources which exposed the set of functionali
 All initialization related setup is handled in the ```main.dart``` file.
 
 ### Does all data sources resides in data module??
-Not really, one can keep only globally used usecases in data and very specific data sources could be part of individual features.
+Not really, one can keep only globally used data sources in data module and very specific data sources could be part of individual features.

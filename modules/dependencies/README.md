@@ -27,4 +27,4 @@ dependencies:
 Not really, if the dependency scope is limited to one module, one can define and use it in local pubspecs.yaml file of module.
 
 ### What about the dev dependencies??
-Sadly dev dependencies has to be maintained in rach module's pubspecs.yaml file for now.
+Sadly dev dependencies has to be maintained in each module's pubspecs.yaml file for now.
