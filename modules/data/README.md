@@ -48,7 +48,27 @@ dependencies:
     path: ../network
 ```
 
+## Repositories
+
+- [x] ```FeatureToggleRepository```
+- [x] ```PokedexRepository```
+- [x] ```PokemonRepository```
+
 ## Unit Test
 
 - [x] Data Sources
 - [x] Repositories
+
+## FAQ
+
+### DataSources??
+Datasources are required to combine the raw data coming from different client into a single object. Each feature can have data stored in different places. 
+
+### Repositories??
+Repositories are collection of data sources which exposed the set of functionality to manipulate the data coming from different data sources.
+
+### What if I need to do some initialization setup??
+All initialization related setup is handled in the ```main.dart``` file.
+
+### Does all data sources resides in data module??
+Not really, one can keep only globally used usecases in data and very specific data sources could be part of individual features.

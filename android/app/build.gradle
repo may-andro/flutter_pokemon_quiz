@@ -69,7 +69,7 @@ android {
                 println("keystoreFile: $keystoreFile")
             }
 
-            println(file("keystore/kanto.jks").path)
+            println("path: ${file("keystore/kanto.jks").path}")
             storeFile file("keystore/kanto.jks")
             keyAlias System.getenv("SIGNING_KEY_ALIAS")
             keyPassword System.getenv("SIGNING_KEY_PASSWORD")

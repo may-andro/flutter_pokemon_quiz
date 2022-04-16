@@ -76,14 +76,14 @@ This module depends on the data module for the data fetch.
 
 ## FAQ
 
-- [x] ### Mappers??
+### Mappers??
 Mappers are required to seperate out the dependecy of business logic with raw storage entities. In software development it is very often that an api reponse might change with time. Keeping a separation between these data models enhances the maintainability of code in long run.
 
-- [x] ### Usecase??
+### Usecase??
 Usecase follows the single responsibility principle where it handles only one business requirement. Usecase can be used by another user case to handle complex business requirement.
 
-- [x] ### What if I need to do some initialization setup??
+### What if I need to do some initialization setup??
 All initialization related setup is handled in the ```main.dart``` file.
 
-- [x] ### Does all feature usecase resides in domain??
+### Does all feature usecase resides in domain??
 Not really, one can keep only globally used usecases in domain and other business requirement could be part of individual features.
