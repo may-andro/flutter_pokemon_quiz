@@ -7,9 +7,9 @@ abstract class LocalClient<T> {
 
   T? get(int id);
 
-  List<T?> getMany(List<int> ids);
+  List<T> getMany(List<int> ids);
 
-  List<T?> getAll();
+  List<T> getAll();
 
   void remove(int id);
 

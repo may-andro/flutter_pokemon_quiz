@@ -33,37 +33,29 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   List<LocalPokemon> queryFavoritePokemons() {
-    return _pokemonDataSource.queryPokemon(
-      LocalPokemon_.isFavorite.equals(true),
-    );
+    return _queryPokemons(LocalPokemon_.isFavorite.equals(true));
   }
 
   @override
   List<LocalPokemon> queryCapturedPokemons() {
-    return _pokemonDataSource.queryPokemon(
-      LocalPokemon_.isCaptured.equals(true),
-    );
+    return _queryPokemons(LocalPokemon_.isCaptured.equals(true));
   }
 
   @override
-  LocalPokemon queryIsCapturedPokemon(int index) {
-    return _pokemonDataSource
-        .queryPokemon(
-          LocalPokemon_.isCaptured
-              .equals(true)
-              .and(LocalPokemon_.index.equals(index)),
-        )
-        .first;
+  bool queryIsCapturedPokemon(int index) {
+    final pokemonList = _queryPokemons(LocalPokemon_.index.equals(index));
+    if (pokemonList.isEmpty) return false;
+    return pokemonList.first.isCaptured;
   }
 
   @override
-  LocalPokemon queryIsFavoritePokemon(int index) {
-    return _pokemonDataSource
-        .queryPokemon(
-          LocalPokemon_.isFavorite
-              .equals(true)
-              .and(LocalPokemon_.index.equals(index)),
-        )
-        .first;
+  bool queryIsFavoritePokemon(int index) {
+    final pokemonList = _queryPokemons(LocalPokemon_.index.equals(index));
+    if (pokemonList.isEmpty) return false;
+    return pokemonList.first.isFavorite;
+  }
+
+  List<LocalPokemon> _queryPokemons(Condition<LocalPokemon> condition) {
+    return _pokemonDataSource.queryPokemon(condition);
   }
 }

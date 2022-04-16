@@ -1,3 +1,4 @@
+import 'package:local/objectbox.g.dart';
 import 'package:local/src/client/local_client.dart';
 import 'package:local/src/entity/entities.dart';
 import 'package:objectbox/objectbox.dart';
@@ -17,10 +18,12 @@ class PokemonLocalClient extends LocalClient<LocalPokemon> {
   LocalPokemon? get(int id) => _pokemonBox.get(id);
 
   @override
-  List<LocalPokemon?> getMany(List<int> ids) => _pokemonBox.getMany(ids);
+  List<LocalPokemon> getMany(List<int> ids) =>
+      _pokemonBox.getMany(ids).whereType<LocalPokemon>().toList();
 
   @override
-  List<LocalPokemon?> getAll() => _pokemonBox.getAll();
+  List<LocalPokemon> getAll() =>
+      _pokemonBox.getAll().whereType<LocalPokemon>().toList();
 
   @override
   void remove(int id) => _pokemonBox.remove(id);

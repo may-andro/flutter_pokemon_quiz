@@ -1,19 +1,22 @@
 import 'package:dartz/dartz.dart';
 import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
+import 'package:local/local.dart';
 import 'package:domain/src/model/model.dart';
 
 class AddFavoritePokemonUseCase {
   AddFavoritePokemonUseCase(
     this._pokemonRepository,
-    this._pokemonLocalMapper,
   );
 
   final PokemonRepository _pokemonRepository;
-  final PokemonLocalMapper _pokemonLocalMapper;
 
   Either<Failure, void> call(Pokemon params) {
-    final localPokemon = _pokemonLocalMapper.mapFromModelToEntity(params);
+    final localPokemon = LocalPokemon(
+      index: params.index,
+      imageUrl: params.imageUrl,
+      name: params.name,
+      isFavorite: true,
+    );
     try {
       return Right(_pokemonRepository.putPokemon(localPokemon));
     } catch (e) {

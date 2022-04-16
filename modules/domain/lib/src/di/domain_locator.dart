@@ -11,10 +11,19 @@ void setupDomainDependencies(final GetIt getIt) {
 
 void _setupMappers(final GetIt getIt) {
   getIt.registerFactory(() => PokedexRemoteMapper(getIt.get()));
-  getIt.registerFactory(ExtendedPokemonRemoteMapper.new);
-  getIt.registerFactory(CapturedPokemonLocalMapper.new);
-  getIt.registerFactory(PokemonLocalMapper.new);
-  getIt.registerFactory(() => PokemonRemoteMapper(getIt.get()));
+  getIt.registerFactory(
+    () => ExtendedPokemonRemoteMapper(
+      getIt.get<IsFavoritePokemonUseCase>(),
+      getIt.get<IsCapturedPokemonUseCase>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => PokemonRemoteMapper(
+      getIt.get(),
+      getIt.get(),
+      getIt.get(),
+    ),
+  );
   getIt.registerFactory(PokemonStatsRemoteMapper.new);
   getIt.registerFactory(FeatureToggleMapper.new);
 }
@@ -35,14 +44,10 @@ void _setUpUseCases(final GetIt getIt) {
   getIt.registerFactory(
     () => AddFavoritePokemonUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
-      getIt.get<PokemonLocalMapper>(),
     ),
   );
   getIt.registerFactory(
-    () => FetchFavoritePokemonsUseCase(
-      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
-      getIt.get<CapturedPokemonLocalMapper>(),
-    ),
+    () => FetchFavoritePokemonsUseCase(getIt.get<FetchPokedexUseCase>()),
   );
   getIt.registerFactory(
     () => RemoveFavoritePokemonUseCase(
@@ -87,15 +92,11 @@ void _setUpUseCases(final GetIt getIt) {
     ),
   );
   getIt.registerFactory(
-    () => FetchCapturedPokemonsUseCase(
-      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
-      getIt.get<CapturedPokemonLocalMapper>(),
-    ),
+    () => FetchCapturedPokemonsUseCase(getIt.get<FetchPokedexUseCase>()),
   );
   getIt.registerFactory(
-    () => IsFavouritePokemonUseCase(
+    () => IsFavoritePokemonUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
-      getIt.get<CapturedPokemonLocalMapper>(),
     ),
   );
   getIt.registerFactory(

@@ -7,6 +7,9 @@ build_runner:
 get_all:
   - find ./ -name pubspec.yaml -execdir sh -c "flutter pub get" \;
 
+clean_all:
+  - find ./ -not -path '*/\.*' -name pubspec.yaml -execdir sh -c "fvm flutter clean && fvm flutter pub get" \;
+
 run_jhoto:
   - flutter run lib/main_jhoto.dart --flavor jhoto
 
@@ -42,6 +45,3 @@ get_kanto_rc:
 
 publish_kanto_rc:
   - npm run rc publish kanto remote_config/kanto.json
-
-add_pokedex_rc:
-  - npm run rc add-rc feature_toggle_pokedex true 'Controls the visibility of Pokedex page' kanto,johto

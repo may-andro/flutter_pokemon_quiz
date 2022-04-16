@@ -1,66 +1,89 @@
-import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:domain/src/usecase/usecase.dart';
-import 'package:local/local.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../mock/repository/pokemon/mocked_pokemon_repository.dart';
+import '../../mock/usecase/pokedex/mock_fetch_pokedex_usecase.dart';
 
 void main() {
   group(FetchFavoritePokemonsUseCase, () {
-    late MockedPokemonRepository mockedPokemonRepository;
-    late CapturedPokemonLocalMapper favouritePokemonLocalMapper;
+    late MockFetchPokedexUseCase mockFetchPokedexUseCase;
 
     late FetchFavoritePokemonsUseCase fetchFavouritePokemonsUseCase;
 
     setUp(() {
-      mockedPokemonRepository = MockedPokemonRepository();
-      favouritePokemonLocalMapper = CapturedPokemonLocalMapper();
+      mockFetchPokedexUseCase = MockFetchPokedexUseCase();
 
       fetchFavouritePokemonsUseCase = FetchFavoritePokemonsUseCase(
-        mockedPokemonRepository,
-        favouritePokemonLocalMapper,
+        mockFetchPokedexUseCase,
       );
     });
 
     group('call', () {
-      test('should return ${Right<Failure, List<CapturedPokemon>>} ', () {
-        final localPokemons = [
-          LocalPokemon(index: 1, name: 'name', imageUrl: 'imageUrl'),
-          LocalPokemon(index: 2, name: 'name', imageUrl: 'imageUrl'),
+      test('should return ${Right<Failure, List<Pokemon>>} ', () async {
+        const pokemons = [
+          Pokemon(
+            index: 1,
+            name: 'name',
+            baseExperience: 1,
+            weight: 1,
+            height: 1,
+            imageUrl: 'imageUrl',
+            abilities: [],
+            moves: [],
+            types: [],
+            stats: [],
+            isCaptured: true,
+            isFavorite: true,
+          ),
+          Pokemon(
+            index: 2,
+            name: 'name',
+            baseExperience: 1,
+            weight: 1,
+            height: 1,
+            imageUrl: 'imageUrl',
+            abilities: [],
+            moves: [],
+            types: [],
+            stats: [],
+            isCaptured: true,
+            isFavorite: false,
+          )
         ];
-        mockedPokemonRepository.mockGetPokemons(localPokemons);
+        const pokedex = Pokedex(pokemons: pokemons);
+        mockFetchPokedexUseCase.mockRightCall(pokedex);
 
-        final result = fetchFavouritePokemonsUseCase();
+        final result = await fetchFavouritePokemonsUseCase('');
 
         expect(result.isRight(), true);
         expect(
           result.asRight(),
           const [
-            CapturedPokemon(
+            Pokemon(
               index: 1,
-              avatar: 'imageUrl',
               name: 'name',
+              baseExperience: 1,
+              weight: 1,
+              height: 1,
+              imageUrl: 'imageUrl',
+              abilities: [],
+              moves: [],
+              types: [],
+              stats: [],
               isCaptured: true,
+              isFavorite: true,
             ),
-            CapturedPokemon(
-              index: 2,
-              avatar: 'imageUrl',
-              name: 'name',
-              isCaptured: true,
-            )
           ],
         );
       });
 
       test(
-          'should return ${Left<Failure, List<CapturedPokemon>>} when '
-          '$PokemonRepository throw exception', () {
-        mockedPokemonRepository.mockGetPokemonsThrowsException();
+          'should return ${Left<Failure, List<Pokemon>>} when '
+          '$FetchPokedexUseCase throw exception', () async {
+        mockFetchPokedexUseCase.mockLeftCall(const Failure(1));
 
-        final result = fetchFavouritePokemonsUseCase();
+        final result = await fetchFavouritePokemonsUseCase('');
 
         expect(result.isLeft(), true);
         expect(result.asLeft(), const Failure(ERROR_SERVER_ID));

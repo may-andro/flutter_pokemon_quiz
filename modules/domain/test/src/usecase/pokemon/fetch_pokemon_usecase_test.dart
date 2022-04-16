@@ -1,33 +1,49 @@
 import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:domain/src/usecase/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../mock/repository/pokemon/mocked_pokemon_repository.dart';
+import '../../mock/usecase/pokemon/mock_extended_pokemon_remote_mapper.dart';
 
 void main() {
   group(FetchPokemonUseCase, () {
+    setUpAll(() {
+      registerFallbackValue(RemoteExtendedPokemon(
+        1,
+        'name',
+        12,
+        56,
+        32,
+        [],
+        [],
+        null,
+        [],
+        [],
+      ));
+    });
+
     late MockedPokemonRepository mockedPokemonRepository;
-    late ExtendedPokemonRemoteMapper extendedPokemonRemoteMapper;
+    late MockExtendedPokemonRemoteMapper mockExtendedPokemonRemoteMapper;
 
     late FetchPokemonUseCase fetchPokemonUseCase;
 
     setUp(() {
       mockedPokemonRepository = MockedPokemonRepository();
-      extendedPokemonRemoteMapper = ExtendedPokemonRemoteMapper();
+      mockExtendedPokemonRemoteMapper = MockExtendedPokemonRemoteMapper();
 
       fetchPokemonUseCase = FetchPokemonUseCase(
         mockedPokemonRepository,
-        extendedPokemonRemoteMapper,
+        mockExtendedPokemonRemoteMapper,
       );
     });
 
     group('call', () {
       test('should return ${Right<Failure, Pokemon>}', () async {
-        final expected = RemoteExtendedPokemon(
+        final remoteExtendedPokemon = RemoteExtendedPokemon(
           1,
           'name',
           12,
@@ -39,25 +55,29 @@ void main() {
           [],
           [],
         );
-        mockedPokemonRepository.mockFetchPokemon(expected);
+        const pokemon = Pokemon(
+          index: 1,
+          name: 'name',
+          baseExperience: 12,
+          weight: 32,
+          height: 56,
+          imageUrl: '',
+          stats: [],
+          types: [],
+          moves: [],
+          abilities: [],
+          isCaptured: true,
+          isFavorite: true,
+        );
+        mockedPokemonRepository.mockFetchPokemon(remoteExtendedPokemon);
+        mockExtendedPokemonRemoteMapper.mockMapFromEntityToModel(pokemon);
 
         final result = await fetchPokemonUseCase(1);
 
         expect(result.isRight(), true);
         expect(
           result.asRight(),
-          const Pokemon(
-            index: 1,
-            name: 'name',
-            baseExperience: 12,
-            weight: 32,
-            height: 56,
-            imageUrl: '',
-            stats: [],
-            types: [],
-            moves: [],
-            abilities: [],
-          ),
+          pokemon,
         );
       });
 

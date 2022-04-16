@@ -3,6 +3,7 @@ import 'package:data/src/repository/pokemon/pokemon_repository.dart';
 import 'package:data/src/repository/pokemon/pokemon_repository_impl.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local/local.dart';
+import 'package:local/objectbox.g.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
 
@@ -10,6 +11,10 @@ import '../../data_source/pokemon/mocked_pokemon_data_source.dart';
 
 void main() {
   group(PokemonRepositoryImpl, () {
+    setUpAll(() {
+      registerFallbackValue(LocalPokemon_.isFavorite.equals(true));
+    });
+
     late MockedPokemonDataSource mockedPokemonDataSource;
 
     late PokemonRepository pokemonRepository;
@@ -20,7 +25,7 @@ void main() {
       pokemonRepository = PokemonRepositoryImpl(mockedPokemonDataSource);
     });
 
-    group('putFavoritePokemon', () {
+    group('putPokemon', () {
       test('should call $PokemonDataSource', () {
         final localPokemon = LocalPokemon(
           index: 1,
@@ -35,7 +40,7 @@ void main() {
       });
     });
 
-    group('removeFavoritePokemon', () {
+    group('removePokemon', () {
       test('should call $PokemonDataSource', () {
         pokemonRepository.removePokemon(1);
 
@@ -43,7 +48,7 @@ void main() {
       });
     });
 
-    group('getAllFavorites', () {
+    group('getPokemons', () {
       test('should return $LocalPokemon list ', () {
         mockedPokemonDataSource.mockGetPokemons([]);
 
@@ -51,27 +56,6 @@ void main() {
 
         verify(() => mockedPokemonDataSource.getPokemons()).called(1);
         expect(result, []);
-      });
-
-      test('should return non nullable $LocalPokemon list ', () {
-        mockedPokemonDataSource.mockGetPokemons([
-          LocalPokemon(
-            index: 1,
-            name: 'name',
-            imageUrl: 'imageUrl',
-          ),
-          null,
-          LocalPokemon(
-            index: 2,
-            name: 'name',
-            imageUrl: 'imageUrl',
-          ),
-        ]);
-
-        final result = pokemonRepository.getPokemons();
-
-        verify(() => mockedPokemonDataSource.getPokemons()).called(1);
-        expect(result.length, 2);
       });
     });
 
@@ -95,6 +79,132 @@ void main() {
 
         verify(() => mockedPokemonDataSource.fetchPokemon(1)).called(1);
         expect(result, expected);
+      });
+    });
+
+    group('queryFavoritePokemons', () {
+      test('should return ${List<LocalPokemon>} from $PokemonDataSource', () {
+        final pokemons = <LocalPokemon>[];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryFavoritePokemons();
+
+        expect(result, pokemons);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+    });
+
+    group('queryCapturedPokemons', () {
+      test('should return ${List<LocalPokemon>} from $PokemonDataSource', () {
+        final pokemons = <LocalPokemon>[];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryCapturedPokemons();
+
+        expect(result, pokemons);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+    });
+
+    group('queryIsCapturedPokemon', () {
+      test(
+          'should return false when '
+          'query returns empty list', () {
+        final pokemons = <LocalPokemon>[];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryIsCapturedPokemon(1);
+
+        expect(result, isFalse);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+
+      test(
+          'should return true when query returns non empty list &'
+          ' isCaptured is true ', () {
+        final pokemons = [
+          LocalPokemon(
+            imageUrl: '',
+            name: '',
+            index: 1,
+            isCaptured: true,
+          )
+        ];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryIsCapturedPokemon(1);
+
+        expect(result, isTrue);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+
+      test(
+          'should return false when query returns non empty list &'
+          ' isCaptured is false ', () {
+        final pokemons = [
+          LocalPokemon(
+            imageUrl: '',
+            name: '',
+            index: 1,
+          )
+        ];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryIsCapturedPokemon(1);
+
+        expect(result, isFalse);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+    });
+
+    group('queryIsFavoritePokemon', () {
+      test(
+          'should return false when '
+          'query returns empty list', () {
+        final pokemons = <LocalPokemon>[];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryIsFavoritePokemon(1);
+
+        expect(result, isFalse);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+
+      test(
+          'should return true when query returns non empty list &'
+          ' isFavorite is true ', () {
+        final pokemons = [
+          LocalPokemon(
+            imageUrl: '',
+            name: '',
+            index: 1,
+            isFavorite: true,
+          )
+        ];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryIsFavoritePokemon(1);
+
+        expect(result, isTrue);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
+      });
+
+      test(
+          'should return false when query returns non empty list &'
+          ' isFavorite is false ', () {
+        final pokemons = [
+          LocalPokemon(
+            imageUrl: '',
+            name: '',
+            index: 1,
+          )
+        ];
+        mockedPokemonDataSource.mockQueryPokemon(pokemons);
+
+        final result = pokemonRepository.queryIsFavoritePokemon(1);
+
+        expect(result, isFalse);
+        verify(() => mockedPokemonDataSource.queryPokemon(any())).called(1);
       });
     });
   });

@@ -1,20 +1,36 @@
 import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
+
+import '../../mock/mapper/pokemon/mock_pokemon_remote_mapper.dart';
 
 void main() {
   group(PokedexRemoteMapper, () {
-    late PokemonStatsRemoteMapper pokemonStatsRemoteMapper;
-    late PokemonRemoteMapper pokemonRemoteMapper;
+    setUpAll(() {
+      registerFallbackValue(const RemotePokemon(
+        index: 1,
+        name: 'name',
+        baseExperience: 2,
+        weight: 3,
+        height: 4,
+        imageUrl: 'imageUrl',
+        abilities: [],
+        moves: [],
+        types: [],
+        stats: [],
+      ));
+    });
+
+    late MockPokemonRemoteMapper mockPokemonRemoteMapper;
 
     late PokedexRemoteMapper pokedexRemoteMapper;
 
     setUp(() {
-      pokemonStatsRemoteMapper = PokemonStatsRemoteMapper();
-      pokemonRemoteMapper = PokemonRemoteMapper(pokemonStatsRemoteMapper);
+      mockPokemonRemoteMapper = MockPokemonRemoteMapper();
 
-      pokedexRemoteMapper = PokedexRemoteMapper(pokemonRemoteMapper);
+      pokedexRemoteMapper = PokedexRemoteMapper(mockPokemonRemoteMapper);
     });
 
     group('mapFromEntityToModel', () {
@@ -33,26 +49,30 @@ void main() {
             stats: [],
           ),
         ]);
-        const model = Pokedex(
+        const pokemonModel = Pokemon(
+          index: 1,
+          name: 'name',
+          baseExperience: 2,
+          weight: 3,
+          height: 4,
+          imageUrl: 'imageUrl',
+          abilities: [],
+          moves: [],
+          types: [],
+          stats: [],
+          isFavorite: false,
+          isCaptured: false,
+        );
+        const pokedexModel = Pokedex(
           pokemons: [
-            Pokemon(
-              index: 1,
-              name: 'name',
-              baseExperience: 2,
-              weight: 3,
-              height: 4,
-              imageUrl: 'imageUrl',
-              abilities: [],
-              moves: [],
-              types: [],
-              stats: [],
-            ),
+            pokemonModel,
           ],
         );
+        mockPokemonRemoteMapper.mockMapFromEntityToModel(pokemonModel);
 
         final result = pokedexRemoteMapper.mapFromEntityToModel(entity);
 
-        expect(result, model);
+        expect(result, pokedexModel);
       });
     });
 
@@ -71,6 +91,8 @@ void main() {
               moves: [],
               types: [],
               stats: [],
+              isFavorite: false,
+              isCaptured: false,
             ),
           ],
         );

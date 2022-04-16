@@ -4,11 +4,15 @@ import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
 
 class MockedPokemonDataSource extends Mock implements PokemonDataSource {
-  void mockGetPokemons(List<LocalPokemon?> expected) {
+  void mockGetPokemons(List<LocalPokemon> expected) {
     when(getPokemons).thenReturn(expected);
   }
 
   void mockFetchPokemon(RemoteExtendedPokemon expected) {
     when(() => fetchPokemon(any())).thenAnswer((_) => Future.value(expected));
+  }
+
+  void mockQueryPokemon(List<LocalPokemon> expected) {
+    when(() => queryPokemon(any())).thenReturn(expected);
   }
 }

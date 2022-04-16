@@ -1,5 +1,4 @@
 export 'pokedex/pokedex.dart';
-export 'pokemon/captured_pokemon.dart';
 export 'pokemon/pokemon.dart';
 export 'pokemon/pokemon_stat.dart';
 export 'error/failure.dart';

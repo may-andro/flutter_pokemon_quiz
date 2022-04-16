@@ -23,10 +23,18 @@ void main() {
         mockedFireStoreClient.mockFetchPokedex(remotePokedex);
 
         final result = await pokedexDataSource.fetchPokedex('');
+
         expect(result, remotePokedex);
       });
 
-      test('should throw error when $FireStoreClient throws error ', () {});
+      test('should throw error when $FireStoreClient throws error ', () {
+        mockedFireStoreClient.mockFetchPokedexThrowException();
+
+        expect(
+            () => pokedexDataSource.fetchPokedex(''),
+          throwsA(isA<Exception>()),
+        );
+      });
     });
   });
 }

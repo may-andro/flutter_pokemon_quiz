@@ -3,6 +3,7 @@ import 'package:data/src/data_source/pokemon/pokemon_data_source_impl.dart';
 import 'package:data/src/exception/parse_failure_exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local/local.dart';
+import 'package:local/objectbox.g.dart';
 import 'package:network/network.dart';
 import 'package:dio/dio.dart';
 
@@ -26,9 +27,9 @@ void main() {
       );
     });
 
-    group('getAllFavoritePokemons', () {
+    group('getPokemons', () {
       test(
-          'should return empty ${List<LocalPokemon?>} '
+          'should return empty ${List<LocalPokemon>} '
           'when $LocalClient return empty list', () {
         final localPokemons = <LocalPokemon?>[];
 
@@ -38,7 +39,7 @@ void main() {
       });
 
       test(
-          'should return list ${List<LocalPokemon?>} '
+          'should return list ${List<LocalPokemon>} '
           'when $LocalClient return list', () {
         final localPokemons = <LocalPokemon>[
           LocalPokemon(
@@ -55,7 +56,7 @@ void main() {
       });
     });
 
-    group('putFavoritePokemon', () {
+    group('putPokemon', () {
       test('should put $LocalPokemon in local ', () {
         final localPokemon = LocalPokemon(
           index: 1,
@@ -69,7 +70,7 @@ void main() {
         expect(
           pokemonDataSource
               .getPokemons()
-              .firstWhere((element) => element?.index == localPokemon.index),
+              .firstWhere((element) => element.index == localPokemon.index),
           localPokemon,
         );
         expect(
@@ -79,7 +80,7 @@ void main() {
       });
     });
 
-    group('removeFavoritePokemon', () {
+    group('removePokemon', () {
       test('should remove $LocalPokemon from local ', () {
         final localPokemon = LocalPokemon(
           index: 1,
@@ -122,7 +123,7 @@ void main() {
         expect(result, isA<RemoteExtendedPokemon>());
       });
 
-      test('should throw $ParsingException when parsing fails', () async {
+      test('should throw $ParsingException when parsing fails', () {
         final responseMap = <String, dynamic>{
           'id': 1,
           'name': 'bulbasaur',
@@ -147,13 +148,23 @@ void main() {
         );
       });
 
-      test('should throw $Exception when parsing fails', () async {
+      test('should throw $Exception when parsing fails', () {
         mockedRemoteClient.mockGetApiCallThrowsException();
 
         expect(
           pokemonDataSource.fetchPokemon(1),
           throwsA(isA<Exception>()),
         );
+      });
+    });
+
+    group('queryPokemon', () {
+      test('should query $LocalClient', () {
+        final query = LocalPokemon_.isFavorite.equals(true);
+
+        final result = pokemonDataSource.queryPokemon(query);
+
+        expect(result, <LocalPokemon?>[]);
       });
     });
   });

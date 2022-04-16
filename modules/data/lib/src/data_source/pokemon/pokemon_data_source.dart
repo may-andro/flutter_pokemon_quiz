@@ -7,7 +7,7 @@ abstract class PokemonDataSource {
 
   void removePokemon(int id);
 
-  List<LocalPokemon?> getPokemons();
+  List<LocalPokemon> getPokemons();
 
   Future<RemoteExtendedPokemon> fetchPokemon(int index);
 

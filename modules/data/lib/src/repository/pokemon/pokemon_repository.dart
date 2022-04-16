@@ -14,7 +14,7 @@ abstract class PokemonRepository {
 
   List<LocalPokemon> queryCapturedPokemons();
 
-  LocalPokemon queryIsCapturedPokemon(int index);
+  bool queryIsCapturedPokemon(int index);
 
-  LocalPokemon queryIsFavoritePokemon(int index);
+  bool queryIsFavoritePokemon(int index);
 }

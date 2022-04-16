@@ -3,12 +3,23 @@ import 'package:domain/src/model/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network/network.dart';
 
+import '../../mock/usecase/pokemon/mock_is_captured_pokemon_usecase.dart';
+import '../../mock/usecase/pokemon/mock_is_favorite_pokemon_usecase.dart';
+
 void main() {
   group(ExtendedPokemonRemoteMapper, () {
     late ExtendedPokemonRemoteMapper extendedPokemonRemoteMapper;
+    late MockIsCapturedPokemonUseCase mockIsCapturedPokemonUseCase;
+    late MockIsFavoritePokemonUseCase mockIsFavoritePokemonUseCase;
 
     setUp(() {
-      extendedPokemonRemoteMapper = ExtendedPokemonRemoteMapper();
+      mockIsCapturedPokemonUseCase = MockIsCapturedPokemonUseCase();
+      mockIsFavoritePokemonUseCase = MockIsFavoritePokemonUseCase();
+
+      extendedPokemonRemoteMapper = ExtendedPokemonRemoteMapper(
+        mockIsFavoritePokemonUseCase,
+        mockIsCapturedPokemonUseCase,
+      );
     });
 
     group('mapFromEntityToModel', () {
@@ -36,7 +47,11 @@ void main() {
           moves: [],
           types: [],
           stats: [],
+          isCaptured: false,
+          isFavorite: true,
         );
+        mockIsFavoritePokemonUseCase.mockCall(true);
+        mockIsCapturedPokemonUseCase.mockCall(false);
 
         final result = extendedPokemonRemoteMapper.mapFromEntityToModel(entity);
 
@@ -57,6 +72,8 @@ void main() {
           moves: [],
           types: [],
           stats: [],
+          isCaptured: false,
+          isFavorite: false,
         );
 
         expect(

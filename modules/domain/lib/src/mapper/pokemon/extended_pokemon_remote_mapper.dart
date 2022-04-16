@@ -1,9 +1,19 @@
 import 'package:domain/src/mapper/model_entity_mapper.dart';
 import 'package:domain/src/model/model.dart';
+import 'package:domain/src/usecase/pokemon/is_captured_pokemon_usecase.dart';
+import 'package:domain/src/usecase/pokemon/is_favorite_pokemon_usecase.dart';
 import 'package:network/network.dart';
 
 class ExtendedPokemonRemoteMapper
     implements ModelEntityMapper<Pokemon, RemoteExtendedPokemon> {
+  ExtendedPokemonRemoteMapper(
+    this._isFavoritePokemonUseCase,
+    this._isCapturedPokemonUseCase,
+  );
+
+  final IsFavoritePokemonUseCase _isFavoritePokemonUseCase;
+  final IsCapturedPokemonUseCase _isCapturedPokemonUseCase;
+
   @override
   Pokemon mapFromEntityToModel(RemoteExtendedPokemon entity) {
     final imageUrl = entity.sprites?.other?.officialArtwork?.frontDefault ??
@@ -30,6 +40,8 @@ class ExtendedPokemonRemoteMapper
       moves: moves,
       types: types,
       stats: stats,
+      isFavorite: _isFavoritePokemonUseCase(entity.id),
+      isCaptured: _isCapturedPokemonUseCase(entity.id),
     );
   }
 

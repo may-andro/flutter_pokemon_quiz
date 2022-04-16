@@ -1,5 +1,4 @@
 import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:domain/src/usecase/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,6 +19,8 @@ const _pokemon = Pokemon(
   moves: [],
   types: [],
   stats: [],
+  isFavorite: false,
+  isCaptured: false,
 );
 
 void main() {
@@ -31,17 +32,14 @@ void main() {
     });
 
     late MockedPokemonRepository mockedPokemonRepository;
-    late PokemonLocalMapper pokemonLocalMapper;
 
     late AddFavoritePokemonUseCase addFavouritePokemonUseCase;
 
     setUp(() {
       mockedPokemonRepository = MockedPokemonRepository();
-      pokemonLocalMapper = PokemonLocalMapper();
 
       addFavouritePokemonUseCase = AddFavoritePokemonUseCase(
         mockedPokemonRepository,
-        pokemonLocalMapper,
       );
     });
 

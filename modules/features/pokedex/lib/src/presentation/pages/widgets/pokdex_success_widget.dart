@@ -19,7 +19,7 @@ class PokedexSuccessWidget extends StatelessWidget {
 
   Widget _buildGridView(BuildContext context, int crossAxisCount) {
     final viewModel = context.read<PokedexViewModel>();
-    final pokemons = viewModel.pokemonsMap.keys.toList();
+    final pokemons = viewModel.pokedex.pokemons;
     return GridView.builder(
       padding: EdgeInsets.only(
         bottom: context.getGridDimen(10),
@@ -34,7 +34,6 @@ class PokedexSuccessWidget extends StatelessWidget {
       itemCount: pokemons.length,
       itemBuilder: (_, index) => _PokemonItem(
         pokemon: pokemons[index],
-        isCaptured: viewModel.pokemonsMap[pokemons[index]] ?? false,
       ),
       cacheExtent: 9999,
     );
@@ -44,20 +43,18 @@ class PokedexSuccessWidget extends StatelessWidget {
 class _PokemonItem extends StatelessWidget {
   const _PokemonItem({
     required this.pokemon,
-    required this.isCaptured,
     Key? key,
   }) : super(key: key);
   final Pokemon pokemon;
-  final bool isCaptured;
 
   @override
   Widget build(BuildContext context) {
-    final color = isCaptured
+    final color = pokemon.isCaptured
         ? Colors.transparent
         : context.isDarkMode
             ? Colors.black87
             : Colors.black;
-    final blendMode = isCaptured ? BlendMode.saturation : BlendMode.modulate;
+    final blendMode = pokemon.isCaptured ? BlendMode.saturation : BlendMode.modulate;
 
     return SizedBox(
       height: context.getGridDimen(3),

@@ -13,6 +13,8 @@ class Pokemon extends Equatable {
     required this.moves,
     required this.types,
     required this.stats,
+    required this.isFavorite,
+    required this.isCaptured,
   });
 
   final int index;
@@ -35,6 +37,10 @@ class Pokemon extends Equatable {
 
   final List<PokemonStat> stats;
 
+  final bool isCaptured;
+
+  final bool isFavorite;
+
   @override
   List<Object?> get props => [
         index,
@@ -47,5 +53,7 @@ class Pokemon extends Equatable {
         moves,
         types,
         stats,
+        isCaptured,
+        isFavorite,
       ];
 }

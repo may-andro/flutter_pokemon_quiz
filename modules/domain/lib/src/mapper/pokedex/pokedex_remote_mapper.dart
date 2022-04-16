@@ -10,11 +10,8 @@ class PokedexRemoteMapper implements ModelEntityMapper<Pokedex, RemotePokedex> {
 
   @override
   Pokedex mapFromEntityToModel(RemotePokedex entity) {
-    final pokemons = entity.pokemons
-        .map(
-          _pokemonRemoteMapper.mapFromEntityToModel,
-        )
-        .toList();
+    final pokemons =
+        entity.pokemons.map(_pokemonRemoteMapper.mapFromEntityToModel).toList();
     return Pokedex(pokemons: pokemons);
   }
 

@@ -1,26 +1,22 @@
 import 'package:dartz/dartz.dart';
-import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
+import 'package:domain/src/usecase/pokedex/fetch_pokedex_usecase.dart';
 
 class FetchCapturedPokemonsUseCase {
-  FetchCapturedPokemonsUseCase(
-    this._pokemonRepository,
-    this._favouritePokemonLocalMapper,
-  );
+  FetchCapturedPokemonsUseCase(this._fetchPokedexUseCase);
 
-  final PokemonRepository _pokemonRepository;
-  final CapturedPokemonLocalMapper _favouritePokemonLocalMapper;
+  final FetchPokedexUseCase _fetchPokedexUseCase;
 
-  Either<Failure, List<CapturedPokemon>> call() {
-    try {
-      final localPokemons = _pokemonRepository.queryCapturedPokemons();
-      final pokemons = localPokemons
-          .map(_favouritePokemonLocalMapper.mapFromEntityToModel)
+  Future<Either<Failure, List<Pokemon>>> call(String region) async {
+    final eitherPokedex = await _fetchPokedexUseCase(region);
+    if (eitherPokedex.isRight()) {
+      final pokemons = eitherPokedex
+          .asRight()
+          .pokemons
+          .where((pokemon) => pokemon.isCaptured)
           .toList();
       return Right(pokemons);
-    } catch (e) {
-      return const Left(Failure(ERROR_SERVER_ID));
     }
+    return const Left(Failure(ERROR_SERVER_ID));
   }
 }

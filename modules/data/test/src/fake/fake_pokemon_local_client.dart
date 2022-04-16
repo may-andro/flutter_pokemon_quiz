@@ -20,12 +20,12 @@ class FakePokemonLocalClient implements LocalClient<LocalPokemon> {
   }
 
   @override
-  List<LocalPokemon?> getAll() {
+  List<LocalPokemon> getAll() {
     return _list;
   }
 
   @override
-  List<LocalPokemon?> getMany(List<int> ids) {
+  List<LocalPokemon> getMany(List<int> ids) {
     return _list.where((element) => ids.contains(element.index)).toList();
   }
 
@@ -41,7 +41,7 @@ class FakePokemonLocalClient implements LocalClient<LocalPokemon> {
 
   @override
   List<LocalPokemon> query(Condition<LocalPokemon> condition) {
-    throw UnimplementedError();
+    return _list;
   }
 
   @override

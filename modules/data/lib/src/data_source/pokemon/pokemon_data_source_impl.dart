@@ -11,19 +11,13 @@ class PokemonDataSourceImpl implements PokemonDataSource {
   final RemoteClient _remoteClient;
 
   @override
-  List<LocalPokemon?> getPokemons() {
-    return _localClient.getAll();
-  }
+  List<LocalPokemon> getPokemons() => _localClient.getAll();
 
   @override
-  void putPokemon(LocalPokemon localPokemon) {
-    _localClient.put(localPokemon);
-  }
+  void putPokemon(LocalPokemon localPokemon) => _localClient.put(localPokemon);
 
   @override
-  void removePokemon(int id) {
-    _localClient.remove(id);
-  }
+  void removePokemon(int id) => _localClient.remove(id);
 
   @override
   Future<RemoteExtendedPokemon> fetchPokemon(int index) async {
@@ -38,7 +32,6 @@ class PokemonDataSourceImpl implements PokemonDataSource {
   }
 
   @override
-  List<LocalPokemon> queryPokemon(Condition<LocalPokemon> condition) {
-    return _localClient.query(condition);
-  }
+  List<LocalPokemon> queryPokemon(Condition<LocalPokemon> condition) =>
+      _localClient.query(condition);
 }
