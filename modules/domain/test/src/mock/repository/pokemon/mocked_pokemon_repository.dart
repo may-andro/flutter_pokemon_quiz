@@ -20,8 +20,8 @@ class MockedPokemonRepository extends Mock implements PokemonRepository {
     when(() => fetchPokemon(any())).thenThrow(Exception());
   }
 
-  void mockPutFavoritePokemon() {
-    when(() => putPokemon(any())).thenReturn(null);
+  void mockPutPokemon(LocalPokemon localPokemon) {
+    when(() => putPokemon(localPokemon)).thenReturn(null);
   }
 
   void mockPutPokemonThrowException() {
@@ -30,5 +30,13 @@ class MockedPokemonRepository extends Mock implements PokemonRepository {
 
   void mockRemovePokemonThrowException() {
     when(() => removePokemon(any())).thenThrow(Exception());
+  }
+
+  void mockQueryIsCapturedPokemon(bool expected) {
+    when(() => queryIsCapturedPokemon(any())).thenReturn(expected);
+  }
+
+  void mockQueryIsFavoritePokemon(bool expected) {
+    when(() => queryIsFavoritePokemon(any())).thenReturn(expected);
   }
 }

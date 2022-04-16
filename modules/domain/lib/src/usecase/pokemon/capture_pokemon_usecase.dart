@@ -4,9 +4,7 @@ import 'package:local/local.dart';
 import 'package:domain/src/model/model.dart';
 
 class CapturePokemonUseCase {
-  CapturePokemonUseCase(
-    this._pokemonRepository,
-  );
+  CapturePokemonUseCase(this._pokemonRepository);
 
   final PokemonRepository _pokemonRepository;
 

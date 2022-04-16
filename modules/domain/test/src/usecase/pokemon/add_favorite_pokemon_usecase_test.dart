@@ -47,7 +47,14 @@ void main() {
       test(
           'should return $Right when '
           '$PokemonRepository did not throw exception', () {
-        mockedPokemonRepository.mockPutFavoritePokemon();
+        mockedPokemonRepository.mockPutPokemon(
+          LocalPokemon(
+            index: 1,
+            name: 'name',
+            imageUrl: 'imageUrl',
+            isCaptured: true,
+          ),
+        );
 
         final result = addFavouritePokemonUseCase(_pokemon);
 

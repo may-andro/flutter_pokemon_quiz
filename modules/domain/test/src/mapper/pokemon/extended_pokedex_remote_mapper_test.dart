@@ -4,21 +4,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:network/network.dart';
 
 import '../../mock/usecase/pokemon/mock_is_captured_pokemon_usecase.dart';
-import '../../mock/usecase/pokemon/mock_is_favorite_pokemon_usecase.dart';
+import '../../mock/usecase/pokemon/mocked_is_favorite_pokemon_usecase.dart';
 
 void main() {
   group(ExtendedPokemonRemoteMapper, () {
     late ExtendedPokemonRemoteMapper extendedPokemonRemoteMapper;
-    late MockIsCapturedPokemonUseCase mockIsCapturedPokemonUseCase;
-    late MockIsFavoritePokemonUseCase mockIsFavoritePokemonUseCase;
+    late MockIsCapturedPokemonUseCase mockedIsCapturedPokemonUseCase;
+    late MockedIsFavoritePokemonUseCase mockedIsFavoritePokemonUseCase;
 
     setUp(() {
-      mockIsCapturedPokemonUseCase = MockIsCapturedPokemonUseCase();
-      mockIsFavoritePokemonUseCase = MockIsFavoritePokemonUseCase();
+      mockedIsCapturedPokemonUseCase = MockIsCapturedPokemonUseCase();
+      mockedIsFavoritePokemonUseCase = MockedIsFavoritePokemonUseCase();
 
       extendedPokemonRemoteMapper = ExtendedPokemonRemoteMapper(
-        mockIsFavoritePokemonUseCase,
-        mockIsCapturedPokemonUseCase,
+        mockedIsFavoritePokemonUseCase,
+        mockedIsCapturedPokemonUseCase,
       );
     });
 
@@ -50,8 +50,8 @@ void main() {
           isCaptured: false,
           isFavorite: true,
         );
-        mockIsFavoritePokemonUseCase.mockCall(true);
-        mockIsCapturedPokemonUseCase.mockCall(false);
+        mockedIsFavoritePokemonUseCase.mockCall(true);
+        mockedIsCapturedPokemonUseCase.mockCall(false);
 
         final result = extendedPokemonRemoteMapper.mapFromEntityToModel(entity);
 

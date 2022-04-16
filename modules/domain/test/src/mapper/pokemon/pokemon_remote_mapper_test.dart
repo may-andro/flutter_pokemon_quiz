@@ -4,20 +4,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:network/network.dart';
 
 import '../../mock/usecase/pokemon/mock_is_captured_pokemon_usecase.dart';
-import '../../mock/usecase/pokemon/mock_is_favorite_pokemon_usecase.dart';
+import '../../mock/usecase/pokemon/mocked_is_favorite_pokemon_usecase.dart';
 
 void main() {
   group(PokemonRemoteMapper, () {
     late PokemonStatsRemoteMapper pokemonStatsRemoteMapper;
     late MockIsCapturedPokemonUseCase mockIsCapturedPokemonUseCase;
-    late MockIsFavoritePokemonUseCase mockIsFavoritePokemonUseCase;
+    late MockedIsFavoritePokemonUseCase mockIsFavoritePokemonUseCase;
 
     late PokemonRemoteMapper pokemonRemoteMapper;
 
     setUp(() {
       pokemonStatsRemoteMapper = PokemonStatsRemoteMapper();
       mockIsCapturedPokemonUseCase = MockIsCapturedPokemonUseCase();
-      mockIsFavoritePokemonUseCase = MockIsFavoritePokemonUseCase();
+      mockIsFavoritePokemonUseCase = MockedIsFavoritePokemonUseCase();
 
       pokemonRemoteMapper = PokemonRemoteMapper(
         pokemonStatsRemoteMapper,

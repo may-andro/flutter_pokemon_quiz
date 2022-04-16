@@ -4,7 +4,7 @@ import 'package:domain/src/usecase/pokedex/fetch_pokedex_usecase.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:dartz/dartz.dart';
 
-class MockFetchPokedexUseCase extends Mock implements FetchPokedexUseCase {
+class MockedFetchPokedexUseCase extends Mock implements FetchPokedexUseCase {
   void mockRightCall(Pokedex expected) {
     when(() => call(any())).thenAnswer((_) async => Right(expected));
   }

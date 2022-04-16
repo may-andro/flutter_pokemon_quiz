@@ -7,7 +7,7 @@ import 'package:network/network.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../mock/repository/pokemon/mocked_pokemon_repository.dart';
-import '../../mock/usecase/pokemon/mock_extended_pokemon_remote_mapper.dart';
+import '../../mock/usecase/pokemon/mocked_extended_pokemon_remote_mapper.dart';
 
 void main() {
   group(FetchPokemonUseCase, () {
@@ -27,17 +27,17 @@ void main() {
     });
 
     late MockedPokemonRepository mockedPokemonRepository;
-    late MockExtendedPokemonRemoteMapper mockExtendedPokemonRemoteMapper;
+    late MockedExtendedPokemonRemoteMapper mockedExtendedPokemonRemoteMapper;
 
     late FetchPokemonUseCase fetchPokemonUseCase;
 
     setUp(() {
       mockedPokemonRepository = MockedPokemonRepository();
-      mockExtendedPokemonRemoteMapper = MockExtendedPokemonRemoteMapper();
+      mockedExtendedPokemonRemoteMapper = MockedExtendedPokemonRemoteMapper();
 
       fetchPokemonUseCase = FetchPokemonUseCase(
         mockedPokemonRepository,
-        mockExtendedPokemonRemoteMapper,
+        mockedExtendedPokemonRemoteMapper,
       );
     });
 
@@ -70,7 +70,7 @@ void main() {
           isFavorite: true,
         );
         mockedPokemonRepository.mockFetchPokemon(remoteExtendedPokemon);
-        mockExtendedPokemonRemoteMapper.mockMapFromEntityToModel(pokemon);
+        mockedExtendedPokemonRemoteMapper.mockMapFromEntityToModel(pokemon);
 
         final result = await fetchPokemonUseCase(1);
 
