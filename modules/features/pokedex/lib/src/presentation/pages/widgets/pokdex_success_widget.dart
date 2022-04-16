@@ -54,7 +54,8 @@ class _PokemonItem extends StatelessWidget {
         : context.isDarkMode
             ? Colors.black87
             : Colors.black;
-    final blendMode = pokemon.isCaptured ? BlendMode.saturation : BlendMode.modulate;
+    final blendMode =
+        pokemon.isCaptured ? BlendMode.saturation : BlendMode.modulate;
 
     return SizedBox(
       height: context.getGridDimen(3),

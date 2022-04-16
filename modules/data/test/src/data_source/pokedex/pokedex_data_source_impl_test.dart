@@ -31,7 +31,7 @@ void main() {
         mockedFireStoreClient.mockFetchPokedexThrowException();
 
         expect(
-            () => pokedexDataSource.fetchPokedex(''),
+          () => pokedexDataSource.fetchPokedex(''),
           throwsA(isA<Exception>()),
         );
       });
