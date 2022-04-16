@@ -43,7 +43,7 @@ void main() {
           'when $LocalClient return list', () {
         final localPokemons = <LocalPokemon>[
           LocalPokemon(
-            index: 1,
+            id: 1,
             name: 'Test',
             imageUrl: '',
           ),
@@ -59,7 +59,7 @@ void main() {
     group('putPokemon', () {
       test('should put $LocalPokemon in local ', () {
         final localPokemon = LocalPokemon(
-          index: 1,
+          id: 1,
           name: 'Test',
           imageUrl: '',
         );
@@ -70,7 +70,7 @@ void main() {
         expect(
           pokemonDataSource
               .getPokemons()
-              .firstWhere((element) => element.index == localPokemon.index),
+              .firstWhere((element) => element.id == localPokemon.id),
           localPokemon,
         );
         expect(
@@ -83,7 +83,7 @@ void main() {
     group('removePokemon', () {
       test('should remove $LocalPokemon from local ', () {
         final localPokemon = LocalPokemon(
-          index: 1,
+          id: 1,
           name: 'Test',
           imageUrl: '',
         );

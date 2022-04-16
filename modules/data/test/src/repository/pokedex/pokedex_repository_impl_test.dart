@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
 
-import '../../data_source/pokedex/mocked_pokedex_data_source.dart';
+import '../../mock/data_source/pokedex/mocked_pokedex_data_source.dart';
 
 void main() {
   group(PokedexRepositoryImpl, () {

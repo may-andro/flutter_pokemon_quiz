@@ -6,12 +6,20 @@ class PokemonDetailViewModel extends BaseViewModel {
   PokemonDetailViewModel(
     this._pokemonTypeImageMapper,
     this._pokemonTypeColorMapper,
+    this._isFavoritePokemonUseCase,
+    this._addFavoritePokemonUseCase,
+    this._removeFavoritePokemonUseCase,
   );
 
   final PokemonTypeImageMapper _pokemonTypeImageMapper;
   final PokemonTypeColorMapper _pokemonTypeColorMapper;
+  final IsFavoritePokemonUseCase _isFavoritePokemonUseCase;
+  final AddFavoritePokemonUseCase _addFavoritePokemonUseCase;
+  final RemoveFavoritePokemonUseCase _removeFavoritePokemonUseCase;
 
   late Pokemon _pokemon;
+
+  late int _errorCode;
 
   int _selectedTabIndex = 0;
 
@@ -22,6 +30,8 @@ class PokemonDetailViewModel extends BaseViewModel {
   int get pokemonIndex => _pokemon.index;
 
   int get selectedTabIndex => _selectedTabIndex;
+
+  bool get isFavorite => _isFavoritePokemonUseCase(pokemonIndex);
 
   List<PokemonStat> get pokemonStats => _pokemon.stats;
 
@@ -34,10 +44,45 @@ class PokemonDetailViewModel extends BaseViewModel {
     _pokemon = pokemon;
   }
 
-  void toggleFavouritePokemon() {}
-
   void setSelectedTab(int tabIndex) {
     _selectedTabIndex = tabIndex;
+    notifyListener();
+  }
+
+  void _addFavoritePokemon() {
+    final eitherPokemon = _addFavoritePokemonUseCase(_pokemon);
+
+    if (eitherPokemon.isLeft()) {
+      _errorCode = eitherPokemon.asLeft().errorId;
+      setErrorState();
+    }
+
+    if (eitherPokemon.isRight()) {
+      _pokemon = eitherPokemon.asRight();
+      setSuccessState();
+    }
+  }
+
+  void _removeFavoritePokemon() {
+    final eitherPokemon = _removeFavoritePokemonUseCase(_pokemon);
+
+    if (eitherPokemon.isLeft()) {
+      _errorCode = eitherPokemon.asLeft().errorId;
+      setErrorState();
+    }
+
+    if (eitherPokemon.isRight()) {
+      _pokemon = eitherPokemon.asRight();
+      setSuccessState();
+    }
+  }
+
+  void toggleFavoritePokemon() {
+    if (isFavorite) {
+      _removeFavoritePokemon();
+    } else {
+      _addFavoritePokemon();
+    }
     notifyListener();
   }
 }

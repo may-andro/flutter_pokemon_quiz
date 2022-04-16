@@ -3,9 +3,9 @@ import 'package:local/objectbox.g.dart';
 import 'package:network/network.dart';
 
 abstract class PokemonDataSource {
-  void putPokemon(LocalPokemon localPokemon);
+  int putPokemon(LocalPokemon localPokemon);
 
-  void removePokemon(int id);
+  bool removePokemon(int id);
 
   List<LocalPokemon> getPokemons();
 

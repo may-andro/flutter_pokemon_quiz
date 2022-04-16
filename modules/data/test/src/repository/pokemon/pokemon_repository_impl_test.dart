@@ -7,7 +7,7 @@ import 'package:local/objectbox.g.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network/network.dart';
 
-import '../../data_source/pokemon/mocked_pokemon_data_source.dart';
+import '../../mock/data_source/pokemon/mocked_pokemon_data_source.dart';
 
 void main() {
   group(PokemonRepositoryImpl, () {
@@ -28,22 +28,37 @@ void main() {
     group('putPokemon', () {
       test('should call $PokemonDataSource', () {
         final localPokemon = LocalPokemon(
-          index: 1,
+          id: 1,
           name: 'name',
           imageUrl: 'imageUrl',
         );
+        mockedPokemonDataSource.mockPutPokemon(localPokemon);
 
-        pokemonRepository.putPokemon(localPokemon);
+        final result = pokemonRepository.putPokemon(localPokemon);
 
+        expect(result, localPokemon.id);
         verify(() => mockedPokemonDataSource.putPokemon(localPokemon))
             .called(1);
       });
     });
 
     group('removePokemon', () {
-      test('should call $PokemonDataSource', () {
-        pokemonRepository.removePokemon(1);
+      test('should return true when $PokemonDataSource removes a value', () {
+        mockedPokemonDataSource.mockRemovePokemon(true);
 
+        final bool = pokemonRepository.removePokemon(1);
+
+        expect(bool, isTrue);
+        verify(() => mockedPokemonDataSource.removePokemon(1)).called(1);
+      });
+
+      test('should return true when'
+          ' $PokemonDataSource does not removes a value', () {
+        mockedPokemonDataSource.mockRemovePokemon(false);
+
+        final bool = pokemonRepository.removePokemon(1);
+
+        expect(bool, isFalse);
         verify(() => mockedPokemonDataSource.removePokemon(1)).called(1);
       });
     });
@@ -109,7 +124,7 @@ void main() {
     group('queryIsCapturedPokemon', () {
       test(
           'should return false when '
-          'query returns empty list', () {
+              'query returns empty list', () {
         final pokemons = <LocalPokemon>[];
         mockedPokemonDataSource.mockQueryPokemon(pokemons);
 
@@ -121,12 +136,12 @@ void main() {
 
       test(
           'should return true when query returns non empty list &'
-          ' isCaptured is true ', () {
+              ' isCaptured is true ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
             name: '',
-            index: 1,
+            id: 1,
             isCaptured: true,
           )
         ];
@@ -140,12 +155,12 @@ void main() {
 
       test(
           'should return false when query returns non empty list &'
-          ' isCaptured is false ', () {
+              ' isCaptured is false ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
             name: '',
-            index: 1,
+            id: 1,
           )
         ];
         mockedPokemonDataSource.mockQueryPokemon(pokemons);
@@ -160,7 +175,7 @@ void main() {
     group('queryIsFavoritePokemon', () {
       test(
           'should return false when '
-          'query returns empty list', () {
+              'query returns empty list', () {
         final pokemons = <LocalPokemon>[];
         mockedPokemonDataSource.mockQueryPokemon(pokemons);
 
@@ -172,12 +187,12 @@ void main() {
 
       test(
           'should return true when query returns non empty list &'
-          ' isFavorite is true ', () {
+              ' isFavorite is true ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
             name: '',
-            index: 1,
+            id: 1,
             isFavorite: true,
           )
         ];
@@ -191,12 +206,12 @@ void main() {
 
       test(
           'should return false when query returns non empty list &'
-          ' isFavorite is false ', () {
+              ' isFavorite is false ', () {
         final pokemons = [
           LocalPokemon(
             imageUrl: '',
             name: '',
-            index: 1,
+            id: 1,
           )
         ];
         mockedPokemonDataSource.mockQueryPokemon(pokemons);

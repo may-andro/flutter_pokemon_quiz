@@ -17,8 +17,11 @@ class FavouriteIconWidget extends StatelessWidget {
 
     return IconButton(
       iconSize: context.getGridDimen(iconSize),
-      onPressed: viewModel.toggleFavouritePokemon,
-      icon: Icon(Icons.favorite_border, color: viewModel.background),
+      onPressed: viewModel.toggleFavoritePokemon,
+      icon: Icon(
+        viewModel.isFavorite ? Icons.favorite : Icons.favorite_border,
+        color: viewModel.background,
+      ),
     );
   }
 }

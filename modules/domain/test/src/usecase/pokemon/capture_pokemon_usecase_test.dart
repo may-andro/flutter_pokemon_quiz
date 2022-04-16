@@ -1,3 +1,4 @@
+import 'package:data/data.dart';
 import 'package:domain/src/model/error/extension/failure_extension.dart';
 import 'package:domain/src/model/error/failure.dart';
 import 'package:domain/src/model/error/ids/common_order_ids.dart';
@@ -6,19 +7,31 @@ import 'package:domain/src/usecase/pokemon/capture_pokemon_usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local/local.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:dartz/dartz.dart';
 
 import '../../mock/repository/pokemon/mocked_pokemon_repository.dart';
+
+const _pokemon = Pokemon(
+  index: 1,
+  name: 'name',
+  baseExperience: 1,
+  weight: 1,
+  height: 1,
+  imageUrl: 'imageUrl',
+  abilities: [],
+  moves: [],
+  types: [],
+  stats: [],
+  isFavorite: false,
+  isCaptured: false,
+);
 
 void main() {
   group(CapturePokemonUseCase, () {
     setUpAll(() {
       registerFallbackValue(
         LocalPokemon(
-          index: 1,
-          name: 'name',
-          imageUrl: 'imageUrl',
-          isCaptured: true,
-        ),
+            id: 1, name: 'name', imageUrl: 'imageUrl', isCaptured: true),
       );
     });
 
@@ -33,57 +46,26 @@ void main() {
     });
 
     group('call', () {
-      test('should save $LocalPokemon', () {
-        const pokemon = Pokemon(
-          index: 1,
-          name: 'name',
-          baseExperience: 1,
-          weight: 1,
-          height: 1,
-          imageUrl: 'imageUrl',
-          abilities: [],
-          moves: [],
-          types: [],
-          stats: [],
-          isFavorite: false,
-          isCaptured: false,
-        );
-        final localPokemon = LocalPokemon(
-          index: 1,
-          name: 'name',
-          imageUrl: 'imageUrl',
-          isCaptured: true,
-        );
-        mockedPokemonRepository.mockPutPokemon(localPokemon);
+      test('should return ${Right<Failure, Pokemon>}', () {
+        mockedPokemonRepository.mockPutPokemon(_pokemon.index);
 
-        final result = capturePokemonUseCase(pokemon);
+        final result = capturePokemonUseCase(_pokemon);
 
-        expect(result.isRight(), true);
+        expect(result.isRight(), isTrue);
+        expect(result.asRight().isCaptured, isTrue);
         verify(
           () => mockedPokemonRepository.putPokemon(any()),
         ).called(1);
       });
 
-      test('should throw $Exception', () {
-        const pokemon = Pokemon(
-          index: 1,
-          name: 'name',
-          baseExperience: 1,
-          weight: 1,
-          height: 1,
-          imageUrl: 'imageUrl',
-          abilities: [],
-          moves: [],
-          types: [],
-          stats: [],
-          isFavorite: false,
-          isCaptured: false,
-        );
+      test(
+          'should return ${Left<Failure, Pokemon>} '
+          'when $PokemonRepository throw $Exception', () {
         mockedPokemonRepository.mockPutPokemonThrowException();
 
-        final result = capturePokemonUseCase.call(pokemon);
+        final result = capturePokemonUseCase.call(_pokemon);
 
-        expect(result.isLeft(), true);
+        expect(result.isLeft(), isTrue);
         expect(result.asLeft(), const Failure(ERROR_DB_ID));
       });
     });

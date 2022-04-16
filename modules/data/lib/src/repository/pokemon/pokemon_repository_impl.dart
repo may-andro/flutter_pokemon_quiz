@@ -10,16 +10,11 @@ class PokemonRepositoryImpl implements PokemonRepository {
   final PokemonDataSource _pokemonDataSource;
 
   @override
-  void putPokemon(
-    LocalPokemon localPokemon,
-  ) {
-    _pokemonDataSource.putPokemon(localPokemon);
-  }
+  int putPokemon(LocalPokemon localPokemon) =>
+      _pokemonDataSource.putPokemon(localPokemon);
 
   @override
-  void removePokemon(int id) {
-    _pokemonDataSource.removePokemon(id);
-  }
+  bool removePokemon(int id) => _pokemonDataSource.removePokemon(id);
 
   @override
   List<LocalPokemon> getPokemons() {
@@ -43,19 +38,27 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   bool queryIsCapturedPokemon(int index) {
-    final pokemonList = _queryPokemons(LocalPokemon_.index.equals(index));
+    final pokemonList = _queryPokemons(LocalPokemon_.id.equals(index));
     if (pokemonList.isEmpty) return false;
     return pokemonList.first.isCaptured;
   }
 
   @override
   bool queryIsFavoritePokemon(int index) {
-    final pokemonList = _queryPokemons(LocalPokemon_.index.equals(index));
+    final pokemonList = _queryPokemons(LocalPokemon_.id.equals(index));
     if (pokemonList.isEmpty) return false;
     return pokemonList.first.isFavorite;
   }
 
   List<LocalPokemon> _queryPokemons(Condition<LocalPokemon> condition) {
     return _pokemonDataSource.queryPokemon(condition);
+  }
+
+  @override
+  LocalPokemon? getPokemon(int index) {
+    final pokemonList = _queryPokemons(LocalPokemon_.id.equals(index));
+    if (pokemonList.isEmpty) return null;
+
+    return pokemonList.first;
   }
 }

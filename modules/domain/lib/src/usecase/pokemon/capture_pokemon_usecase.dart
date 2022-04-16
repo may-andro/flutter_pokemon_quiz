@@ -8,15 +8,17 @@ class CapturePokemonUseCase {
 
   final PokemonRepository _pokemonRepository;
 
-  Either<Failure, void> call(Pokemon params) {
+  Either<Failure, Pokemon> call(Pokemon params) {
     final localPokemon = LocalPokemon(
-      index: params.index,
+      id: params.index,
       imageUrl: params.imageUrl,
       name: params.name,
       isCaptured: true,
     );
     try {
-      return Right(_pokemonRepository.putPokemon(localPokemon));
+      _pokemonRepository.putPokemon(localPokemon);
+      final updatedPokemon = params.copyWith(isCaptured: true);
+      return Right(updatedPokemon);
     } catch (e) {
       return const Left(Failure(ERROR_DB_ID));
     }

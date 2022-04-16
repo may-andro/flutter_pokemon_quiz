@@ -14,10 +14,10 @@ class PokemonDataSourceImpl implements PokemonDataSource {
   List<LocalPokemon> getPokemons() => _localClient.getAll();
 
   @override
-  void putPokemon(LocalPokemon localPokemon) => _localClient.put(localPokemon);
+  int putPokemon(LocalPokemon localPokemon) => _localClient.put(localPokemon);
 
   @override
-  void removePokemon(int id) => _localClient.remove(id);
+  bool removePokemon(int id) => _localClient.remove(id);
 
   @override
   Future<RemoteExtendedPokemon> fetchPokemon(int index) async {

@@ -60,24 +60,39 @@ class _PokemonItem extends StatelessWidget {
     return SizedBox(
       height: context.getGridDimen(3),
       width: context.getGridDimen(3),
-      child: ColorFiltered(
-        colorFilter: ColorFilter.mode(color, blendMode),
-        child: CachedNetworkImage(
-          imageUrl: pokemon.imageUrl,
-          fit: BoxFit.cover,
-          progressIndicatorBuilder: (context, url, downloadProgress) {
-            return Center(
-              child: PokeballImageWidget(
-                height: context.getGridDimen(4),
-                width: context.getGridDimen(4),
+      child: Stack(
+        children: [
+          ColorFiltered(
+            colorFilter: ColorFilter.mode(color, blendMode),
+            child: CachedNetworkImage(
+              imageUrl: pokemon.imageUrl,
+              fit: BoxFit.cover,
+              progressIndicatorBuilder: (context, url, downloadProgress) {
+                return Center(
+                  child: PokeballImageWidget(
+                    height: context.getGridDimen(4),
+                    width: context.getGridDimen(4),
+                  ),
+                );
+              },
+              errorWidget: (context, url, error) => Icon(
+                Icons.error,
+                size: context.getGridDimen(4),
               ),
-            );
-          },
-          errorWidget: (context, url, error) => Icon(
-            Icons.error,
-            size: context.getGridDimen(4),
+            ),
           ),
-        ),
+          if (pokemon.isFavorite)
+            Positioned(
+              top: context.getGridDimen(0.4),
+              right: context.getGridDimen(0.4),
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.red,
+              ),
+            )
+          else
+            const SizedBox.shrink(),
+        ],
       ),
     );
   }

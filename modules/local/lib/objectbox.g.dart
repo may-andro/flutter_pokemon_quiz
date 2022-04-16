@@ -21,19 +21,9 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 1101949788672171074),
       name: 'LocalPokemon',
-      lastPropertyId: const IdUid(7, 1234477189370874837),
+      lastPropertyId: const IdUid(8, 3495143028697553657),
       flags: 0,
       properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 948738652830105515),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 6685515080576467581),
-            name: 'index',
-            type: 6,
-            flags: 0),
         ModelProperty(
             id: const IdUid(3, 6865180054726648182),
             name: 'name',
@@ -53,7 +43,12 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 1234477189370874837),
             name: 'isCaptured',
             type: 1,
-            flags: 0)
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 3495143028697553657),
+            name: 'id',
+            type: 6,
+            flags: 129)
       ],
       relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
@@ -80,12 +75,16 @@ ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
       lastEntityId: const IdUid(1, 1101949788672171074),
-      lastIndexId: const IdUid(0, 0),
+      lastIndexId: const IdUid(1, 5990710392712861028),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [5436361408594617941],
+      retiredIndexUids: const [5990710392712861028],
+      retiredPropertyUids: const [
+        5436361408594617941,
+        948738652830105515,
+        6685515080576467581
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -103,13 +102,12 @@ ModelDefinition getObjectBoxModel() {
         objectToFB: (LocalPokemon object, fb.Builder fbb) {
           final nameOffset = fbb.writeString(object.name);
           final imageUrlOffset = fbb.writeString(object.imageUrl);
-          fbb.startTable(8);
-          fbb.addInt64(0, object.id);
-          fbb.addInt64(1, object.index);
+          fbb.startTable(9);
           fbb.addOffset(2, nameOffset);
           fbb.addOffset(3, imageUrlOffset);
           fbb.addBool(4, object.isFavorite);
           fbb.addBool(6, object.isCaptured);
+          fbb.addInt64(7, object.id);
           fbb.finish(fbb.endTable());
           return object.id;
         },
@@ -118,7 +116,7 @@ ModelDefinition getObjectBoxModel() {
           final rootOffset = buffer.derefObject(0);
 
           final object = LocalPokemon(
-              index: const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0),
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0),
               name: const fb.StringReader(asciiOptimization: true)
                   .vTableGet(buffer, rootOffset, 8, ''),
               imageUrl: const fb.StringReader(asciiOptimization: true)
@@ -126,8 +124,7 @@ ModelDefinition getObjectBoxModel() {
               isFavorite: const fb.BoolReader()
                   .vTableGet(buffer, rootOffset, 12, false),
               isCaptured: const fb.BoolReader()
-                  .vTableGet(buffer, rootOffset, 16, false))
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+                  .vTableGet(buffer, rootOffset, 16, false));
 
           return object;
         })
@@ -138,27 +135,23 @@ ModelDefinition getObjectBoxModel() {
 
 /// [LocalPokemon] entity fields to define ObjectBox queries.
 class LocalPokemon_ {
-  /// see [LocalPokemon.id]
-  static final id =
-      QueryIntegerProperty<LocalPokemon>(_entities[0].properties[0]);
-
-  /// see [LocalPokemon.index]
-  static final index =
-      QueryIntegerProperty<LocalPokemon>(_entities[0].properties[1]);
-
   /// see [LocalPokemon.name]
   static final name =
-      QueryStringProperty<LocalPokemon>(_entities[0].properties[2]);
+      QueryStringProperty<LocalPokemon>(_entities[0].properties[0]);
 
   /// see [LocalPokemon.imageUrl]
   static final imageUrl =
-      QueryStringProperty<LocalPokemon>(_entities[0].properties[3]);
+      QueryStringProperty<LocalPokemon>(_entities[0].properties[1]);
 
   /// see [LocalPokemon.isFavorite]
   static final isFavorite =
-      QueryBooleanProperty<LocalPokemon>(_entities[0].properties[4]);
+      QueryBooleanProperty<LocalPokemon>(_entities[0].properties[2]);
 
   /// see [LocalPokemon.isCaptured]
   static final isCaptured =
-      QueryBooleanProperty<LocalPokemon>(_entities[0].properties[5]);
+      QueryBooleanProperty<LocalPokemon>(_entities[0].properties[3]);
+
+  /// see [LocalPokemon.id]
+  static final id =
+      QueryIntegerProperty<LocalPokemon>(_entities[0].properties[4]);
 }

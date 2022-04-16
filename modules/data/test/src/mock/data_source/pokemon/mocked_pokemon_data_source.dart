@@ -15,4 +15,12 @@ class MockedPokemonDataSource extends Mock implements PokemonDataSource {
   void mockQueryPokemon(List<LocalPokemon> expected) {
     when(() => queryPokemon(any())).thenReturn(expected);
   }
+
+  void mockPutPokemon(LocalPokemon localPokemon) {
+    when(() => putPokemon(localPokemon)).thenReturn(localPokemon.id);
+  }
+
+  void mockRemovePokemon(bool expected) {
+    when(() => removePokemon(any())).thenReturn(expected);
+  }
 }

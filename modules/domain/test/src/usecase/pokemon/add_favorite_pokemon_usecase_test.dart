@@ -27,7 +27,7 @@ void main() {
   group(AddFavoritePokemonUseCase, () {
     setUpAll(() {
       registerFallbackValue(
-        LocalPokemon(index: 1, name: 'name', imageUrl: 'imageUrl'),
+        LocalPokemon(id: 1, name: 'name', imageUrl: 'imageUrl'),
       );
     });
 
@@ -45,16 +45,9 @@ void main() {
 
     group('call', () {
       test(
-          'should return $Right when '
+          'should return ${Right<Failure, Pokemon>} when '
           '$PokemonRepository did not throw exception', () {
-        mockedPokemonRepository.mockPutPokemon(
-          LocalPokemon(
-            index: 1,
-            name: 'name',
-            imageUrl: 'imageUrl',
-            isCaptured: true,
-          ),
-        );
+        mockedPokemonRepository.mockPutPokemon(_pokemon.index);
 
         final result = addFavouritePokemonUseCase(_pokemon);
 
@@ -62,7 +55,7 @@ void main() {
       });
 
       test(
-          'should return $Left when '
+          'should return ${Left<Failure, Pokemon>} when '
           '$PokemonRepository throw exception', () {
         mockedPokemonRepository.mockPutPokemonThrowException();
 

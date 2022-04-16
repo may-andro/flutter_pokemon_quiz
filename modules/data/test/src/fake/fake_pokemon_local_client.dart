@@ -26,17 +26,19 @@ class FakePokemonLocalClient implements LocalClient<LocalPokemon> {
 
   @override
   List<LocalPokemon> getMany(List<int> ids) {
-    return _list.where((element) => ids.contains(element.index)).toList();
+    return _list.where((element) => ids.contains(element.id)).toList();
   }
 
   @override
-  void put(LocalPokemon entity) {
+  int put(LocalPokemon entity) {
     _list.add(entity);
+    return _list.indexOf(entity);
   }
 
   @override
-  void putMany(List<LocalPokemon> entities) {
+  List<int> putMany(List<LocalPokemon> entities) {
     _list.addAll(entities);
+    return entities.map((entity) => entity.id).toList();
   }
 
   @override
@@ -45,17 +47,20 @@ class FakePokemonLocalClient implements LocalClient<LocalPokemon> {
   }
 
   @override
-  void remove(int id) {
+  bool remove(int id) {
     _list.removeWhere((element) => element.id == id);
+    return true;
   }
 
   @override
-  void removeAll() {
+  int removeAll() {
     _list.clear();
+    return 0;
   }
 
   @override
-  void removeMany(List<int> ids) {
+  int removeMany(List<int> ids) {
     _list.removeWhere((element) => ids.contains(element.id));
+    return _list.length;
   }
 }

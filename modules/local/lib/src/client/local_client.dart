@@ -1,9 +1,9 @@
 import 'package:objectbox/objectbox.dart';
 
 abstract class LocalClient<T> {
-  void put(T entity);
+  int put(T entity);
 
-  void putMany(List<T> entities);
+  List<int> putMany(List<T> entities);
 
   T? get(int id);
 
@@ -11,11 +11,11 @@ abstract class LocalClient<T> {
 
   List<T> getAll();
 
-  void remove(int id);
+  bool remove(int id);
 
-  void removeMany(List<int> ids);
+  int removeMany(List<int> ids);
 
-  void removeAll();
+  int removeAll();
 
   int count();
 

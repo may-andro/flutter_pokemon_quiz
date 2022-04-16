@@ -56,4 +56,24 @@ class Pokemon extends Equatable {
         isCaptured,
         isFavorite,
       ];
+
+  Pokemon copyWith({
+    bool? isCaptured,
+    bool? isFavorite,
+  }) {
+    return Pokemon(
+      index: index,
+      name: name,
+      baseExperience: baseExperience,
+      weight: weight,
+      height: height,
+      imageUrl: imageUrl,
+      abilities: abilities,
+      moves: moves,
+      types: types,
+      stats: stats,
+      isCaptured: isCaptured ?? this.isCaptured,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }

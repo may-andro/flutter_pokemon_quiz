@@ -20,8 +20,8 @@ class MockedPokemonRepository extends Mock implements PokemonRepository {
     when(() => fetchPokemon(any())).thenThrow(Exception());
   }
 
-  void mockPutPokemon(LocalPokemon localPokemon) {
-    when(() => putPokemon(localPokemon)).thenReturn(null);
+  void mockPutPokemon(int expected) {
+    when(() => putPokemon(any())).thenReturn(expected);
   }
 
   void mockPutPokemonThrowException() {

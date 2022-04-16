@@ -49,7 +49,16 @@ class GuessPokemonViewModel extends BaseViewModel {
     _startSpeechToTextUseCase.textStream.listen((text) {
       _text = text.toUpperCase().replaceAll('-', '');
       _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
-      if (_isAnsweredCorrectly) _capturePokemonUseCase.call(_pokemon!);
+      if (_isAnsweredCorrectly) {
+        final eitherPokemon = _capturePokemonUseCase.call(_pokemon!);
+        if (eitherPokemon.isLeft()) {
+          _errorCode = eitherPokemon.asLeft().errorId;
+        }
+
+        if (eitherPokemon.isRight()) {
+          _pokemon = eitherPokemon.asRight();
+        }
+      }
       notifyListener();
     });
 
@@ -97,7 +106,17 @@ class GuessPokemonViewModel extends BaseViewModel {
     _text = _pokemon?.name.toUpperCase() ?? 'Unknown';
     _stopSpeechService();
     _isAnsweredCorrectly = true;
-    _capturePokemonUseCase.call(_pokemon!);
+
+    final eitherPokemon = _capturePokemonUseCase.call(_pokemon!);
+    if (eitherPokemon.isLeft()) {
+      _errorCode = eitherPokemon.asLeft().errorId;
+    }
+
+    if (eitherPokemon.isRight()) {
+      _pokemon = eitherPokemon.asRight();
+    }
+
+
     notifyListener();
   }
 

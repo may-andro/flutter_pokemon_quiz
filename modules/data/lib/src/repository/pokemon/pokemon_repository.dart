@@ -2,11 +2,13 @@ import 'package:local/local.dart';
 import 'package:network/network.dart';
 
 abstract class PokemonRepository {
-  void putPokemon(LocalPokemon localPokemon);
+  int putPokemon(LocalPokemon localPokemon);
 
-  void removePokemon(int id);
+  bool removePokemon(int id);
 
   List<LocalPokemon> getPokemons();
+
+  LocalPokemon? getPokemon(int index);
 
   Future<RemoteExtendedPokemon> fetchPokemon(int index);
 
