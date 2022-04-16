@@ -49,14 +49,11 @@ jobs:
       - name: Generate icons
         run: flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons/${{ inputs.flavor }}.yaml
       - name: Decode Keystore
-        env:
-          ENCODED_STRING: ${{ secrets.SIGNING_KEYSTORE }}
-        run: |
-          TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
-          mkdir "${TMP_KEYSTORE_FILE_PATH}"
-          echo $GITHUB_REF
-          echo ${TMP_KEYSTORE_FILE_PATH}
-          echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/${{ inputs.flavor }}.jks
+        id: decode_keystore
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: keystore/${{ inputs.flavor }}.jks
+          encodedString: ${{ secrets.SIGNING_KEYSTORE }}
       - name: Build apk file
         run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --split-per-abi
         timeout-minutes: 20
