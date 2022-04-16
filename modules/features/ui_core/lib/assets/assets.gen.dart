@@ -215,6 +215,9 @@ class $AssetsImagesGen {
 class $AssetsLottieGen {
   const $AssetsLottieGen();
 
+  /// File path: assets/lottie/error.json
+  String get error => 'assets/lottie/error.json';
+
   /// File path: assets/lottie/jhoto.json
   String get jhoto => 'assets/lottie/jhoto.json';
 

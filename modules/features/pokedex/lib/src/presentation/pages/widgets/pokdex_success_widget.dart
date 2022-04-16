@@ -62,24 +62,11 @@ class _PokemonItem extends StatelessWidget {
       width: context.getGridDimen(3),
       child: Stack(
         children: [
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(color, blendMode),
-            child: CachedNetworkImage(
-              imageUrl: pokemon.imageUrl,
-              fit: BoxFit.cover,
-              progressIndicatorBuilder: (context, url, downloadProgress) {
-                return Center(
-                  child: PokeballImageWidget(
-                    height: context.getGridDimen(4),
-                    width: context.getGridDimen(4),
-                  ),
-                );
-              },
-              errorWidget: (context, url, error) => Icon(
-                Icons.error,
-                size: context.getGridDimen(4),
-              ),
-            ),
+          ColorFilteredImageWidget(
+            filterColor: color,
+            blendMode: blendMode,
+            imageUrl: pokemon.imageUrl,
+            sizeFactor: 0.1,
           ),
           if (pokemon.isFavorite)
             Positioned(

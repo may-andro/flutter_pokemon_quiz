@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:guess_pokemon/assets/assets.gen.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 import 'package:ui_core/ui_core.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
 
 class QuestionImageWidget extends StatelessWidget {
@@ -50,7 +49,7 @@ class QuestionImageWidget extends StatelessWidget {
 
   Widget _buildLoadingState(BuildContext context) {
     return Center(
-      child: AnimatorLoadingWidget(
+      child: AnimatedLoadingWidget(
         height: context.shortestSide * 0.2,
         width: context.shortestSide * 0.2,
       ),
@@ -58,13 +57,10 @@ class QuestionImageWidget extends StatelessWidget {
   }
 
   Widget _buildErrorState(BuildContext context) {
-    return SizedBox(
-      height: context.height * 0.25,
-      child: Center(
-        child: Icon(
-          Icons.error,
-          size: context.height * 0.25,
-        ),
+    return Center(
+      child: ErrorIconWidget(
+        height: context.shortestSide * 0.2,
+        width: context.shortestSide * 0.2,
       ),
     );
   }
@@ -77,26 +73,13 @@ class QuestionImageWidget extends StatelessWidget {
             : Colors.black;
     final blendMode = isVisible ? BlendMode.saturation : BlendMode.modulate;
 
-    return ColorFiltered(
-      colorFilter: ColorFilter.mode(color, blendMode),
-      child: Hero(
-        tag: url,
-        child: CachedNetworkImage(
-          imageUrl: url,
-          fit: BoxFit.contain,
-          progressIndicatorBuilder: (context, url, downloadProgress) {
-            return Center(
-              child: AnimatorLoadingWidget(
-                height: context.shortestSide * 0.2,
-                width: context.shortestSide * 0.2,
-              ),
-            );
-          },
-          errorWidget: (context, url, error) => Icon(
-            Icons.error,
-            size: context.getGridDimen(4),
-          ),
-        ),
+    return Hero(
+      tag: url,
+      child: ColorFilteredImageWidget(
+        imageUrl: url,
+        boxFit: BoxFit.contain,
+        filterColor: color,
+        blendMode: blendMode,
       ),
     );
   }

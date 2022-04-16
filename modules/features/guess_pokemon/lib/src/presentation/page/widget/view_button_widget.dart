@@ -9,13 +9,10 @@ class ViewButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
-    return FloatingActionButton(
+    return SmallFABWidget(
       onPressed: viewModel.isStateSuccess ? viewModel.viewPokemon : null,
-      child: Icon(
-        Icons.remove_red_eye_sharp,
-        size: context.getGridDimen(3),
-      ),
-      heroTag: null,
+      iconData: Icons.remove_red_eye_sharp,
+      toolTipLabel: 'View Pokemon',
     );
   }
 }

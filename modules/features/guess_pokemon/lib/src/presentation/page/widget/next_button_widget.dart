@@ -9,14 +9,10 @@ class NextButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
-    return FloatingActionButton(
+    return SmallFABWidget(
       onPressed: viewModel.isStateLoading ? null : viewModel.loadPokemon,
-      child: Icon(
-        Icons.next_plan,
-        color: context.colorPalette.grey80,
-        size: context.getGridDimen(3),
-      ),
-      heroTag: null,
+      iconData: Icons.next_plan,
+      toolTipLabel: 'Show next Pokemon',
     );
   }
 }

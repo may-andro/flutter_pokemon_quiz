@@ -75,11 +75,9 @@ class PokedexPage extends StatelessWidget {
       bottom: context.getGridDimen(2),
       right: 0,
       left: 0,
-      child: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: const Icon(Icons.close),
+      child: SmallFABWidget(
+        onPressed: () => Navigator.pop(context),
+        iconData: Icons.close,
       ),
     );
   }

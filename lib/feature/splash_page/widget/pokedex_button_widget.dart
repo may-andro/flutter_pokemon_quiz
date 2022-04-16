@@ -13,16 +13,10 @@ class PokedexButtonWidget extends StatelessWidget {
     if (!viewModel.isPokedexFeatureEnabled) {
       return const SizedBox.shrink();
     }
-    return FloatingActionButton(
-      elevation: 2,
-      heroTag: null,
+    return SmallFABWidget(
       backgroundColor: context.colorPalette.secondary,
       onPressed: () => Navigator.pushNamed(context, PokedexRoute.root),
-      child: Icon(
-        Icons.catching_pokemon,
-        color: context.colorPalette.grey80,
-        size: context.getGridDimen(3),
-      ),
+      iconData: Icons.catching_pokemon,
     );
   }
 }

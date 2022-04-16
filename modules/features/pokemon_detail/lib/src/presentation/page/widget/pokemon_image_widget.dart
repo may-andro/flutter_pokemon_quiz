@@ -14,21 +14,10 @@ class PokemonImageWidget extends StatelessWidget {
     final viewModel = context.watch<PokemonDetailViewModel>();
     return Hero(
       tag: viewModel.pokemonImage,
-      child: CachedNetworkImage(
+      child: ColorFilteredImageWidget(
         imageUrl: viewModel.pokemonImage,
-        fit: BoxFit.contain,
-        progressIndicatorBuilder: (context, url, downloadProgress) {
-          return Center(
-            child: AnimatorLoadingWidget(
-              height: context.shortestSide * 0.25,
-              width: context.shortestSide * 0.25,
-            ),
-          );
-        },
-        errorWidget: (context, url, error) => Icon(
-          Icons.error,
-          size: context.getGridDimen(4),
-        ),
+        boxFit: BoxFit.contain,
+        sizeFactor: 0.25,
       ),
     );
   }

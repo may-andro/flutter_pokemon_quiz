@@ -59,13 +59,13 @@ class DeveloperPage extends StatelessWidget {
   }
 
   Widget _buildLoadingState(BuildContext context) {
-    return AnimatorLoadingWidget(
+    return AnimatedLoadingWidget(
       height: context.shortestSide * 0.5,
       width: context.shortestSide * 0.5,
     );
   }
 
   Widget _buildErrorState(BuildContext context) {
-    return const FullPageErrorWidget();
+    return const ErrorPageWidget();
   }
 }

@@ -14,7 +14,7 @@ class PokemonDetailModuleRoute extends ModuleRoute {
           if (args is Pokemon) {
             return PokemonDetailPage(pokemon: args);
           }
-          return const ErrorPage();
+          return const ErrorPageWidget();
         },
         settings: settings,
       ),

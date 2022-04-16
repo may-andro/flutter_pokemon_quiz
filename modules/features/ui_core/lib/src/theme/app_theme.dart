@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ui_core/src/presentation/device_resolution/device_resolution.dart';
+import 'package:ui_core/src/component/component.dart';
 import 'package:ui_core/src/theme/color/color.dart';
-import 'package:ui_core/src/extension/context.dart';
+import 'package:ui_core/src/extension/context_extension.dart';
 
 const _fontRegular = FontWeight.w400;
 const _fontMedium = FontWeight.w500;

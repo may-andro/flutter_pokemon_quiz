@@ -17,7 +17,7 @@ class PokedexLoadingWidget extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Expanded(
-          child: AnimatorLoadingWidget(
+          child: AnimatedLoadingWidget(
             height: context.height * 0.2,
             width: context.height * 0.2,
           ),
