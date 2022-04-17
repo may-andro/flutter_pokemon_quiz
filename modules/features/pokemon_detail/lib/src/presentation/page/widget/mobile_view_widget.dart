@@ -94,10 +94,8 @@ class MobileViewWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: context.getGridDimen(3)),
           child: const StatsCardWidget(),
         );
-      case 2:
-        return Container(color: Colors.black87);
       default:
-        return Container(color: Colors.blue);
+        return const ErrorPageWidget();
     }
   }
 }

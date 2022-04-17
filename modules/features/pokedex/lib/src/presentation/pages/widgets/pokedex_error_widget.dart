@@ -12,28 +12,9 @@ class PokedexErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Error fetching Pokédex',
-            style: context.textTheme.titleMedium?.copyWith(
-              color: context.colorPalette.grey70,
-            ),
-          ),
-          SizedBox(height: context.getGridDimen(4)),
-          ErrorIconWidget(
-            height: context.shortestSide * 0.3,
-            width: context.shortestSide * 0.3,
-          ),
-          SizedBox(height: context.getGridDimen(4)),
-          Text(
-            error,
-            style: context.textTheme.labelMedium?.copyWith(
-              color: context.colorPalette.grey70,
-            ),
-          ),
-        ],
+      child: ErrorPageWidget(
+        error: error,
+        errorLabel: 'Error fetching Pokédex',
       ),
     );
   }

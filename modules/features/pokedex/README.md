@@ -31,7 +31,7 @@ dependencies:
 
 ## Additional information
 
-This module does not have it's own domain and data, it takes business logic from central ```domain`` module. The dependencies are inserted in the GetIt.
+This module does not have it's own domain and data, it takes business logic from central ```domain``` module. The dependencies are inserted in the GetIt.
 
 ## Module Setup
 

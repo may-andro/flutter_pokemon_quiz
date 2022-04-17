@@ -109,7 +109,7 @@ class TabletViewWidget extends StatelessWidget {
           child: const StatsCardWidget(),
         );
       default:
-        return Container(color: Colors.blue);
+        return const ErrorPageWidget();
     }
   }
 }
