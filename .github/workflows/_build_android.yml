@@ -1,4 +1,4 @@
-name: build android
+name: build and upload android artifacts
 
 on:
   workflow_call:
@@ -20,8 +20,8 @@ on:
         required: true
 
 jobs:
-  build_android:
-    name: apk and aab
+  create_release_artifact:
+    name: create and upload apk and aab to github
     runs-on: ubuntu-latest
     env:
       JAVA_VERSION: "12.x"
@@ -53,3 +53,19 @@ jobs:
         timeout-minutes: 20
       - name: Build aab file
         run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
+
+  upload_release_artifact_github:
+    name: create and upload apk and aab to github
+    runs-on: ubuntu-latest
+    needs: [create_release_artifact]
+    steps:
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: apk
+          path: build/app/outputs/apk/${{ inputs.flavor }}/release/app-${{ inputs.flavor }}-release.apk
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: aab
+          path: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
