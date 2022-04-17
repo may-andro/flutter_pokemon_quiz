@@ -9,10 +9,22 @@ class NextButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
+    var elevation = 4.0;
+    var fabIcon = Icons.next_plan;
+    if (viewModel.isStateLoading) {
+      fabIcon = Icons.cloud_download_rounded;
+      elevation = 0;
+    }
+    if (viewModel.isStateError) {
+      fabIcon = Icons.replay_circle_filled;
+      elevation = 0;
+    }
+
     return SmallFABWidget(
       onPressed: viewModel.isStateLoading ? null : viewModel.loadPokemon,
-      iconData: Icons.next_plan,
+      iconData: fabIcon,
       toolTipLabel: 'Show next Pokemon',
+      elevation: elevation,
     );
   }
 }

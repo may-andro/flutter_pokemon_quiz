@@ -8,6 +8,7 @@ class StartSpeechToTextUseCase {
   final SpeechTextRepository _speechTextRepository;
 
   final StreamController<String> _textStreamController = StreamController();
+
   final StreamController<String> _statusStreamController = StreamController();
 
   Stream<String> get textStream => _textStreamController.stream;

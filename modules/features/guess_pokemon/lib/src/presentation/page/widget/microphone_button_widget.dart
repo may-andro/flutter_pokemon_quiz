@@ -10,9 +10,20 @@ class MicrophoneButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
     var fabIcon = viewModel.isListening ? Icons.mic : Icons.mic_none;
-    if (viewModel.isAnsweredCorrectly) fabIcon = Icons.done;
-    if (viewModel.isStateLoading) fabIcon = Icons.downloading;
-    if (viewModel.isStateError) fabIcon = Icons.warning;
+    var elevation = 16.0;
+
+    if (viewModel.isAnsweredCorrectly) {
+      fabIcon = Icons.done_all_sharp;
+      elevation = 0;
+    }
+    if (viewModel.isStateLoading) {
+      fabIcon = Icons.downloading;
+      elevation = 0;
+    }
+    if (viewModel.isStateError) {
+      fabIcon = Icons.warning;
+      elevation = 0;
+    }
 
     final isClickable = fabIcon == Icons.mic || fabIcon == Icons.mic_none;
 
@@ -20,6 +31,7 @@ class MicrophoneButtonWidget extends StatelessWidget {
       child: Icon(fabIcon),
       toolTipLabel: "Speak the name",
       animateGlow: viewModel.isListening,
+      elevation: elevation,
       backgroundColor:
           viewModel.isListening ? Colors.teal : context.colorPalette.secondary,
       onPressed: isClickable ? viewModel.listenToSpeech : null,

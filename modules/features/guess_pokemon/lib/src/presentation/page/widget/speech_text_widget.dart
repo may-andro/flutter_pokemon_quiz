@@ -18,12 +18,12 @@ class SpeechTextWidget extends StatelessWidget {
       fontFamily: FontFamily.pokemon,
       letterSpacing: 12,
       package: 'ui_core',
-      color: viewModel.typeColor,
+      color: viewModel.pokemonTypeColor,
     );
     final highlightedWord = HighlightedWord(
       onTap: () {
         if (!viewModel.isPokemonDetailFeatureEnabled) return;
-        goToPokemonDetail(context, viewModel.pokemon);
+        _goToPokemonDetail(context, viewModel.pokemon);
       },
       textStyle: highlightedStyle,
     );
@@ -40,7 +40,7 @@ class SpeechTextWidget extends StatelessWidget {
       height: context.height * 0.1,
       child: Center(
         child: TextHighlight(
-          text: viewModel.text,
+          text: viewModel.statusLabel,
           words: {
             pokemonName: highlightedWord,
           },
@@ -53,7 +53,7 @@ class SpeechTextWidget extends StatelessWidget {
     );
   }
 
-  void goToPokemonDetail(BuildContext context, Pokemon? pokemon) {
+  void _goToPokemonDetail(BuildContext context, Pokemon? pokemon) {
     if (pokemon == null) return;
     Navigator.pushNamed(context, PokemonDetailRoute.root, arguments: pokemon);
   }

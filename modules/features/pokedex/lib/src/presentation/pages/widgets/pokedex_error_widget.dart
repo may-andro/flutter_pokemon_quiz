@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ui_core/assets/assets.gen.dart';
 import 'package:ui_core/ui_core.dart';
 
 class PokedexErrorWidget extends StatelessWidget {
@@ -22,15 +21,15 @@ class PokedexErrorWidget extends StatelessWidget {
               color: context.colorPalette.grey70,
             ),
           ),
-          Image.asset(
-            Assets.images.warning.path,
-            height: context.height * 0.25,
-            width: context.height * 0.25,
-            package: 'ui_core',
+          SizedBox(height: context.getGridDimen(4)),
+          ErrorIconWidget(
+            height: context.shortestSide * 0.3,
+            width: context.shortestSide * 0.3,
           ),
+          SizedBox(height: context.getGridDimen(4)),
           Text(
             error,
-            style: context.textTheme.titleMedium?.copyWith(
+            style: context.textTheme.labelMedium?.copyWith(
               color: context.colorPalette.grey70,
             ),
           ),

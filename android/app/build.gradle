@@ -59,7 +59,7 @@ android {
             v2SigningEnabled true
         }
         jhoto {
-            storeFile file(".signing/kanto.jks")
+            storeFile file(".signing/jhoto.jks")
             keyAlias System.getenv("SIGNING_KEY_ALIAS")
             keyPassword System.getenv("SIGNING_KEY_PASSWORD")
             storePassword System.getenv("SIGNING_STORE_PASSWORD")

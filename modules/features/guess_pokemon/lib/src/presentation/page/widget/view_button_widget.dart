@@ -9,10 +9,26 @@ class ViewButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
+    var fabIcon = Icons.visibility_off;
+    var elevation = 4.0;
+    if (viewModel.isAnsweredCorrectly) {
+      fabIcon = Icons.visibility;
+      elevation = 0;
+    }
+    if (viewModel.isStateLoading) {
+      fabIcon = Icons.do_disturb_alt_rounded;
+      elevation = 0;
+    }
+    if (viewModel.isStateError) {
+      fabIcon = Icons.broken_image;
+      elevation = 0;
+    }
+
     return SmallFABWidget(
       onPressed: viewModel.isStateSuccess ? viewModel.viewPokemon : null,
-      iconData: Icons.remove_red_eye_sharp,
+      iconData: fabIcon,
       toolTipLabel: 'View Pokemon',
+      elevation: elevation,
     );
   }
 }

@@ -3,7 +3,7 @@
 ```Guess Pokemon?``` is feature where user can interact the with the microphone to guess the pokemon name. 
 On correct answer the image comes to light. On each successful answer the pokemon is captured and visible in the ```Pokedex``` feature.
 
-If the ```Feature Toggle``` is on the for ```Pokemon Detail``` feature then on click of pokemon takes user to detail page.
+If the ```Feature Toggle``` is on for the ```Pokemon Detail``` feature then on click of pokemon takes user to detail page.
 
 Feature Includes:
 - [x] Fetching pokemon from server
@@ -57,8 +57,6 @@ dependencies:
 domain:
   path: ../../domain
 ```
-
-## Screen Shots
 
 ## Unit Testing
 

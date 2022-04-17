@@ -56,30 +56,42 @@ class _PokemonItem extends StatelessWidget {
     final blendMode =
         pokemon.isCaptured ? BlendMode.saturation : BlendMode.modulate;
 
-    return SizedBox(
-      height: context.getGridDimen(3),
-      width: context.getGridDimen(3),
-      child: Stack(
-        children: [
-          ColorFilteredImageWidget(
-            filterColor: color,
-            blendMode: blendMode,
-            imageUrl: pokemon.imageUrl,
-            sizeFactor: 0.1,
-          ),
-          if (pokemon.isFavorite)
-            Positioned(
-              top: context.getGridDimen(0.4),
-              right: context.getGridDimen(0.4),
-              child: const Icon(
-                Icons.favorite,
-                color: Colors.red,
+    return Hero(
+      tag: pokemon.imageUrl,
+      child: SizedBox(
+        height: context.getGridDimen(3),
+        width: context.getGridDimen(3),
+        child: InkWell(
+          onTap: pokemon.isCaptured
+              ? () => _goToPokemonDetail(context, pokemon)
+              : null,
+          child: Stack(
+            children: [
+              ColorFilteredImageWidget(
+                filterColor: color,
+                blendMode: blendMode,
+                imageUrl: pokemon.imageUrl,
+                sizeFactor: 0.1,
               ),
-            )
-          else
-            const SizedBox.shrink(),
-        ],
+              if (pokemon.isFavorite)
+                Positioned(
+                  top: context.getGridDimen(0.4),
+                  right: context.getGridDimen(0.4),
+                  child: const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
+                )
+              else
+                const SizedBox.shrink(),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  void _goToPokemonDetail(BuildContext context, Pokemon pokemon) {
+    Navigator.pushNamed(context, PokemonDetailRoute.root, arguments: pokemon);
   }
 }

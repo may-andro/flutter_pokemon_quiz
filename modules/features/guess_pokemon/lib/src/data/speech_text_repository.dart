@@ -1,9 +1,9 @@
 import 'package:speech_to_text/speech_to_text.dart';
 
 class SpeechTextRepository {
-  final SpeechToText _speechToText;
-
   SpeechTextRepository(this._speechToText);
+
+  final SpeechToText _speechToText;
 
   bool get _isListening => _speechToText.isListening;
 

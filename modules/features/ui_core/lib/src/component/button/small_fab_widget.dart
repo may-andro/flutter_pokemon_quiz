@@ -8,6 +8,7 @@ class SmallFABWidget extends StatelessWidget {
     this.toolTipLabel,
     this.heroTag,
     this.onPressed,
+    this.elevation,
     Key? key,
   }) : super(key: key);
 
@@ -16,11 +17,13 @@ class SmallFABWidget extends StatelessWidget {
   final String? toolTipLabel;
   final String? heroTag;
   final VoidCallback? onPressed;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: onPressed,
+      elevation: elevation,
       heroTag: heroTag,
       tooltip: toolTipLabel,
       backgroundColor: backgroundColor,

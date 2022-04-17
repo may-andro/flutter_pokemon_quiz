@@ -15,11 +15,11 @@ class PokedexLoadingWidget extends StatelessWidget {
             color: context.colorPalette.grey70,
           ),
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: context.getGridDimen(5)),
         Expanded(
           child: AnimatedLoadingWidget(
-            height: context.height * 0.2,
-            width: context.height * 0.2,
+            height: context.shortestSide * 0.3,
+            width: context.shortestSide * 0.3,
           ),
         ),
         const Spacer(),

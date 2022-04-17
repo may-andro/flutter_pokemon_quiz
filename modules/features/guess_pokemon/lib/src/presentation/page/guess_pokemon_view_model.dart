@@ -25,10 +25,10 @@ class GuessPokemonViewModel extends BaseViewModel {
   late int _errorCode;
   Pokemon? _pokemon;
   bool _isListening = false;
-  String _text = 'Press the button and speak';
+  String _statusLabel = 'Press the button and speak';
   bool _isAnsweredCorrectly = false;
 
-  String get text => _text;
+  String get statusLabel => _statusLabel;
 
   bool get isListening => _isListening;
 
@@ -40,15 +40,17 @@ class GuessPokemonViewModel extends BaseViewModel {
 
   Pokemon? get pokemon => _pokemon;
 
-  Color get typeColor => _pokemonTypeColorMapper.map(_pokemon?.types[0] ?? '');
+  Color get pokemonTypeColor =>
+      _pokemonTypeColorMapper.map(_pokemon?.types[0] ?? '');
 
   bool get isPokemonDetailFeatureEnabled =>
       _isFeatureEnabledUseCase(Feature.pokemon_detail);
 
   void onInit() async {
     _startSpeechToTextUseCase.textStream.listen((text) {
-      _text = text.toUpperCase().replaceAll('-', '');
-      _isAnsweredCorrectly = _text.toUpperCase() == pokemonName.toUpperCase();
+      _statusLabel = text.toUpperCase().replaceAll('-', '');
+      _isAnsweredCorrectly =
+          _statusLabel.toUpperCase() == pokemonName.toUpperCase();
       if (_isAnsweredCorrectly) {
         final eitherPokemon = _capturePokemonUseCase.call(_pokemon!);
         if (eitherPokemon.isLeft()) {
@@ -83,27 +85,30 @@ class GuessPokemonViewModel extends BaseViewModel {
   }
 
   Future<void> loadPokemon() async {
-    _text = 'Press the button and speak';
+    setLoadingState();
+
+    _statusLabel = 'Fetching Pokemon!';
     _stopSpeechService();
     _isAnsweredCorrectly = false;
 
     final pokemon = await _fetchRandomPokemonUseCase.call();
+
     if (pokemon.isLeft()) {
       _errorCode = pokemon.asLeft().errorId;
-
       //DO ERROR Mech for correct strings
-      _text = 'Failed to fetch pokemon $_errorCode';
+      _statusLabel = 'Failed to fetch pokemon $_errorCode';
       setErrorState();
     }
 
     if (pokemon.isRight()) {
+      _statusLabel = 'Press the button and speak';
       _pokemon = pokemon.asRight();
       setSuccessState();
     }
   }
 
   void viewPokemon() {
-    _text = _pokemon?.name.toUpperCase() ?? 'Unknown';
+    _statusLabel = _pokemon?.name.toUpperCase() ?? 'Unknown';
     _stopSpeechService();
     _isAnsweredCorrectly = true;
 

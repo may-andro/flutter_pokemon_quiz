@@ -10,6 +10,7 @@ class LargeFABWidget extends StatelessWidget {
     this.toolTipLabel,
     this.heroTag,
     this.onPressed,
+    this.elevation = 16.0,
     Key? key,
   }) : super(key: key);
 
@@ -19,6 +20,7 @@ class LargeFABWidget extends StatelessWidget {
   final String? toolTipLabel;
   final String? heroTag;
   final VoidCallback? onPressed;
+  final double elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class LargeFABWidget extends StatelessWidget {
       glowColor: context.colorPalette.grey70,
       endRadius: context.getGridDimen(6),
       child: FloatingActionButton.large(
-        elevation: 16,
+        elevation: elevation,
         tooltip: toolTipLabel,
         backgroundColor: backgroundColor,
         onPressed: onPressed,
