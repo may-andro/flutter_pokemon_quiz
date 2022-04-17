@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:setting/src/presentation/page/setting_page/setting_view_model.dart';
+import 'package:setting/src/presentation/page/setting_page/widget/menu_tile_widget.dart';
+import 'package:setting/src/presentation/page/setting_page/widget/setting_title_text_widget.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,6 +17,7 @@ class SettingPage extends StatelessWidget {
           color: context.colorPalette.grey80,
         ),
         automaticallyImplyLeading: true,
+        centerTitle: true,
         title: Text(
           'Setting',
           style: context.textTheme.headlineMedium?.copyWith(
@@ -28,11 +31,11 @@ class SettingPage extends StatelessWidget {
             return ListView(
               children: [
                 SizedBox(height: context.getGridDimen(3)),
-                _buildSettingTitle(context, 'General'),
+                const SettingTitleTextWidget(label: 'General'),
                 SizedBox(height: context.getGridDimen(0.1)),
                 _buildGeneralSettings(context),
                 SizedBox(height: context.getGridDimen(5)),
-                _buildSettingTitle(context, 'Developer'),
+                const SettingTitleTextWidget(label: 'Developer'),
                 SizedBox(height: context.getGridDimen(0.1)),
                 _buildDeveloperSettings(context),
                 SizedBox(height: context.getGridDimen(3)),
@@ -42,46 +45,35 @@ class SettingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingTitle(BuildContext context, String label) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.getGridDimen(2)),
-      child: Text(
-        label,
-        style: context.textTheme.titleMedium,
-      ),
-    );
-  }
-
   Widget _buildGeneralSettings(BuildContext context) {
     final viewModel = context.watch<SettingViewModel>();
     return Column(
       children: [
-        _buildListItem(
-          context,
-          'About',
-          Icons.info,
-          () => Navigator.pushNamed(context, SettingRoute.about),
+        MenuTileWidget(
+          label: 'About',
+          trailingIcon: Icons.navigate_next,
+          leadingIcon: Icons.info,
+          onTap: () => Navigator.pushNamed(context, SettingRoute.about),
         ),
-        _buildListItem(
-          context,
-          'Privacy Policy',
-          Icons.privacy_tip,
-          () => launch(viewModel.privacyPolicy),
+        MenuTileWidget(
+          label: 'Privacy Policy',
+          trailingIcon: Icons.open_in_browser,
+          leadingIcon: Icons.privacy_tip,
+          onTap: () => launch(viewModel.privacyPolicy),
         ),
-        _buildListItem(
-          context,
-          'Terms & Conditions',
-          Icons.insert_link,
-          () => launch(viewModel.termsAndConditions),
+        MenuTileWidget(
+          label: 'Terms & Conditions',
+          leadingIcon: Icons.insert_link,
+          trailingIcon: Icons.open_in_browser,
+          onTap: () => launch(viewModel.termsAndConditions),
         ),
-        viewModel.isFeedbackFeatureEnabled
-            ? _buildListItem(
-                context,
-                'Feedback',
-                Icons.feedback,
-                () => Navigator.pushNamed(context, SettingRoute.feedback),
-              )
-            : const SizedBox.shrink(),
+        if (viewModel.isFeedbackFeatureEnabled) ...[
+          MenuTileWidget(
+            label: 'Feedback',
+            leadingIcon: Icons.feedback,
+            onTap: () => Navigator.pushNamed(context, SettingRoute.feedback),
+          )
+        ]
       ],
     );
   }
@@ -90,47 +82,23 @@ class SettingPage extends StatelessWidget {
     final viewModel = context.watch<SettingViewModel>();
     return Column(
       children: [
-        _buildListItem(
-          context,
-          'Github',
-          Icons.code,
-          () => launch('https://github.com/may-andro/flutter_pokemon_quiz'),
+        MenuTileWidget(
+          label: 'Github',
+          leadingIcon: Icons.code,
+          trailingIcon: Icons.open_in_browser,
+          onTap: () =>
+              launch('https://github.com/may-andro/flutter_pokemon_quiz'),
         ),
-        viewModel.isDeveloperModeEnabled
-            ? _buildListItem(
-                context,
-                'Developer Option',
-                Icons.developer_mode_rounded,
-                () =>
-                    Navigator.pushNamed(context, SettingRoute.developerOption),
-              )
-            : const SizedBox.shrink(),
+        if (viewModel.isDeveloperModeEnabled) ...[
+          MenuTileWidget(
+            label: 'Developer Option',
+            leadingIcon: Icons.developer_mode_rounded,
+            trailingIcon: Icons.navigate_next,
+            onTap: () =>
+                Navigator.pushNamed(context, SettingRoute.developerOption),
+          )
+        ]
       ],
-    );
-  }
-
-  Widget _buildListItem(
-    BuildContext context,
-    String label,
-    IconData leadingIcon,
-    VoidCallback onTap,
-  ) {
-    return ListTile(
-      onTap: onTap,
-      leading: Icon(
-        leadingIcon,
-        color: context.colorPalette.grey90,
-      ),
-      title: Text(
-        label,
-        style: context.textTheme.titleSmall?.copyWith(
-          color: context.colorPalette.grey90,
-        ),
-      ),
-      trailing: Icon(
-        Icons.navigate_next,
-        color: context.colorPalette.grey90,
-      ),
     );
   }
 }

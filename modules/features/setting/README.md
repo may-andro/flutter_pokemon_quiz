@@ -1,6 +1,14 @@
-## Purpose
+## Feature
 
-This module contain the feature of App Setting where user can configure the app.
+```Setting``` is feature where user can view app settings.
+
+Feature Includes:
+- [x] About
+- [x] Privacy Policy
+- [x] Terms and Conditions
+- [x] Feedback
+- [x] Github
+- [x] Developer Menu
 
 ## Usage
 Add this module in pubspec.ymal to get all the dependencies.
@@ -9,6 +17,11 @@ dependencies:
   setting:
     path: modules/features/setting
 ```
+
+## Feature Toggle
+
+```Feature Toggle``` are switches which can control the visibility of a feature. This gives the power to control the local access of a feature.
+This concept can further expanded by hooking the feature toggle with ```Firebase Remote Config``` and this will help to control the visibility of the feature dynamically.
 
 ## Additional information
 
@@ -24,9 +37,3 @@ This module exposes ```main.dart```  file that has ```setupSettingFeature``` fun
 dependencies:
   path: ../../dependencies
 ```
-
-## Screen Shots
-
-## Testing
-
-TODO

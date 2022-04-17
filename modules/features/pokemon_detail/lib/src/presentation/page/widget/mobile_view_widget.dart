@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
-import 'package:pokemon_detail/src/presentation/page/widget/back_icon_widget.dart';
 import 'package:pokemon_detail/src/presentation/page/widget/stats_card_widget.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
@@ -30,13 +29,17 @@ class MobileViewWidget extends StatelessWidget {
   }
 
   Widget _buildToolbar(BuildContext context) {
+    final viewModel = context.watch<PokemonDetailViewModel>();
     return Padding(
       padding: EdgeInsets.all(context.getGridDimen(2)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          BackIconWidget(iconSize: 4),
-          FavouriteIconWidget(iconSize: 4),
+        children: [
+          CloseIconButtonWidget(
+            iconSizeFactor: 4,
+            iconColor: viewModel.background,
+          ),
+          const FavouriteIconWidget(iconSize: 4),
         ],
       ),
     );

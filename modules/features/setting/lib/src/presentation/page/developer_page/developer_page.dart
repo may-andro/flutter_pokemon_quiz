@@ -14,6 +14,7 @@ class DeveloperPage extends StatelessWidget {
         iconTheme: IconTheme.of(context).copyWith(
           color: context.colorPalette.grey80,
         ),
+        centerTitle: true,
         automaticallyImplyLeading: true,
         title: Text(
           'Developer Option',

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:setting/src/presentation/page/about_page/widget/about_appbar_widget.dart';
+import 'package:setting/src/presentation/page/about_page/widget/about_image_widget.dart';
 import 'package:ui_core/ui_core.dart';
 
 class AboutPage extends StatelessWidget {
@@ -7,48 +9,45 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconTheme.of(context).copyWith(
-          color: context.colorPalette.grey80,
-        ),
-        automaticallyImplyLeading: true,
-        title: Text(
-          'About',
-          style: context.textTheme.headlineMedium?.copyWith(
-            color: context.colorPalette.grey90,
-          ),
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.getGridDimen(3)),
+      body: SafeArea(
         child: Column(
           children: [
+            const AboutAppBarWidget(),
+            const AboutImageWidget(),
+            SizedBox(height: context.getGridDimen(3)),
             Text(
-              'Become the Pokemon Master!!',
-              style: context.textTheme.headline5?.copyWith(
-                color: context.colorPalette.grey70,
-              ),
-            ),
-            Text(
-              'Answer all questions and unlock your pokedex!!!',
-              style: context.textTheme.bodyLarge?.copyWith(
-                color: context.colorPalette.grey90,
-              ),
-            ),
-            SizedBox(height: context.getGridDimen(4)),
-            Text(
-              'This app is made for demonstration of usage of firebase remote congif and dynamic control of app',
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: context.colorPalette.grey90,
-              ),
-            ),
-            SizedBox(height: context.getGridDimen(4)),
-            Text(
-              'All images and texts used are open source and used for learning purpose',
+              'Answer all questions and complete your pokedex!!!',
               style: context.textTheme.bodySmall?.copyWith(
                 color: context.colorPalette.grey90,
               ),
-            )
+            ),
+            SizedBox(height: context.getGridDimen(4)),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.getGridDimen(3),
+              ),
+              child: Text(
+                'This app is made for demonstration of usage of firebase remote config and dynamic control of app',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: context.colorPalette.grey90,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.getGridDimen(3),
+              ),
+              child: Text(
+                'All images and texts used are open source and used for learning purpose',
+                style: context.textTheme.labelSmall?.copyWith(
+                  color: context.colorPalette.grey90,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: context.getGridDimen(3)),
           ],
         ),
       ),

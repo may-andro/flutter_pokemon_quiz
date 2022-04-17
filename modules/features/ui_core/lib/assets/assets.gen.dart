@@ -128,6 +128,10 @@ class $AssetsImagesGen {
   AssetGenImage get pokemonLogo =>
       const AssetGenImage('assets/images/pokemon_logo.png');
 
+  /// File path: assets/images/pokemon_master.png
+  AssetGenImage get pokemonMaster =>
+      const AssetGenImage('assets/images/pokemon_master.png');
+
   /// File path: assets/images/premierball.png
   AssetGenImage get premierball =>
       const AssetGenImage('assets/images/premierball.png');

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
 import 'package:pokemon_detail/src/presentation/page/pokemon_detail_view_model.dart';
-import 'package:pokemon_detail/src/presentation/page/widget/back_icon_widget.dart';
 import 'package:pokemon_detail/src/presentation/page/widget/stats_card_widget.dart';
 import 'package:pokemon_detail/src/presentation/page/widget/favourite_icon_widget.dart';
 import 'package:pokemon_detail/src/presentation/page/widget/pokemon_image_widget.dart';
@@ -46,6 +45,7 @@ class TabletViewWidget extends StatelessWidget {
   }
 
   Widget _buildToolbar(BuildContext context) {
+    final viewModel = context.watch<PokemonDetailViewModel>();
     return Padding(
       padding: EdgeInsets.only(
         top: context.getGridDimen(1),
@@ -53,9 +53,12 @@ class TabletViewWidget extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          BackIconWidget(iconSize: 2.5),
-          FavouriteIconWidget(iconSize: 2.5),
+        children: [
+          CloseIconButtonWidget(
+            iconSizeFactor: 2.5,
+            iconColor: viewModel.background,
+          ),
+          const FavouriteIconWidget(iconSize: 2.5),
         ],
       ),
     );
