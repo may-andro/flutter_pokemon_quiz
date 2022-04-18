@@ -23,11 +23,13 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
+          tag: v1.0.${{ github.run_number }}
           token: ${{ env.DISTRIBUTION_GITHUB_TOKEN }}
       - name: Upload apk to Github
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
+          tag: v1.0.${{ github.run_number }}
           token: ${{ env.DISTRIBUTION_GITHUB_TOKEN }}
 
   upload_ios_artifact:
@@ -42,4 +44,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/ios/iphoneos/app-${{ inputs.flavor }}-release.ipa
+          tag: v1.0.${{ github.run_number }}
           token: ${{ env.DISTRIBUTION_GITHUB_TOKEN }}
