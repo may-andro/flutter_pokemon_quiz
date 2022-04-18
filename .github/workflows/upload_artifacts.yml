@@ -59,7 +59,7 @@ jobs:
 
   upload_github_kanto:
     uses: ./.github/workflows/_upload_github.yml
-    needs: [ build_android_kanto, build_ios_jhoto ]
+    needs: [ build_android_kanto, build_ios_kanto ]
     with:
       flavor: kanto
     secrets:
@@ -76,7 +76,7 @@ jobs:
 
   upload_github_jhoto:
     uses: ./.github/workflows/_upload_github.yml
-    needs: [ build_android_jhoto, build_ios_kanto ]
+    needs: [ build_android_jhoto, build_ios_jhoto ]
     with:
       flavor: jhoto
     secrets:

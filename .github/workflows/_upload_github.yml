@@ -7,7 +7,7 @@ on:
         type: string
         required: true
     secrets:
-      DISTRIBUTION_GITHUB_TOKEN:
+      GITHUB_TOKEN:
         required: true
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     name: Upload apk and aab to github
     runs-on: ubuntu-latest
     env:
-      DISTRIBUTION_GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -23,18 +23,18 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
-          token: ${{ env.DISTRIBUTION_GITHUB_TOKEN }}
+          token: ${{ env.GITHUB_TOKEN }}
       - name: Upload apk to Github
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
-          token: ${{ env.DISTRIBUTION_GITHUB_TOKEN }}
+          token: ${{ env.GITHUB_TOKEN }}
 
   upload_ios_artifact:
     name: Upload ipa to github
     runs-on: ubuntu-latest
     env:
-      DISTRIBUTION_GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -42,4 +42,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build/ios/iphoneos/app-${{ inputs.flavor }}-release.ipa
-          token: ${{ env.DISTRIBUTION_GITHUB_TOKEN }}
+          token: ${{ env.GITHUB_TOKEN }}

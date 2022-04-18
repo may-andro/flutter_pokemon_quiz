@@ -14,7 +14,7 @@ on:
 
 jobs:
   upload_android_artifact:
-    name: create and upload apk and aab to github
+    name: Upload apk and aab to github
     runs-on: ubuntu-latest
     env:
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
@@ -35,7 +35,7 @@ jobs:
           file: app-${{ inputs.flavor }}-release.apk
 
   upload_ios_artifact:
-    name: create and upload apk and aab to github
+    name: Upload ipa to github
     runs-on: ubuntu-latest
     env:
       FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
