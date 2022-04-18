@@ -43,6 +43,14 @@ jobs:
       FIREBASE_APP_ID: ${{ secrets.KANTO_ANDROID_FIREBASE_APP_ID }}
       FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
+  upload_github_kanto:
+    uses: ./.github/workflows/_upload_github.yml
+    needs: [ build_android_kanto ]
+    with:
+      flavor: kanto
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
+
   upload_firebase_jhoto:
     uses: ./.github/workflows/_upload_firebase.yml
     needs: [ build_android_jhoto ]
@@ -51,5 +59,13 @@ jobs:
     secrets:
       FIREBASE_APP_ID: ${{ secrets.JHOTO_ANDROID_FIREBASE_APP_ID }}
       FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+  upload_github_jhoto:
+    uses: ./.github/workflows/_upload_github.yml
+    needs: [ build_android_jhoto ]
+    with:
+      flavor: jhoto
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
 
 

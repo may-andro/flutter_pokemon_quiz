@@ -1,0 +1,26 @@
+name: Upload artifacts to Github
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        type: string
+        required: true
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
+jobs:
+  create_android_artifact:
+    name: create and upload apk and aab to github
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Upload APK to Github
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
+          token: ${{ env.GITHUB_TOKEN }}
