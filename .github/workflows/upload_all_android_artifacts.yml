@@ -1,0 +1,49 @@
+name: tests
+
+on:
+  push:
+    tags:
+      - '*-prod'
+
+jobs:
+  build_android_kanto:
+    uses: ./.github/workflows/_build_android.yml
+    with:
+      flavor: kanto
+      target: lib/main_kanto.dart
+    secrets:
+      SIGNING_KEYSTORE: ${{ secrets.KANTO_KEYSTORE }}
+      SIGNING_KEY_ALIAS: ${{ secrets.KANTO_SIGNING_KEY_ALIAS }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+
+  build_android_jhoto:
+    uses: ./.github/workflows/_build_android.yml
+    with:
+      flavor: jhoto
+      target: lib/main_jhoto.dart
+    secrets:
+      SIGNING_KEYSTORE: ${{ secrets.JHOTO_KEYSTORE }}
+      SIGNING_KEY_ALIAS: ${{ secrets.JHOTO_SIGNING_KEY_ALIAS }}
+      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+
+  upload_firebase_kanto:
+    uses: ./.github/workflows/_upload_firebase.yml
+    needs: [ build_android_kanto ]
+    with:
+      flavor: kanto
+    secrets:
+      FIREBASE_APP_ID: ${{ secrets.KANTO_ANDROID_FIREBASE_APP_ID }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+  upload_firebase_jhoto:
+    uses: ./.github/workflows/_upload_firebase.yml
+    needs: [ build_android_jhoto ]
+    with:
+      flavor: jhoto
+    secrets:
+      FIREBASE_APP_ID: ${{ secrets.JHOTO_ANDROID_FIREBASE_APP_ID }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
+
