@@ -63,7 +63,7 @@ jobs:
     with:
       flavor: kanto
     secrets:
-      GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
+      DISTRIBUTION_GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
 
   upload_firebase_jhoto:
     uses: ./.github/workflows/_upload_firebase.yml
@@ -80,6 +80,6 @@ jobs:
     with:
       flavor: jhoto
     secrets:
-      GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
+      DISTRIBUTION_GITHUB_TOKEN: ${{ secrets.DISTRIBUTION_GITHUB_TOKEN }}
 
 
