@@ -53,14 +53,6 @@ jobs:
         timeout-minutes: 20
       - name: Build aab file
         run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
-
-  upload_release_artifact_github:
-    name: create and upload apk and aab to github
-    runs-on: ubuntu-latest
-    needs: [create_release_artifact]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
       - name: Upload APK artifact
         uses: actions/upload-artifact@v3
         with:

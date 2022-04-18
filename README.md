@@ -28,45 +28,64 @@ dependencies:
     path: modules/features/ui_core
 ```
 
-## Core Modules
+## Common difficulties in Module Arch
 
-### [Local Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/local/README.md)
+- [x] Navigation Between Modules [DONE]
+- [x] Dependency Injection [DONE]
+- [x] Circular Dependency [DONE]
+- [x] Dependency Version Management [DONE]
+- [ ] Localization [TODO]
 
-Local modules handles the data storage for the App
+## App Arch.
 
-### [Network Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/network/README.md)
+This application follows the modular architecture. The app responsibilities are distributed in various modules to make it more maintainable across teams.
 
-Network modules handles the networking/services for the App
+![app_arch (1)](https://user-images.githubusercontent.com/16761273/163763273-6900bdae-131a-48bc-9885-102fbf04852f.jpg)
 
-### [Data Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/data/README.md)
+Architecture tries to maintain SOLID principles in each module to enhance the testability of the app. 
 
-Data modules exposes the repositories for the app and handles the data management from different sources.
+## Dependency Graph
 
-### [Domain Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/domain/README.md)
+![dependecy_graph](https://user-images.githubusercontent.com/16761273/163763548-8ee7f798-d561-4a8c-93bb-9542d8a60f3e.jpg)
 
-Domain modules exposes the basic usecase required in the app
+Very often in modular arch the most common issue is circular dependency. In order to avoid that a linear dependency approach is used in this project.
+
+[TODO] Another way to architect this app using Uncle Bob Clean Arch would be this:
+
+![other_app_arch](https://user-images.githubusercontent.com/16761273/163764332-5e6adefc-45d5-4db9-ab83-f8521a75a1f2.jpg)
+
+## Data Modules
+
+- [x] [Local Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/local/README.md)
+- [x] [Network Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/network/README.md)
+- [x] [Data Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/data/README.md)
+
+
+## Domain Module
+
+- [x] [Domain Module](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/domain/README.md)
 
 ## Feature Module
 
-### [Guess Pokemon?](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/guess_pokemon/README.md)
-
-Feature for guessing the pokemon in the App
-
-### [Pokedex](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/pokedex/README.md)
-
-Feature for the pokedex for the App
-
-### [Pokemon Detail](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/pokemon_detail/README.md)
-
-Feature for the pokemon detail
-
-### [Setting](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/setting/README.md)
-
-Feature for the app configuration.
+- [x] [Guess Pokemon?](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/guess_pokemon/README.md)
+- [x] [Pokedex](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/pokedex/README.md)
+- [x] [Pokemon Detail](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/pokemon_detail/README.md)
+- [x] [Setting](https://github.com/may-andro/flutter_pokemon_quiz/blob/master/modules/features/setting/README.md)
 
 ## App Flavour
 
-The app has two flavours ```Kanto``` & ```Johto``` for the two different regions of pokemon world.
+- [x] ```Kanto```
+- [x] ```Johto```
+
+
+## Derry Script
+
+Derry defines the basic scripts required during development.
+- [x] test: Run all test cases.
+- [x] run_jhoto: Run the Jhoto flavor.
+- [x] run_kanto: Run the Kanto flavor.
+- [x] get_all: Run ```flutter pub get``` in each module
+- [x] build_runner: Run ```flutter pub run build_runner build --delete-conflicting-outputs``` in each module
 
 ## App Screen Shots
 
