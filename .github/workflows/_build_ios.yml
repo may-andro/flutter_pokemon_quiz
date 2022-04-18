@@ -34,3 +34,8 @@ jobs:
       - name: Build ios file
         run: flutter build ios --no-codesign --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
         timeout-minutes: 60
+      - name: Upload iPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ inputs.flavor }}-release.ipa
+          path: build/ios/iphoneos

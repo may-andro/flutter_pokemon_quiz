@@ -13,7 +13,7 @@ on:
         required: true
 
 jobs:
-  create_android_artifact:
+  upload_android_artifact:
     name: create and upload apk and aab to github
     runs-on: ubuntu-latest
     env:
@@ -33,3 +33,24 @@ jobs:
           token: ${{ env.FIREBASE_TOKEN }}
           groups: Testers
           file: app-${{ inputs.flavor }}-release.apk
+
+  upload_ios_artifact:
+    name: create and upload apk and aab to github
+    runs-on: ubuntu-latest
+    env:
+      FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Download IPA Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: app-${{ inputs.flavor }}-release.ipa
+      - name: Upload IPA to Firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        with:
+          appId: ${{ env.FIREBASE_APP_ID }}
+          token: ${{ env.FIREBASE_TOKEN }}
+          groups: Testers
+          file: Runner.ipa

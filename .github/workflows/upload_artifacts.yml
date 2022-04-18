@@ -34,9 +34,23 @@ jobs:
       SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
+  build_ios_kanto:
+    uses: ./.github/workflows/_build_ios.yml
+    needs: flutter_test
+    with:
+      flavor: kanto
+      target: lib/main_kanto.dart
+
+  build_ios_jhoto:
+    uses: ./.github/workflows/_build_ios.yml
+    needs: flutter_test
+    with:
+      flavor: jhoto
+      target: lib/main_jhoto.dart
+
   upload_firebase_kanto:
     uses: ./.github/workflows/_upload_firebase.yml
-    needs: [ build_android_kanto ]
+    needs: [ build_android_kanto, build_ios_kanto ]
     with:
       flavor: kanto
     secrets:
@@ -45,7 +59,7 @@ jobs:
 
   upload_github_kanto:
     uses: ./.github/workflows/_upload_github.yml
-    needs: [ build_android_kanto ]
+    needs: [ build_android_kanto, build_ios_jhoto ]
     with:
       flavor: kanto
     secrets:
@@ -53,7 +67,7 @@ jobs:
 
   upload_firebase_jhoto:
     uses: ./.github/workflows/_upload_firebase.yml
-    needs: [ build_android_jhoto ]
+    needs: [ build_android_jhoto, build_ios_jhoto ]
     with:
       flavor: jhoto
     secrets:
@@ -62,7 +76,7 @@ jobs:
 
   upload_github_jhoto:
     uses: ./.github/workflows/_upload_github.yml
-    needs: [ build_android_jhoto ]
+    needs: [ build_android_jhoto, build_ios_kanto ]
     with:
       flavor: jhoto
     secrets:
