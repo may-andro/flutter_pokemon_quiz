@@ -2,12 +2,17 @@ name: tests
 
 on:
   push:
-    tags:
-      - '*-prod'
+    branches:
+      - master
 
 jobs:
+
+  flutter_test:
+    uses: ./.github/workflows/_build_test.yml
+
   build_android_kanto:
     uses: ./.github/workflows/_build_android.yml
+    needs: flutter_test
     with:
       flavor: kanto
       target: lib/main_kanto.dart
@@ -19,6 +24,7 @@ jobs:
 
   build_android_jhoto:
     uses: ./.github/workflows/_build_android.yml
+    needs: flutter_test
     with:
       flavor: jhoto
       target: lib/main_jhoto.dart

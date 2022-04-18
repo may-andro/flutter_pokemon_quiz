@@ -57,9 +57,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-${{ inputs.flavor }}-release.apk
-          path: build/app/outputs/apk/${{ inputs.flavor }}/release/app-${{ inputs.flavor }}-release.apk
+          path: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
           retention-days: 7
-      - name: Upload APK artifact
+      - name: Upload AAB artifact
         uses: actions/upload-artifact@v3
         with:
           name: app-${{ inputs.flavor }}-release.aab

@@ -1,0 +1,34 @@
+name: Run tests
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        type: string
+        required: false
+
+jobs:
+  flutter_test:
+    name: flutter build and test
+    runs-on: ubuntu-latest
+    env:
+      FLUTTER_VERSION: "2.10.3"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+      - name: Format the Dart code
+        run: flutter format . --set-exit-if-changed
+      - name: Get flutter dependencies
+        run: find ./ -name pubspec.yaml -execdir sh -c "flutter pub get" \;
+      - name: Statically analyze the Dart code
+        run: flutter analyze
+      - name: Run widget tests for our flutter project
+        run: flutter test
