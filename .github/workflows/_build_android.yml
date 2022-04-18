@@ -49,7 +49,7 @@ jobs:
       - name: Generate icons
         run: flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons/${{ inputs.flavor }}.yaml
       - name: Build apk file
-        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --split-per-abi
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
         timeout-minutes: 20
       - name: Build aab file
         run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }}
