@@ -38,5 +38,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-${{ inputs.flavor }}-release.ipa
-          path: build/ios/iphoneos/app-${{ inputs.flavor }}-release.ipa
+          path: build/ios/ipa/app-${{ inputs.flavor }}-release.ipa
           retention-days: 7
