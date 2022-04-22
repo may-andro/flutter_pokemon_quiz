@@ -36,6 +36,11 @@ dependencies:
 - [x] Dependency Version Management [DONE]
 - [ ] Localization [TODO]
 
+## TODO
+- [ ] Error Handling [TODO]
+- [ ] Golden Test [TODO]
+- [ ] Integration Test [TODO]
+
 ## App Arch.
 
 This application follows the modular architecture. The app responsibilities are distributed in various modules to make it more maintainable across teams.
