@@ -22,7 +22,6 @@ class GuessPokemonViewModel extends BaseViewModel {
   final PokemonTypeColorMapper _pokemonTypeColorMapper;
   final CapturePokemonUseCase _capturePokemonUseCase;
 
-  late int _errorCode;
   Pokemon? _pokemon;
   bool _isListening = false;
   String _statusLabel = 'Press the button and speak';
@@ -46,34 +45,16 @@ class GuessPokemonViewModel extends BaseViewModel {
   bool get isPokemonDetailFeatureEnabled =>
       _isFeatureEnabledUseCase(Feature.pokemon_detail);
 
-  void onInit() async {
-    _startSpeechToTextUseCase.textStream.listen((text) {
-      _statusLabel = text.toUpperCase().replaceAll('-', '');
-      _isAnsweredCorrectly =
-          _statusLabel.toUpperCase() == pokemonName.toUpperCase();
-      if (_isAnsweredCorrectly) {
-        final eitherPokemon = _capturePokemonUseCase.call(_pokemon!);
-        if (eitherPokemon.isLeft()) {
-          _errorCode = eitherPokemon.asLeft().errorId;
-        }
+  Future onInit() async {
+    await loadPokemon();
 
-        if (eitherPokemon.isRight()) {
-          _pokemon = eitherPokemon.asRight();
-        }
-      }
-      notifyListener();
+    _startSpeechToTextUseCase.textStream.listen((text) {
+      _onSpeechToTextResponse(text);
     });
 
     _startSpeechToTextUseCase.statusStream.listen((status) {
-      if (status == 'listening') {
-        _isListening = true;
-      } else {
-        _stopSpeechService();
-      }
-      notifyListener();
+      _onSpeechToTextStatus(status);
     });
-
-    await loadPokemon();
   }
 
   void listenToSpeech() {
@@ -88,21 +69,21 @@ class GuessPokemonViewModel extends BaseViewModel {
     setLoadingState();
 
     _statusLabel = 'Fetching Pokemon!';
-    _stopSpeechService();
+    if (_isListening) _stopSpeechService();
     _isAnsweredCorrectly = false;
 
-    final pokemon = await _fetchRandomPokemonUseCase.call();
+    final eitherPokemon = await _fetchRandomPokemonUseCase();
 
-    if (pokemon.isLeft()) {
-      _errorCode = pokemon.asLeft().errorId;
+    if (eitherPokemon.isLeft()) {
       //DO ERROR Mech for correct strings
-      _statusLabel = 'Failed to fetch pokemon $_errorCode';
+      _statusLabel =
+          'Failed to fetch pokemon ${eitherPokemon.asLeft().errorId}';
       setErrorState();
     }
 
-    if (pokemon.isRight()) {
+    if (eitherPokemon.isRight()) {
       _statusLabel = 'Press the button and speak';
-      _pokemon = pokemon.asRight();
+      _pokemon = eitherPokemon.asRight();
       setSuccessState();
     }
   }
@@ -111,16 +92,7 @@ class GuessPokemonViewModel extends BaseViewModel {
     _statusLabel = _pokemon?.name.toUpperCase() ?? 'Unknown';
     _stopSpeechService();
     _isAnsweredCorrectly = true;
-
-    final eitherPokemon = _capturePokemonUseCase.call(_pokemon!);
-    if (eitherPokemon.isLeft()) {
-      _errorCode = eitherPokemon.asLeft().errorId;
-    }
-
-    if (eitherPokemon.isRight()) {
-      _pokemon = eitherPokemon.asRight();
-    }
-
+    _capturePokemon();
     notifyListener();
   }
 
@@ -131,6 +103,38 @@ class GuessPokemonViewModel extends BaseViewModel {
   void _stopSpeechService() {
     _isListening = false;
     _stopSpeechToTextUseCase();
+  }
+
+  void _onSpeechToTextResponse(String speechToText) {
+    _statusLabel = speechToText.toUpperCase().replaceAll('-', '');
+    _isAnsweredCorrectly =
+        _statusLabel.toUpperCase() == pokemonName.toUpperCase();
+    if (_isAnsweredCorrectly) {
+      _capturePokemon();
+    }
+    notifyListener();
+  }
+
+  void _capturePokemon() {
+    if (_pokemon == null) return;
+
+    final eitherPokemon = _capturePokemonUseCase.call(_pokemon!);
+    if (eitherPokemon.isLeft()) {
+      //TODO Add UI Notification
+    }
+
+    if (eitherPokemon.isRight()) {
+      _pokemon = eitherPokemon.asRight();
+    }
+  }
+
+  void _onSpeechToTextStatus(String status) {
+    if (status == 'listening') {
+      _isListening = true;
+    } else {
+      _stopSpeechService();
+    }
+    notifyListener();
   }
 
   @override

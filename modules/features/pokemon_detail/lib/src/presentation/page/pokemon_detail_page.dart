@@ -46,6 +46,6 @@ class PokemonDetailPage extends StatelessWidget {
   }
 
   Widget _buildDesktop(BuildContext context) {
-    return Container();
+    return const TabletViewWidget();
   }
 }

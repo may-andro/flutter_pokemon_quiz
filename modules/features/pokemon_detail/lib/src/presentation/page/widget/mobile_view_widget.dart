@@ -37,7 +37,7 @@ class MobileViewWidget extends StatelessWidget {
         children: [
           CloseIconButtonWidget(
             iconSizeFactor: 4,
-            iconColor: viewModel.background,
+            iconColor: viewModel.pokemonTypeColor,
           ),
           const FavouriteIconWidget(iconSize: 4),
         ],
@@ -51,7 +51,7 @@ class MobileViewWidget extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       currentIndex: viewModel.selectedTabIndex,
-      selectedItemColor: viewModel.background,
+      selectedItemColor: viewModel.pokemonTypeColor,
       onTap: viewModel.setSelectedTab,
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -79,7 +79,7 @@ class MobileViewWidget extends StatelessWidget {
     final textStyle = viewModel.selectedTabIndex == index
         ? context.textTheme.titleLarge!
         : context.textTheme.titleMedium!;
-    return textStyle.copyWith(color: viewModel.background);
+    return textStyle.copyWith(color: viewModel.pokemonTypeColor);
   }
 
   Widget _buildContent(BuildContext context) {

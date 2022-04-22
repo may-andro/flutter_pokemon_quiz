@@ -13,8 +13,7 @@ class PokedexErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ErrorPageWidget(
-        error: error,
-        errorLabel: 'Error fetching Pokédex',
+        errorLabel: error,
       ),
     );
   }

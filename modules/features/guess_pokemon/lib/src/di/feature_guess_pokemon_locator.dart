@@ -2,6 +2,7 @@ import 'package:domain/domain.dart';
 import 'package:get_it/get_it.dart';
 import 'package:guess_pokemon/src/data/speech_text_repository.dart';
 import 'package:guess_pokemon/src/domain/fetch_random_pokemon_usecase.dart';
+import 'package:guess_pokemon/src/domain/random_number_generator_usecase.dart';
 import 'package:guess_pokemon/src/domain/start_speech_to_text_usecase.dart';
 import 'package:guess_pokemon/src/domain/stop_speech_to_text_usecase.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
@@ -27,6 +28,9 @@ void _injectSpeechRepository(final GetIt getIt) {
 
 void _injectUseCase(final GetIt getIt) {
   getIt.registerFactory(
+    () => RandomNumberGeneratorUseCase(),
+  );
+  getIt.registerFactory(
     () => StopSpeechToTextUseCase(getIt.get<SpeechTextRepository>()),
   );
   getIt.registerFactory(
@@ -37,6 +41,7 @@ void _injectUseCase(final GetIt getIt) {
       getIt.get<FetchPokemonUseCase>(),
       getIt.get<FetchPokedexStartIndexUseCase>(),
       getIt.get<FetchPokedexEndIndexUseCase>(),
+      getIt.get<RandomNumberGeneratorUseCase>(),
     ),
   );
 }

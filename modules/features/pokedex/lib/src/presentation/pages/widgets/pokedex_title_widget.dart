@@ -20,7 +20,10 @@ class PokedexTitleWidget extends StatelessWidget {
           ),
         ),
         SizedBox(height: context.getGridDimen(2)),
-        Divider(height: 2, color: context.colorPalette.grey70),
+        Divider(
+          height: 2,
+          color: context.colorPalette.grey70,
+        ),
       ],
     );
   }

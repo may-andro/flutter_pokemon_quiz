@@ -4,24 +4,19 @@ import 'package:provider/provider.dart';
 import 'package:ui_core/ui_core.dart';
 
 class FavouriteIconWidget extends StatelessWidget {
-  const FavouriteIconWidget({
-    required this.iconSize,
-    Key? key,
-  }) : super(key: key);
+  const FavouriteIconWidget({required this.iconSize, Key? key})
+      : super(key: key);
 
   final double iconSize;
 
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<PokemonDetailViewModel>();
-
+    final icon = viewModel.isFavorite ? Icons.favorite : Icons.favorite_border;
     return IconButton(
       iconSize: context.getGridDimen(iconSize),
       onPressed: viewModel.toggleFavoritePokemon,
-      icon: Icon(
-        viewModel.isFavorite ? Icons.favorite : Icons.favorite_border,
-        color: viewModel.background,
-      ),
+      icon: Icon(icon, color: viewModel.pokemonTypeColor),
     );
   }
 }

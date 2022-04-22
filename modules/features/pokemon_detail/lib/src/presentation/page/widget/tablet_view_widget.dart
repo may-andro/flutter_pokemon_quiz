@@ -56,7 +56,7 @@ class TabletViewWidget extends StatelessWidget {
         children: [
           CloseIconButtonWidget(
             iconSizeFactor: 2.5,
-            iconColor: viewModel.background,
+            iconColor: viewModel.pokemonTypeColor,
           ),
           const FavouriteIconWidget(iconSize: 2.5),
         ],
@@ -70,7 +70,7 @@ class TabletViewWidget extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.transparent,
       currentIndex: viewModel.selectedTabIndex,
-      selectedItemColor: viewModel.background,
+      selectedItemColor: viewModel.pokemonTypeColor,
       onTap: viewModel.setSelectedTab,
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -98,7 +98,7 @@ class TabletViewWidget extends StatelessWidget {
     final textStyle = viewModel.selectedTabIndex == index
         ? context.textTheme.titleLarge!
         : context.textTheme.titleMedium!;
-    return textStyle.copyWith(color: viewModel.background);
+    return textStyle.copyWith(color: viewModel.pokemonTypeColor);
   }
 
   Widget _buildContent(BuildContext context) {

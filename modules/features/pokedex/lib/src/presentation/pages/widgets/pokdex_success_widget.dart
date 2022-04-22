@@ -10,16 +10,21 @@ class PokedexSuccessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveContainerWidget(
-      mobileBuilder: (context) => _buildGridView(context, 3),
-      tabletBuilder: (context) => _buildGridView(context, 5),
-      desktopBuilder: (context) => _buildGridView(context, 7),
+      mobileBuilder: (context) => _buildGridView(context, 3, 'mobile_view'),
+      tabletBuilder: (context) => _buildGridView(context, 5, 'tablet_view'),
+      desktopBuilder: (context) => _buildGridView(context, 7, 'desktop_view'),
     );
   }
 
-  Widget _buildGridView(BuildContext context, int crossAxisCount) {
+  Widget _buildGridView(
+    BuildContext context,
+    int crossAxisCount,
+    String key,
+  ) {
     final viewModel = context.read<PokedexViewModel>();
     final pokemons = viewModel.pokedex.pokemons;
     return GridView.builder(
+      key: Key(key),
       padding: EdgeInsets.only(
         bottom: context.getGridDimen(10),
         left: context.getGridDimen(2),

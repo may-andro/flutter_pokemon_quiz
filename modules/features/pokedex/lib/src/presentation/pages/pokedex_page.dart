@@ -21,7 +21,7 @@ class PokedexPage extends StatelessWidget {
             children: [
               _buildTopPokeball(context),
               _buildBottomPokeball(context),
-              _buildPokemonsList(context),
+              _buildPokedex(context),
               _buildFab(context),
             ],
           );
@@ -30,7 +30,7 @@ class PokedexPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPokemonsList(BuildContext context) {
+  Widget _buildPokedex(BuildContext context) {
     final viewModel = context.read<PokedexViewModel>();
 
     return Column(
@@ -50,6 +50,7 @@ class PokedexPage extends StatelessWidget {
 
   Widget _buildTopPokeball(BuildContext context) {
     return Positioned(
+      key: const Key('top_pokeball'),
       right: -context.height * 0.2,
       top: -context.height * 0.15,
       child: PokeballImageWidget(
@@ -61,6 +62,7 @@ class PokedexPage extends StatelessWidget {
 
   Widget _buildBottomPokeball(BuildContext context) {
     return Positioned(
+      key: const Key('bottom_pokeball'),
       left: -context.height * 0.3,
       bottom: -context.height * 0.35,
       child: PokeballImageWidget(

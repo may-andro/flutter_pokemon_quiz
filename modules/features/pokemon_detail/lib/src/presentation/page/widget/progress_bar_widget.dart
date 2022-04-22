@@ -15,13 +15,6 @@ class ProgressBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<PokemonDetailViewModel>();
 
-    final child = Container(
-      decoration: ShapeDecoration(
-        shape: const StadiumBorder(),
-        color: viewModel.background,
-      ),
-    );
-
     return Container(
       clipBehavior: Clip.hardEdge,
       height: 3,
@@ -32,7 +25,12 @@ class ProgressBarWidget extends StatelessWidget {
       ),
       child: FractionallySizedBox(
         widthFactor: progressInPercentage,
-        child: child,
+        child: Container(
+          decoration: ShapeDecoration(
+            shape: const StadiumBorder(),
+            color: viewModel.pokemonTypeColor,
+          ),
+        ),
       ),
     );
   }

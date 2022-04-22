@@ -29,7 +29,7 @@ class PokemonInfoWidget extends StatelessWidget {
     return Text(
       viewModel.pokemonName,
       style: context.textTheme.headline1?.copyWith(
-        color: viewModel.background,
+        color: viewModel.pokemonTypeColor,
         letterSpacing: 12,
         overflow: TextOverflow.ellipsis,
         fontFamily: FontFamily.pokemon,
@@ -43,7 +43,7 @@ class PokemonInfoWidget extends StatelessWidget {
     return Chip(
       elevation: context.getGridDimen(1),
       padding: EdgeInsets.all(context.getGridDimen(1)),
-      backgroundColor: viewModel.background,
+      backgroundColor: viewModel.pokemonTypeColor,
       shadowColor: Colors.transparent,
       label: Text(
         '${viewModel.pokemonIndex}',

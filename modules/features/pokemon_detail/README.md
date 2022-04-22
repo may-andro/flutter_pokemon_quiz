@@ -57,4 +57,6 @@ domain:
 
 ## Testing
 
-- [x] Todo
+- [x] Unit Test
+- [ ] Golden Test
+- [ ] Integration Test

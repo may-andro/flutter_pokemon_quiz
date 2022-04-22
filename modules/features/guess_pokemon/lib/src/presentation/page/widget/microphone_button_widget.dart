@@ -9,23 +9,28 @@ class MicrophoneButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
-    var fabIcon = viewModel.isListening ? Icons.mic : Icons.mic_none;
+    var fabIcon = Icons.mic_none;
     var elevation = 16.0;
+    var isClickable = true;
 
+    if (viewModel.isListening) {
+      fabIcon = Icons.message;
+    }
     if (viewModel.isAnsweredCorrectly) {
       fabIcon = Icons.done_all_sharp;
       elevation = 0;
+      isClickable = false;
     }
     if (viewModel.isStateLoading) {
       fabIcon = Icons.downloading;
       elevation = 0;
+      isClickable = false;
     }
     if (viewModel.isStateError) {
       fabIcon = Icons.warning;
       elevation = 0;
+      isClickable = false;
     }
-
-    final isClickable = fabIcon == Icons.mic || fabIcon == Icons.mic_none;
 
     return LargeFABWidget(
       child: Icon(fabIcon),

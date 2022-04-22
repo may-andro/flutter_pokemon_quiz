@@ -17,6 +17,7 @@ class StatsCardWidget extends StatelessWidget {
     final viewModel = context.watch<PokemonDetailViewModel>();
     final stats = viewModel.pokemonStats;
     return ListView.separated(
+        key: const Key('pokemon_status_list'),
         separatorBuilder: (context, index) =>
             SizedBox(height: context.getGridDimen(3)),
         itemCount: stats.length,
@@ -34,7 +35,7 @@ class StatsCardWidget extends StatelessWidget {
           flex: 2,
           child: Text(
             pokemonStat.name,
-            style: TextStyle(color: viewModel.background),
+            style: TextStyle(color: viewModel.pokemonTypeColor),
           ),
         ),
         Expanded(

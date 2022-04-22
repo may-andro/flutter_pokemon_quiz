@@ -40,7 +40,7 @@ class PokemonDetailViewModel extends BaseViewModel {
   List<String> get pokemonTypeImages =>
       _pokemon.types.map((type) => _pokemonTypeImageMapper.map(type)).toList();
 
-  Color get background => _pokemonTypeColorMapper.map(_pokemon.types[0]);
+  Color get pokemonTypeColor => _pokemonTypeColorMapper.map(_pokemon.types[0]);
 
   void onInit(Pokemon pokemon) async {
     _pokemon = pokemon;
@@ -48,6 +48,15 @@ class PokemonDetailViewModel extends BaseViewModel {
 
   void setSelectedTab(int tabIndex) {
     _selectedTabIndex = tabIndex;
+    notifyListener();
+  }
+
+  void toggleFavoritePokemon() {
+    if (isFavorite) {
+      _removeFavoritePokemon();
+    } else {
+      _addFavoritePokemon();
+    }
     notifyListener();
   }
 
@@ -79,15 +88,6 @@ class PokemonDetailViewModel extends BaseViewModel {
       _pokemon = eitherPokemon.asRight();
     }
 
-    notifyListener();
-  }
-
-  void toggleFavoritePokemon() {
-    if (isFavorite) {
-      _removeFavoritePokemon();
-    } else {
-      _addFavoritePokemon();
-    }
     notifyListener();
   }
 }

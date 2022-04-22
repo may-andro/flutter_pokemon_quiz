@@ -19,12 +19,12 @@ class PQApp extends StatelessWidget {
         return AppThemeProviderWidget(child: child!);
       },
       initialRoute: '/',
-      onGenerateRoute: generateRoute,
+      onGenerateRoute: _generateRoute,
       debugShowCheckedModeBanner: false,
     );
   }
 
-  Route<dynamic>? generateRoute(RouteSettings routeSettings) {
+  Route<dynamic>? _generateRoute(RouteSettings routeSettings) {
     final routesMap = <String, MaterialPageRoute>{};
     routesMap.addAll(MainModuleRoute().getRoutes(routeSettings));
     routesMap.addAll(PokedexModuleRoute().getRoutes(routeSettings));

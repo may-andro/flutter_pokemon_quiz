@@ -12,7 +12,7 @@ class GuessPokemonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ViewModelProviderWidget<GuessPokemonViewModel>(
-          onViewModelProvided: (viewModel) => viewModel.onInit(),
+          onViewModelProvided: (viewModel) async => await viewModel.onInit(),
           builder: (context, viewModel, widget) {
             return ResponsiveContainerWidget(
               mobileBuilder: (_) => const MobileViewWidget(),

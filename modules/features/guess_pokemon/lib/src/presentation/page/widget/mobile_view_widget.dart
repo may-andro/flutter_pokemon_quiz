@@ -43,6 +43,7 @@ class MobileViewWidget extends StatelessWidget {
           bottom: context.height * 0.2,
           left: context.width * 0.05,
           right: context.width * 0.05,
+          height: context.height * 0.1,
           child: const SpeechTextWidget(),
         ),
         Positioned(

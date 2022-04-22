@@ -10,7 +10,7 @@ class NextButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final viewModel = context.watch<GuessPokemonViewModel>();
     var elevation = 4.0;
-    var fabIcon = Icons.next_plan;
+    var fabIcon = Icons.navigate_next_rounded;
     if (viewModel.isStateLoading) {
       fabIcon = Icons.cloud_download_rounded;
       elevation = 0;

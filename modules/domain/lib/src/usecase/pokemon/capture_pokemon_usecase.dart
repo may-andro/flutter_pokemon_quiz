@@ -14,6 +14,7 @@ class CapturePokemonUseCase {
       imageUrl: params.imageUrl,
       name: params.name,
       isCaptured: true,
+      isFavorite: params.isFavorite,
     );
     try {
       _pokemonRepository.putPokemon(localPokemon);

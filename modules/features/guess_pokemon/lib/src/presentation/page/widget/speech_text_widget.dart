@@ -1,4 +1,3 @@
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:guess_pokemon/src/presentation/page/guess_pokemon_view_model.dart';
 import 'package:highlight_text/highlight_text.dart';
@@ -7,9 +6,7 @@ import 'package:ui_core/ui_core.dart';
 import 'package:provider/provider.dart';
 
 class SpeechTextWidget extends StatelessWidget {
-  const SpeechTextWidget({
-    Key? key,
-  }) : super(key: key);
+  const SpeechTextWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +20,7 @@ class SpeechTextWidget extends StatelessWidget {
     final highlightedWord = HighlightedWord(
       onTap: () {
         if (!viewModel.isPokemonDetailFeatureEnabled) return;
-        _goToPokemonDetail(context, viewModel.pokemon);
+        _goToPokemonDetail(context);
       },
       textStyle: highlightedStyle,
     );
@@ -34,26 +31,24 @@ class SpeechTextWidget extends StatelessWidget {
       fontFamily: FontFamily.pokemon,
       package: 'ui_core',
     );
-    final pokemonName = viewModel.pokemonName;
 
-    return SizedBox(
-      height: context.height * 0.1,
-      child: Center(
-        child: TextHighlight(
-          text: viewModel.statusLabel,
-          words: {
-            pokemonName: highlightedWord,
-          },
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.center,
-          textStyle: textStyle,
-        ),
+    return Center(
+      child: TextHighlight(
+        text: viewModel.statusLabel,
+        words: {
+          viewModel.pokemonName: highlightedWord,
+        },
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.center,
+        textStyle: textStyle,
       ),
     );
   }
 
-  void _goToPokemonDetail(BuildContext context, Pokemon? pokemon) {
+  void _goToPokemonDetail(BuildContext context) {
+    final viewModel = context.read<GuessPokemonViewModel>();
+    final pokemon = viewModel.pokemon;
     if (pokemon == null) return;
     Navigator.pushNamed(context, PokemonDetailRoute.root, arguments: pokemon);
   }

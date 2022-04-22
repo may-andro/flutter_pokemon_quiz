@@ -1,9 +1,9 @@
-name: tests
+name: upload artifacts
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*-prod'
 
 jobs:
 
