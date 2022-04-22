@@ -2,8 +2,11 @@ name: tests
 
 on:
   push:
-    tags:
-      - '*-prod'
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   flutter_test:
