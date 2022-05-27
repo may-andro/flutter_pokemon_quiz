@@ -60,13 +60,13 @@ void main() {
         mockedFetchPokedexEndIndexUseCase.mockCall(2);
         mockedRandomNumberGeneratorUseCase.mockCall(1);
         mockedFetchPokemonUseCase.mockCall(
-          const Left<Failure, Pokemon>(Failure(1)),
+          const Left<Failure, Pokemon>(FetchPokemonUseCaseFailure.server()),
         );
 
         final result = await fetchRandomPokemonUseCase.call();
 
         expect(result.isLeft(), true);
-        expect(result.asLeft(), const Failure(1));
+        expect(result.asLeft(), const FetchPokemonUseCaseFailure.server());
       });
     });
   });

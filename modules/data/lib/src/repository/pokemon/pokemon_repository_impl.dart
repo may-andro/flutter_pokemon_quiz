@@ -1,64 +1,99 @@
 import 'package:data/src/data_source/data_source.dart';
-import 'package:data/src/repository/pokemon/pokemon_repository.dart';
+import 'package:data/src/mapper/mapper.dart';
 import 'package:local/local.dart';
+import 'package:domain/domain.dart';
 import 'package:local/objectbox.g.dart';
-import 'package:network/network.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
-  PokemonRepositoryImpl(this._pokemonDataSource);
+  PokemonRepositoryImpl(
+    this._pokemonDataSource,
+    this._pokedexDataSource,
+    this._pokemonRemoteMapper,
+    this._extendedPokemonRemoteMapper,
+  );
 
   final PokemonDataSource _pokemonDataSource;
+  final PokedexDataSource _pokedexDataSource;
+  final PokemonRemoteMapper _pokemonRemoteMapper;
+  final ExtendedPokemonRemoteMapper _extendedPokemonRemoteMapper;
 
   @override
-  int putPokemon(LocalPokemon localPokemon) =>
-      _pokemonDataSource.putPokemon(localPokemon);
-
-  @override
-  bool removePokemon(int id) => _pokemonDataSource.removePokemon(id);
-
-  @override
-  List<LocalPokemon> getPokemons() {
-    return _pokemonDataSource.getPokemons().whereType<LocalPokemon>().toList();
+  int addToCaptured(Pokemon pokemon) {
+    final localPokemon = LocalPokemon(
+      id: pokemon.index,
+      imageUrl: pokemon.imageUrl,
+      name: pokemon.name,
+      isCaptured: true,
+      isFavorite: pokemon.isFavorite,
+    );
+    return _pokemonDataSource.putPokemon(localPokemon);
   }
 
   @override
-  Future<RemoteExtendedPokemon> fetchPokemon(int index) {
-    return _pokemonDataSource.fetchPokemon(index);
+  int addToFavorites(Pokemon pokemon) {
+    final localPokemon = LocalPokemon(
+      id: pokemon.index,
+      imageUrl: pokemon.imageUrl,
+      name: pokemon.name,
+      isFavorite: true,
+      isCaptured: pokemon.isCaptured,
+    );
+    return _pokemonDataSource.putPokemon(localPokemon);
   }
 
   @override
-  List<LocalPokemon> queryFavoritePokemons() {
-    return _queryPokemons(LocalPokemon_.isFavorite.equals(true));
+  Future<List<Pokemon>> fetchPokedex(String region) async {
+    final remotePokedex = await _pokedexDataSource.fetchPokedex(region);
+
+    final pokemons = remotePokedex.pokemons.map((item) {
+      final pokemon = _pokemonRemoteMapper.mapFromEntityToModel(item);
+      final isFavorite = isFavoritePokemon(pokemon.index);
+      final isCaptured = isCapturedPokemon(pokemon.index);
+      return pokemon.copyWith(isCaptured: isCaptured, isFavorite: isFavorite);
+    }).toList();
+
+    return Future.value(pokemons);
   }
 
   @override
-  List<LocalPokemon> queryCapturedPokemons() {
-    return _queryPokemons(LocalPokemon_.isCaptured.equals(true));
+  Future<Pokemon> fetchPokemon(int index) async {
+    final remotePokemon = await _pokemonDataSource.fetchPokemon(index);
+    final pokemon = _extendedPokemonRemoteMapper.mapFromEntityToModel(
+      remotePokemon,
+    );
+    final isFavorite = isFavoritePokemon(pokemon.index);
+    final isCaptured = isCapturedPokemon(pokemon.index);
+    return Future.value(
+      pokemon.copyWith(isCaptured: isCaptured, isFavorite: isFavorite),
+    );
   }
 
   @override
-  bool queryIsCapturedPokemon(int index) {
+  bool isCapturedPokemon(int index) {
     final pokemonList = _queryPokemons(LocalPokemon_.id.equals(index));
     if (pokemonList.isEmpty) return false;
     return pokemonList.first.isCaptured;
   }
 
   @override
-  bool queryIsFavoritePokemon(int index) {
+  bool isFavoritePokemon(int index) {
     final pokemonList = _queryPokemons(LocalPokemon_.id.equals(index));
     if (pokemonList.isEmpty) return false;
     return pokemonList.first.isFavorite;
   }
 
-  List<LocalPokemon> _queryPokemons(Condition<LocalPokemon> condition) {
-    return _pokemonDataSource.queryPokemon(condition);
+  @override
+  int removeFromFavorites(Pokemon pokemon) {
+    final localPokemon = LocalPokemon(
+      id: pokemon.index,
+      imageUrl: pokemon.imageUrl,
+      name: pokemon.name,
+      isCaptured: pokemon.isCaptured,
+    );
+    return _pokemonDataSource.putPokemon(localPokemon);
   }
 
-  @override
-  LocalPokemon? getPokemon(int index) {
-    final pokemonList = _queryPokemons(LocalPokemon_.id.equals(index));
-    if (pokemonList.isEmpty) return null;
-
-    return pokemonList.first;
+  List<LocalPokemon> _queryPokemons(Condition<LocalPokemon> condition) {
+    return _pokemonDataSource.queryPokemon(condition);
   }
 }

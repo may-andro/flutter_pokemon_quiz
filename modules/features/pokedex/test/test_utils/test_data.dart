@@ -17,7 +17,7 @@ const testPokemon = Pokemon(
   isCaptured: false,
 );
 
-const testPokedex = Pokedex(pokemons: [testPokemon]);
+const testPokedex = [testPokemon];
 
 final pokemonImageTypeList = [
   Assets.images.typeElectric.path,

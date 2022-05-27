@@ -1,31 +1,10 @@
-import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
 import 'package:domain/src/usecase/usecase.dart';
+import 'package:domain/src/repository/repository.dart';
 import 'package:get_it/get_it.dart';
 
 void setupDomainDependencies(final GetIt getIt) {
-  _setupMappers(getIt);
   _setUpUseCases(getIt);
-}
-
-void _setupMappers(final GetIt getIt) {
-  getIt.registerFactory(() => PokedexRemoteMapper(getIt.get()));
-  getIt.registerFactory(
-    () => ExtendedPokemonRemoteMapper(
-      getIt.get<IsFavoritePokemonUseCase>(),
-      getIt.get<IsCapturedPokemonUseCase>(),
-    ),
-  );
-  getIt.registerFactory(
-    () => PokemonRemoteMapper(
-      getIt.get(),
-      getIt.get(),
-      getIt.get(),
-    ),
-  );
-  getIt.registerFactory(PokemonStatsRemoteMapper.new);
-  getIt.registerFactory(FeatureToggleMapper.new);
 }
 
 void _setUpUseCases(final GetIt getIt) {
@@ -37,17 +16,14 @@ void _setUpUseCases(final GetIt getIt) {
   );
   getIt.registerFactory(
     () => FetchPokedexUseCase(
-      getIt.get<PokedexRepository>(instanceName: 'PokedexRepositoryImpl'),
-      getIt.get<PokedexRemoteMapper>(),
+      getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
+      getIt.get<BuildConfig>(),
     ),
   );
   getIt.registerFactory(
     () => AddFavoritePokemonUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
     ),
-  );
-  getIt.registerFactory(
-    () => FetchFavoritePokemonsUseCase(getIt.get<FetchPokedexUseCase>()),
   );
   getIt.registerFactory(
     () => RemoveFavoritePokemonUseCase(
@@ -57,7 +33,6 @@ void _setUpUseCases(final GetIt getIt) {
   getIt.registerFactory(
     () => FetchPokemonUseCase(
       getIt.get<PokemonRepository>(instanceName: 'PokemonRepositoryImpl'),
-      getIt.get<ExtendedPokemonRemoteMapper>(),
     ),
   );
   getIt.registerFactory(
@@ -65,7 +40,6 @@ void _setUpUseCases(final GetIt getIt) {
       getIt.get<FeatureToggleRepository>(
         instanceName: 'FeatureToggleRepositoryImpl',
       ),
-      getIt.get<FeatureToggleMapper>(),
     ),
   );
   getIt.registerFactory(
@@ -73,7 +47,6 @@ void _setUpUseCases(final GetIt getIt) {
       getIt.get<FeatureToggleRepository>(
         instanceName: 'FeatureToggleRepositoryImpl',
       ),
-      getIt.get<FeatureToggleMapper>(),
     ),
   );
   getIt.registerFactory(
@@ -81,18 +54,14 @@ void _setUpUseCases(final GetIt getIt) {
       getIt.get<FeatureToggleRepository>(
         instanceName: 'FeatureToggleRepositoryImpl',
       ),
-      getIt.get<FeatureToggleMapper>(),
     ),
   );
   getIt.registerFactory(
     () => DisableFeatureToggleUseCase(
       getIt.get<FeatureToggleRepository>(
-          instanceName: 'FeatureToggleRepositoryImpl'),
-      getIt.get<FeatureToggleMapper>(),
+        instanceName: 'FeatureToggleRepositoryImpl',
+      ),
     ),
-  );
-  getIt.registerFactory(
-    () => FetchCapturedPokemonsUseCase(getIt.get<FetchPokedexUseCase>()),
   );
   getIt.registerFactory(
     () => IsFavoritePokemonUseCase(

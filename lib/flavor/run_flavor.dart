@@ -1,3 +1,4 @@
+import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,8 @@ Future<void> runFlavor(final BuildConfig buildConfig) async {
 
 Future<void> _setupLocator(final BuildConfig buildConfig) async {
   setupAppModule(buildConfig);
-  await setupDomainModule(getIt);
+  await setUpDataModule(getIt);
+  setupDomainModule(getIt);
   setupUiCoreModule(getIt);
   setupPokedexFeature(getIt);
   setupGuessPokemonFeature(getIt);

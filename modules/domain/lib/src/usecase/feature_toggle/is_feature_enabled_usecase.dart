@@ -1,19 +1,12 @@
-import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
+import 'package:domain/src/repository/feature_toggle/feature_toggle_repository.dart';
 
 class IsFeatureEnabledUseCase {
-  IsFeatureEnabledUseCase(
-    this._featureToggleRepository,
-    this._featureToggleMapper,
-  );
+  IsFeatureEnabledUseCase(this._featureToggleRepository);
 
   final FeatureToggleRepository _featureToggleRepository;
-  final FeatureToggleMapper _featureToggleMapper;
 
   bool call(Feature feature) {
-    return _featureToggleRepository.getFeatureToggleValue(
-      _featureToggleMapper.mapFromModelToEntity(feature),
-    );
+    return _featureToggleRepository.getFeatureToggleValue(feature);
   }
 }

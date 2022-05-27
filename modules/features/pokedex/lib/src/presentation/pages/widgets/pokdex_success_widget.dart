@@ -22,7 +22,7 @@ class PokedexSuccessWidget extends StatelessWidget {
     String key,
   ) {
     final viewModel = context.read<PokedexViewModel>();
-    final pokemons = viewModel.pokedex.pokemons;
+    final pokemons = viewModel.pokemons;
     return GridView.builder(
       key: Key(key),
       padding: EdgeInsets.only(

@@ -13,6 +13,8 @@ dependencies:
     path: modules/dependencies
   domain:
     path: modules/domain
+  data:
+    path: modules/data
   flutter:
     sdk: flutter
   pokedex:

@@ -4,12 +4,12 @@ import 'package:pokedex/src/presentation/pages/pokedex_view_model.dart';
 import 'package:ui_core/ui_core.dart';
 
 class MockedPokedexViewModel extends Mock implements PokedexViewModel {
-  void mockPokedex(Pokedex expected) {
-    when(() => pokedex).thenReturn(expected);
+  void mockPokedex(List<Pokemon> expected) {
+    when(() => pokemons).thenReturn(expected);
   }
 
-  void mockErrorCode(int expected) {
-    when(() => errorCode).thenReturn(expected);
+  void mockErrorMessage(String expected) {
+    when(() => errorMessage).thenReturn(expected);
   }
 
   void mockOnInit() {

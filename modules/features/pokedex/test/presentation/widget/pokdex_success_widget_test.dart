@@ -77,7 +77,7 @@ void main() {
 
       expect(
         find.byType(ColorFilteredImageWidget),
-        findsNWidgets(mockedPokedexViewModel.pokedex.pokemons.length),
+        findsNWidgets(mockedPokedexViewModel.pokemons.length),
       );
     });
   });

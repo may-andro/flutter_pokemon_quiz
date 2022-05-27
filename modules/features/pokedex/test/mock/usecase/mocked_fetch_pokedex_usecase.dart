@@ -3,7 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:dartz/dartz.dart';
 
 class MockedFetchPokedexUseCase extends Mock implements FetchPokedexUseCase {
-  void mockCall(Either<Failure, Pokedex> expected) {
+  void mockCall(Either<Failure, List<Pokemon>> expected) {
     when(() => call(any())).thenAnswer((_) => Future.value(expected));
   }
 }

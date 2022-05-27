@@ -1,31 +1,12 @@
-import 'package:data/data.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/src/mapper/mapper.dart';
+import 'package:domain/src/repository/feature_toggle/feature_toggle_repository.dart';
 
 class FetchFeatureConfigsUseCase {
-  FetchFeatureConfigsUseCase(
-    this._featureToggleRepository,
-    this._featureToggleMapper,
-  );
+  FetchFeatureConfigsUseCase(this._featureToggleRepository);
 
   final FeatureToggleRepository _featureToggleRepository;
-  final FeatureToggleMapper _featureToggleMapper;
 
   List<FeatureConfig> call() {
-    final featureConfig = <FeatureConfig>[];
-    final remoteFeatureConfigs = _featureToggleRepository.remoteFeatureConfigs;
-
-    remoteFeatureConfigs.forEach(
-      (remoteConfigFeature, isEnabled) => featureConfig.add(
-        FeatureConfig(
-          isEnabled,
-          _featureToggleMapper.mapFromEntityToModel(
-            remoteConfigFeature,
-          ),
-        ),
-      ),
-    );
-
-    return featureConfig;
+    return _featureToggleRepository.remoteFeatureConfigs;
   }
 }

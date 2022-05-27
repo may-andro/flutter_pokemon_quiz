@@ -4,7 +4,7 @@ import 'package:local/local.dart';
 import 'package:network/network.dart';
 
 Future<void> setUpDataModule(final GetIt getIt) async {
-  setupDataDependencies(getIt);
   await setupLocalModule(getIt);
   await setUpNetworkModule(getIt);
+  setupDataDependencies(getIt);
 }

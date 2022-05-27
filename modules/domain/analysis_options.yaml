@@ -126,3 +126,4 @@ analyzer:
   errors:
     constant_identifier_names: ignore
     invalid_annotation_target: ignore
+    depend_on_referenced_packages: ignore

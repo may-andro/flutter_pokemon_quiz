@@ -19,7 +19,7 @@ class PokemonDetailViewModel extends BaseViewModel {
 
   late Pokemon _pokemon;
 
-  int? _errorCode;
+  String? _errorMessage;
 
   int _selectedTabIndex = 0;
 
@@ -33,7 +33,7 @@ class PokemonDetailViewModel extends BaseViewModel {
 
   bool get isFavorite => _isFavoritePokemonUseCase(pokemonIndex);
 
-  int? get errorCode => _errorCode;
+  String? get errorCode => _errorMessage;
 
   List<PokemonStat> get pokemonStats => _pokemon.stats;
 
@@ -61,12 +61,17 @@ class PokemonDetailViewModel extends BaseViewModel {
   }
 
   void _addFavoritePokemon() {
-    _errorCode = null;
+    _errorMessage = null;
 
     final eitherPokemon = _addFavoritePokemonUseCase(_pokemon);
 
     if (eitherPokemon.isLeft()) {
-      _errorCode = eitherPokemon.asLeft().errorId;
+      (eitherPokemon.asLeft() as AddFavoritePokemonUseCaseFailure).when(
+          parse: (Exception? error, StackTrace? stackTrace) {
+        _errorMessage = 'Failed to add pokemon due to server error}';
+      }, server: (Exception? error, StackTrace? stackTrace) {
+        _errorMessage = 'Failed to add pokemon due to parsing error}';
+      });
     }
 
     if (eitherPokemon.isRight()) {
@@ -77,11 +82,16 @@ class PokemonDetailViewModel extends BaseViewModel {
   }
 
   void _removeFavoritePokemon() {
-    _errorCode = null;
+    _errorMessage = null;
     final eitherPokemon = _removeFavoritePokemonUseCase(_pokemon);
 
     if (eitherPokemon.isLeft()) {
-      _errorCode = eitherPokemon.asLeft().errorId;
+      (eitherPokemon.asLeft() as RemoveFavoritePokemonUseCaseFailure).when(
+          parse: (Exception? error, StackTrace? stackTrace) {
+        _errorMessage = 'Failed to remove pokemon due to server error}';
+      }, server: (Exception? error, StackTrace? stackTrace) {
+        _errorMessage = 'Failed to remove pokemon due to parsing error}';
+      });
     }
 
     if (eitherPokemon.isRight()) {

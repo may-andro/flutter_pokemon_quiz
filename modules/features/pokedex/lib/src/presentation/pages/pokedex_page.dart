@@ -90,9 +90,9 @@ class PokedexPage extends StatelessWidget {
 
   Widget _buildErrorState(BuildContext context) {
     final viewModel = context.read<PokedexViewModel>();
-    final errorCode = viewModel.errorCode;
+    final errorMessage = viewModel.errorMessage;
 
-    return PokedexErrorWidget(error: 'Test $errorCode');
+    return PokedexErrorWidget(error: 'Test $errorMessage');
   }
 
   Widget _buildSuccessState(BuildContext context) {

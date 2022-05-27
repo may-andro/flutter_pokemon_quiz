@@ -107,7 +107,7 @@ void main() {
 
     testWidgets('should load $PokedexErrorWidget when ${ViewState.error}',
         (tester) async {
-      mockedPokedexViewModel.mockErrorCode(1);
+      mockedPokedexViewModel.mockErrorMessage('Test');
       mockedPokedexViewModel.mockViewState(ViewState.error);
 
       await tester.pumpWidget(widget);

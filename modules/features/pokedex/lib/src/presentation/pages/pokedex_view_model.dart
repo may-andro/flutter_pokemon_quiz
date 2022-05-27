@@ -10,29 +10,34 @@ class PokedexViewModel extends BaseViewModel {
   final FetchPokedexUseCase _fetchPokedexUseCase;
   final BuildConfig _buildConfig;
 
-  late Pokedex _pokedex;
-  late int _errorCode;
+  late List<Pokemon> _pokemons;
+  late String _errorMessage;
 
-  Pokedex get pokedex => _pokedex;
+  List<Pokemon> get pokemons => _pokemons;
 
-  int get errorCode => _errorCode;
+  String get errorMessage => _errorMessage;
 
   Future<void> onInit() async {
     await _loadPokedex();
   }
 
   Future<void> _loadPokedex() async {
-    final pokedex = await _fetchPokedexUseCase.call(
+    final eitherPokemons = await _fetchPokedexUseCase.call(
       _buildConfig.buildFlavor.name,
     );
 
-    if (pokedex.isLeft()) {
-      _errorCode = pokedex.asLeft().errorId;
+    if (eitherPokemons.isLeft()) {
+      (eitherPokemons.asLeft() as FetchPokedexUseCaseFailure).when(
+          parse: (error, stackTrace) {
+        _errorMessage = 'Failed to fetch pokedex due to parsing error';
+      }, server: (error, stackTrace) {
+        _errorMessage = 'Failed to fetch pokedex due to server error';
+      });
       setErrorState();
     }
 
-    if (pokedex.isRight()) {
-      _pokedex = pokedex.asRight();
+    if (eitherPokemons.isRight()) {
+      _pokemons = eitherPokemons.asRight();
       setSuccessState();
     }
   }

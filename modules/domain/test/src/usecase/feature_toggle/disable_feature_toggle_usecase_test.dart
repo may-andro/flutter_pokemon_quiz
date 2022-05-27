@@ -1,37 +1,32 @@
-import 'package:data/data.dart';
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
+import 'package:domain/src/repository/feature_toggle/feature_toggle_repository.dart';
 import 'package:domain/src/usecase/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
-import '../../mock/repository/feature_toggle/mocked_feature_toggle_repository.dart';
+import '../../fake/repository/feature_toggle/fake_feature_toggle_repository.dart';
 
 void main() {
   group(DisableFeatureToggleUseCase, () {
-    late MockedFeatureToggleRepository mockedFeatureToggleRepository;
-    late FeatureToggleMapper featureToggleMapper;
+    late FeatureToggleRepository featureToggleRepository;
 
     late DisableFeatureToggleUseCase disableFeatureToggleUseCase;
 
     setUp(() {
-      featureToggleMapper = FeatureToggleMapper();
-      mockedFeatureToggleRepository = MockedFeatureToggleRepository();
+      featureToggleRepository = FakeFeatureToggleRepository();
 
       disableFeatureToggleUseCase = DisableFeatureToggleUseCase(
-        mockedFeatureToggleRepository,
-        featureToggleMapper,
+        featureToggleRepository,
       );
     });
 
     group('call', () {
-      test('should call $FeatureToggleRepository', () {
+      test('should set isEnabled to false for the $Feature', () {
         disableFeatureToggleUseCase.call(Feature.pokedex);
-        verify(
-          () => mockedFeatureToggleRepository.disableFeatureToggle(
-            featureToggleMapper.mapFromModelToEntity(Feature.pokedex),
-          ),
-        ).called(1);
+
+        expect(
+          featureToggleRepository.getFeatureToggleValue(Feature.pokedex),
+          isFalse,
+        );
       });
     });
   });

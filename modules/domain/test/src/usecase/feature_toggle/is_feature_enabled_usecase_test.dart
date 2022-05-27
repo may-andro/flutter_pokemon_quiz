@@ -1,47 +1,39 @@
-import 'package:domain/src/mapper/mapper.dart';
 import 'package:domain/src/model/model.dart';
+import 'package:domain/src/repository/feature_toggle/feature_toggle_repository.dart';
 import 'package:domain/src/usecase/usecase.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:network/network.dart';
 
-import '../../mock/repository/feature_toggle/mocked_feature_toggle_repository.dart';
+import '../../fake/repository/feature_toggle/fake_feature_toggle_repository.dart';
 
 void main() {
   group(IsFeatureEnabledUseCase, () {
-    setUpAll(() {
-      registerFallbackValue(
-        RemoteConfigFeature.feature_toggle_developer_option,
-      );
-    });
-
-    late MockedFeatureToggleRepository mockedFeatureToggleRepository;
-    late FeatureToggleMapper featureToggleMapper;
+    late FeatureToggleRepository featureToggleRepository;
 
     late IsFeatureEnabledUseCase isFeatureEnabledUseCase;
 
     setUp(() {
-      featureToggleMapper = FeatureToggleMapper();
-      mockedFeatureToggleRepository = MockedFeatureToggleRepository();
+      featureToggleRepository = FakeFeatureToggleRepository();
 
       isFeatureEnabledUseCase = IsFeatureEnabledUseCase(
-        mockedFeatureToggleRepository,
-        featureToggleMapper,
+        featureToggleRepository,
       );
     });
 
     group('call', () {
-      test('should return true when feature is enable', () {
-        mockedFeatureToggleRepository.mockGetFeatureToggleValue(true);
+      test(
+          'should return true when feature is enable '
+          '& false when disabled', () {
+        featureToggleRepository.enableFeatureToggle(Feature.pokedex);
 
-        final result = isFeatureEnabledUseCase.call(Feature.pokedex);
+        final resultEnabled = isFeatureEnabledUseCase.call(Feature.pokedex);
 
-        verify(
-          () => mockedFeatureToggleRepository.getFeatureToggleValue(
-            featureToggleMapper.mapFromModelToEntity(Feature.pokedex),
-          ),
-        ).called(1);
-        expect(result, isTrue);
+        expect(resultEnabled, isTrue);
+
+        featureToggleRepository.disableFeatureToggle(Feature.pokedex);
+
+        final resultDisabled = isFeatureEnabledUseCase.call(Feature.pokedex);
+
+        expect(resultDisabled, isFalse);
       });
     });
   });

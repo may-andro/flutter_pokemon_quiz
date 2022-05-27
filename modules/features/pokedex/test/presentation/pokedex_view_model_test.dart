@@ -33,7 +33,7 @@ void main() {
     group('onInit', () {
       test('should call $FetchPokedexUseCase', () {
         mockedFetchPokedexUseCase.mockCall(
-          const Right<Failure, Pokedex>(testPokedex),
+          const Right<Failure, List<Pokemon>>(testPokedex),
         );
 
         pokedexViewModel.onInit();
@@ -45,28 +45,30 @@ void main() {
 
       test(
           'should show ${ViewState.error} '
-          'when $FetchPokedexUseCase return ${Left<Failure, Pokedex>}',
+          'when $FetchPokedexUseCase return ${Left<Failure, List<Pokemon>>}',
           () async {
         mockedFetchPokedexUseCase.mockCall(
-          const Left<Failure, Pokedex>(Failure(1)),
+          const Left<FetchPokedexUseCaseFailure, List<Pokemon>>(
+              FetchPokedexUseCaseFailure.server()),
         );
 
         await pokedexViewModel.onInit();
 
-        expect(pokedexViewModel.errorCode, 1);
+        expect(pokedexViewModel.errorMessage,
+            'Failed to fetch pokedex due to server error');
       });
 
       test(
           'should show ${ViewState.success} '
-          'when $FetchPokedexUseCase return ${Right<Failure, Pokedex>}',
+          'when $FetchPokedexUseCase return ${Right<Failure, List<Pokemon>>}',
           () async {
         mockedFetchPokedexUseCase.mockCall(
-          const Right<Failure, Pokedex>(testPokedex),
+          const Right<Failure, List<Pokemon>>(testPokedex),
         );
 
         await pokedexViewModel.onInit();
 
-        expect(pokedexViewModel.pokedex, testPokedex);
+        expect(pokedexViewModel.pokemons, testPokedex);
       });
     });
   });

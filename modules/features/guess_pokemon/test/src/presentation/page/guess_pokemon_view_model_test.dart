@@ -92,7 +92,7 @@ void main() {
         mockedStartSpeechToTextUseCase.mockStatusStream('close');
         mockedStartSpeechToTextUseCase.mockTextStream('');
         mockedFetchRandomPokemonUseCase.mockCall(
-          const Left<Failure, Pokemon>(Failure(1)),
+          const Left<Failure, Pokemon>(FetchPokemonUseCaseFailure.server()),
         );
 
         fakeAsync<dynamic>((async) {
@@ -194,7 +194,7 @@ void main() {
         mockedStartSpeechToTextUseCase.mockStatusStream('');
         mockedStartSpeechToTextUseCase.mockTextStream(testPokemon.name);
         mockedFetchRandomPokemonUseCase.mockCall(
-          const Left<Failure, Pokemon>(Failure(1)),
+          const Left<Failure, Pokemon>(FetchPokemonUseCaseFailure.server()),
         );
 
         fakeAsync<dynamic>((async) {
@@ -322,7 +322,7 @@ void main() {
           '$FetchRandomPokemonUseCase return ${Left<Failure, Pokemon>}',
           () async {
         mockedFetchRandomPokemonUseCase.mockCall(
-          const Left<Failure, Pokemon>(Failure(1)),
+          const Left<Failure, Pokemon>(FetchPokemonUseCaseFailure.server()),
         );
 
         await guessPokemonViewModel.loadPokemon();

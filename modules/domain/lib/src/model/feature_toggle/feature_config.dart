@@ -1,12 +1,12 @@
 import 'package:domain/src/model/feature_toggle/feature.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class FeatureConfig extends Equatable {
-  const FeatureConfig(this.isEnabled, this.feature);
+part 'feature_config.freezed.dart';
 
-  final bool isEnabled;
-  final Feature feature;
-
-  @override
-  List<Object> get props => [isEnabled, feature];
+@freezed
+class FeatureConfig with _$FeatureConfig {
+  const factory FeatureConfig({
+    required bool isEnabled,
+    required Feature feature,
+  }) = _FeatureConfig;
 }

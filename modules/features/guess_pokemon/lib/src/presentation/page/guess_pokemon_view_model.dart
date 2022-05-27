@@ -4,6 +4,7 @@ import 'package:guess_pokemon/src/domain/fetch_random_pokemon_usecase.dart';
 import 'package:guess_pokemon/src/domain/start_speech_to_text_usecase.dart';
 import 'package:guess_pokemon/src/domain/stop_speech_to_text_usecase.dart';
 import 'package:ui_core/ui_core.dart';
+import 'package:dartz/dartz.dart';
 
 class GuessPokemonViewModel extends BaseViewModel {
   GuessPokemonViewModel(
@@ -76,8 +77,12 @@ class GuessPokemonViewModel extends BaseViewModel {
 
     if (eitherPokemon.isLeft()) {
       //DO ERROR Mech for correct strings
-      _statusLabel =
-          'Failed to fetch pokemon ${eitherPokemon.asLeft().errorId}';
+      (eitherPokemon.asLeft() as FetchPokemonUseCaseFailure).when(
+          parse: (Exception? error, StackTrace? stackTrace) {
+        _statusLabel = 'Failed to fetch pokemon due to parsing error}';
+      }, server: (Exception? error, StackTrace? stackTrace) {
+        _statusLabel = 'Failed to fetch pokemon due to server error}';
+      });
       setErrorState();
     }
 
