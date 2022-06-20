@@ -15,7 +15,7 @@ jobs:
     name: ios build
     runs-on: macos-latest
     env:
-      FLUTTER_VERSION: "2.10.3"
+      FLUTTER_VERSION: "3.0.1"
 
     steps:
       - name: Checkout repository

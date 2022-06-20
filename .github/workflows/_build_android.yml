@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JAVA_VERSION: "12.x"
-      FLUTTER_VERSION: "2.10.3"
+      FLUTTER_VERSION: "3.0.1"
       SIGNING_KEYSTORE: ${{ secrets.SIGNING_KEYSTORE }}
       SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
       SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
